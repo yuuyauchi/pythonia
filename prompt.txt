@@ -1,0 +1,276 @@
+
+````text
+あなたはReact Native / Expo / TypeScript に精通したモバイルエンジニアです。
+このリポジトリに、以下要件の iOS 向けアプリ（Expoベース）を実装してください。
+
+# アプリのコンセプト
+- Python入門アプリと、Pythonista系の「実行環境」を組み合わせた学習アプリ。
+- ターゲットは、プログラミング未経験〜初級の社会人・学生。
+- 完全オフラインで動作し、ローカルでPythonコードを実行できること。
+- MVPでは以下3つができればOK:
+  1. 基礎レッスン8章
+  2. レッスンごとのミニ課題
+  3. エディタと実行環境
+
+# 技術スタックと前提
+- React Native + Expo + TypeScript
+- iOS向け（ただしExpoとしてはクロスプラットフォーム構成で問題なし）
+- 状態管理はシンプルな実装でOK（Context API or Zustandなど好きなものでよい）
+- 画面遷移は @react-navigation を使用（Bottom Tab Navigator + Stack）
+- Python実行環境は「完全ローカル + オフライン」で動作する前提。
+  - WebView 内で動く Python ランタイム（例: Pyodide / Skulpt など JS/WASMベース）を利用する実装を想定。
+  - 初期実装で難しい場合は、ランタイムをラップする層を「インターフェース」として切り出し、実行部はモック実装から始めてもよい。
+  - 重要なのは、`runPython(code: string) => Promise<{ stdout: string; stderr: string; success: boolean }>` の形のユーティリティを用意し、UI側から統一的に呼べるようにすること。
+
+# 画面構成（4タブ）
+Bottom Tab で以下4タブを用意してください。
+
+1. 学ぶ（LessonsTab）
+2. 書く（EditorTab）
+3. 作る（HandsOnTab）
+4. プロフィール（ProfileTab）
+
+MVPで機能を実装するのは「学ぶ」「書く」の2タブが中心です。
+「作る」「プロフィール」はシンプルなプレースホルダ画面でOKです。
+
+---
+
+## 学ぶタブ（LessonsTab）詳細
+
+### 画面階層
+1. LessonsHomeScreen
+   - 「昨日の続きから」的な現在の進捗カード
+   - 8章分の章カード一覧（Chapter List）
+     - タイトル
+     - 進捗バー（完了ステップ数 / 全ステップ数）
+     - ステータス（未着手 / 進行中 / 完了）
+
+2. ChapterDetailScreen
+   - ある1章のステップ一覧
+   - ステップは以下の type を持つ:
+     - slide
+     - code_read
+     - quiz_fill
+     - quiz_mcq
+     - code_task
+   - 各ステップの進捗（未 / 済）を表示し、タップで StepScreen へ遷移。
+
+3. StepScreen
+   - `step.type` に応じてコンポーネントを切り替え。
+   - 下部に「＜前へ」「次へ＞」ナビゲーションを配置。
+
+### レッスンデータ構造（ローカルJSON）
+アプリ内にバンドルされた JSON ファイルとしてレッスン定義を持ってください。
+例として以下のような構造を想定します（ファイル名例: `assets/lessons/chapters.json` など）:
+
+```json
+{
+  "chapters": [
+    {
+      "id": "ch1",
+      "title": "変数とprint",
+      "description": "Pythonの最初の一歩として、画面に文字を表示してみます。",
+      "steps": [
+        { "id": "ch1_s1", "type": "slide", "contentId": "slide_ch1_s1" },
+        { "id": "ch1_s2", "type": "code_read", "contentId": "code_ch1_hello" },
+        { "id": "ch1_s3", "type": "quiz_fill", "contentId": "quiz_ch1_fill_1" },
+        { "id": "ch1_s4", "type": "quiz_mcq", "contentId": "quiz_ch1_mcq_1" },
+        { "id": "ch1_s5", "type": "code_task", "contentId": "task_ch1_print_name" }
+      ]
+    }
+  ]
+}
+````
+
+スライドやクイズなどの詳細コンテンツは、別JSONに分割しても構いません。
+（`slides.json`, `quizzes.json`, `tasks.json` など）
+
+### Step type ごとのUI仕様
+
+#### type = "slide"
+
+* タイトル + 箇条書きテキストを表示する簡易スライド。
+* 1画面に詰め込みすぎないシンプルなレイアウト。
+
+#### type = "code_read"
+
+* 上部：簡単な説明文
+* 中央：読み取り専用コードブロック
+* 下部：「▶ このコードを実行してみる」ボタン
+
+  * 押下で `runPython()` を使って実行し、コンソール領域に標準出力 or エラーを表示。
+
+#### type = "quiz_fill"（穴埋め）
+
+* コードの一部が `____` などで穴埋めになっている。
+* ユーザーが TextInput（または選択肢）で入力。
+* 「答え合わせ」ボタンを押すと:
+
+  * 内部で正解文字列 or python実行結果と比較し正誤判定。
+  * 正解/不正解メッセージと簡単な解説を表示。
+
+#### type = "quiz_mcq"（四択）
+
+* 上部：コードブロック
+* 中央：4択ボタン
+* 選択後、正誤と解説を表示。
+
+#### type = "code_task"
+
+* 上部：課題説明（例: 「名前を入力して挨拶を表示するプログラムを書いてください」）
+* 中央：編集可能なエディタ領域（あらかじめ雛形コードを表示）
+* 下部：
+
+  * 「テスト実行」ボタン → `runPython()`で実行
+  * 期待される出力との比較で合否を表示（簡単でOK）。
+* 将来的にテスト仕様をJSONで持てるようにインターフェースを切っておいてください。
+
+  * 例: `expectedStdout`, `inputStdin` など。
+
+---
+
+## 書くタブ（EditorTab）詳細
+
+### 要件
+
+* ユーザーが自由にPythonコードを書いて実行できる画面。
+* MVPではファイル管理を簡略化し、以下程度でよい:
+
+  * `main.py` 1つを編集対象とする。
+  * もしくは `main.py` + 読み取り専用サンプルファイル数本（タブ切り替えで閲覧のみ）。
+
+### UI
+
+* 上部：ファイル選択（タブ or ドロップダウン）
+
+  * `main.py`（編集可）
+  * `sample_xxx.py`（閲覧用）
+* 中央：コードエディタコンポーネント
+
+  * 行番号表示
+  * Pythonっぽいシンタックスハイライト
+* 下部：
+
+  * `▶ 実行` ボタン → `runPython()` を呼ぶ
+  * コンソール領域で `stdout` / `stderr` を表示
+  * 「クリア」ボタンでコンソールを初期化
+
+### 実装
+
+* エディタはシンプルな TextInput ベースでも良いが、可能であればReact Native用のコードエディタコンポーネントを利用してもよい。
+* コードの永続化は AsyncStorage に保存し、アプリ再起動時も `main.py` の内容が復元されるようにしてください。
+
+---
+
+## Python実行ランタイムのラッパー
+
+### インターフェース
+
+`src/lib/pythonRunner.ts` のようなファイルを作成し、以下のインターフェースを提供してください:
+
+```ts
+export type PythonRunResult = {
+  stdout: string;
+  stderr: string;
+  success: boolean;
+};
+
+export async function runPython(code: string): Promise<PythonRunResult> {
+  // 内部でWebView or JSランタイムを使ってPythonを実行
+}
+```
+
+* UI側（レッスンのミニ課題・書くタブ）は、この `runPython()` のみを呼び出すように実装してください。
+* 実際のPython実行は、WebView + Pyodide などで実現する想定です。
+
+  * もし初期段階では難しい場合:
+
+    * ダミー実装（コードを評価せず固定の出力を返す）を用意しつつ、
+    * コメントで「ここにPyodideを組み込む」という形で拡張ポイントを明示してください。
+
+---
+
+## 作るタブ（HandsOnTab）とプロフィールタブ（ProfileTab）
+
+MVP時点ではプレースホルダー画面で構いません。
+
+### HandsOnTab
+
+* 文言例:
+
+  * 「ここでは、実務に近いミニプロジェクト（ハンズオン）に挑戦できます。」
+  * 「現在は開発中です。次回アップデートをお楽しみに！」
+
+### ProfileTab
+
+* 簡易な進捗表示だけ実装してください:
+
+  * 学習した章数 / 全8章
+  * クリアしたステップ数
+  * 連続学習日数（ローカルの最終学習日から計算できる範囲）
+* テーマ（ライト/ダーク）切り替えは後回しにしてOK。余裕があればトグルだけ実装してもよいです。
+
+---
+
+## プロジェクト構成の例
+
+可能であれば、以下のようなディレクトリ構成を採用してください:
+
+* `src/`
+
+  * `navigation/` … TabNavigator / StackNavigator
+  * `screens/`
+
+    * `lessons/`
+
+      * `LessonsHomeScreen.tsx`
+      * `ChapterDetailScreen.tsx`
+      * `StepScreen.tsx`
+    * `editor/`
+
+      * `EditorScreen.tsx`
+    * `handsOn/`
+
+      * `HandsOnPlaceholderScreen.tsx`
+    * `profile/`
+
+      * `ProfileScreen.tsx`
+  * `components/`
+
+    * `LessonCard.tsx`
+    * `StepNavigator.tsx`
+    * `CodeEditor.tsx`
+    * `ConsoleView.tsx`
+    * `quiz/`（Quiz系コンポーネント）
+  * `lib/`
+
+    * `pythonRunner.ts`
+    * `lessonLoader.ts`（ローカルJSONを読み込んで型付けする）
+  * `types/`
+
+    * `lesson.ts`（Chapter, Step, StepType などの型定義）
+* `assets/lessons/`
+
+  * `chapters.json`
+  * `slides.json`
+  * `quizzes.json`
+  * `tasks.json`
+
+---
+
+## 仕上げと確認事項
+
+1. ExpoでiOSシミュレータ上で動作確認できる状態にしてください。
+2. 最低1章分（第1章）のレッスンデータとミニ課題をダミーで良いので実装し、
+
+   * スライド
+   * code_read
+   * quiz_fill
+   * quiz_mcq
+   * code_task
+     が一通り一連の流れで動くことを確認できるようにしてください。
+3. 「書く」タブで、`main.py`を編集して実行し、標準出力がコンソールに表示されることを確認できるようにしてください。
+
+以上を踏まえ、このリポジトリに必要なファイルの作成・編集・依存ライブラリ導入・コード実装を進めてください。
+
+```

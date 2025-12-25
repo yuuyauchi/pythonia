@@ -1,0 +1,30 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz_ch1_mcq_1",
+      "question": "次のコードを実行すると、何が表示されますか？",
+      "code": "print(\"Hello, Python!\")",
+      "choices": [
+        { "id": "a", "text": "Hello, Python!" },
+        { "id": "b", "text": "print(\"Hello, Python!\")" },
+        { "id": "c", "text": "\"Hello, Python!\"" },
+        { "id": "d", "text": "エラーが出る" }
+      ],
+      "correctChoiceId": "a",
+      "explanation": "print()関数は、( )の中の文字列を画面に表示します。引用符は表示されません。"
+    },
+    {
+      "id": "quiz_ch1_fill_1",
+      "description": "次のコードの空欄を埋めて、「こんにちは、世界！」と表示させてください。",
+      "codeTemplate": "______(\"こんにちは、世界！\")",
+      "blanks": [
+        {
+          "id": "blank1",
+          "correctAnswer": "print",
+          "hint": "画面に文字を表示する命令です"
+        }
+      ],
+      "explanation": "print()関数を使って文字列を画面に表示します。"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "chapters": [
+    {
+      "id": "ch1",
+      "title": "変数とprint",
+      "description": "Pythonの最初の一歩として、画面に文字を表示してみます。",
+      "steps": [
+        { "id": "ch1_s1", "type": "slide", "contentId": "slide_ch1_intro" },
+        { "id": "ch1_s2", "type": "code_read", "contentId": "code_ch1_hello" },
+        { "id": "ch1_s3", "type": "quiz_mcq", "contentId": "quiz_ch1_mcq_1" },
+        { "id": "ch1_s4", "type": "quiz_fill", "contentId": "quiz_ch1_fill_1" },
+        { "id": "ch1_s5", "type": "code_task", "contentId": "task_ch1_print_name" }
+      ]
+    }
+  ]
+}

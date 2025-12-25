@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "code_ch1_hello",
+      "description": "このコードは、画面に「Hello, World!」と表示します。",
+      "code": "print(\"Hello, World!\")",
+      "expectedOutput": "Hello, World!"
+    },
+    {
+      "id": "task_ch1_print_name",
+      "description": "あなたの名前を表示するプログラムを書いてください。\n\nヒント: print()関数を使って、\"\"で囲んだ文字列を表示します。",
+      "initialCode": "# あなたの名前を表示してください\nprint(\"\")",
+      "testCases": [
+        {
+          "expectedOutput": "",
+          "description": "何か文字が表示されていればOK（名前は自由）"
+        }
+      ],
+      "hint": "print(\"あなたの名前\") のように書きます"
+    }
+  ]
+}
