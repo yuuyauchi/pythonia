@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": "code_ch7_concat",
+      "description": "文字列の結合と繰り返しの例です。",
+      "code": "word = \"Python\"\nprint(word + \"は楽しい！\")\nprint(\"=\" * 10)",
+      "expectedOutput": "Pythonは楽しい！\n=========="
+    },
+    {
+      "id": "code_ch7_methods",
+      "description": "便利な文字列メソッドの例です。",
+      "code": "text = \"Hello World\"\nprint(text.upper())\nprint(text.lower())\nprint(text.replace(\"World\", \"Python\"))",
+      "expectedOutput": "HELLO WORLD\nhello world\nHello Python"
+    },
+    {
+      "id": "task_ch7_profile",
+      "description": "自己紹介文を作成するプログラムを書いてください。\n\nf-stringを使って、以下の変数を含む自己紹介文を作ってください：\n- name（名前）\n- age（年齢）\n- hobby（趣味）\n\n出力例：「私の名前は太郎です。25歳で、趣味は読書です。」",
+      "initialCode": "# 変数\nname = \"太郎\"\nage = 25\nhobby = \"読書\"\n\n# f-stringで自己紹介文を作成\nprofile = \n\nprint(profile)",
+      "testCases": [
+        {
+          "expectedOutput": "私の名前は太郎です。25歳で、趣味は読書です。",
+          "description": "名前、年齢、趣味が含まれる自己紹介文が表示される"
+        }
+      ],
+      "hint": "profile = f\"私の名前は{name}です。{age}歳で、趣味は{hobby}です。\" のように書きます"
+    }
+  ]
+}

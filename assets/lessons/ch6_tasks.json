@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": "code_ch6_function",
+      "description": "シンプルな関数の例です。関数を定義して呼び出します。",
+      "code": "def say_hello():\n    print(\"Hello, Python!\")\n\nsay_hello()\nsay_hello()",
+      "expectedOutput": "Hello, Python!\nHello, Python!"
+    },
+    {
+      "id": "code_ch6_return",
+      "description": "引数を受け取って、値を返す関数の例です。",
+      "code": "def multiply(x, y):\n    return x * y\n\nresult = multiply(4, 5)\nprint(result)",
+      "expectedOutput": "20"
+    },
+    {
+      "id": "task_ch6_greeting",
+      "description": "名前を受け取って、挨拶メッセージを返す関数を作ってください。\n\n関数名: make_greeting\n引数: name（名前）\n戻り値: \"こんにちは、〇〇さん！\"という文字列\n\n例: make_greeting(\"太郎\") → \"こんにちは、太郎さん！\"",
+      "initialCode": "# 挨拶メッセージを作る関数\ndef make_greeting(name):\n    # ここに処理を書いてください\n    \n\n# 関数を呼び出して結果を表示\nmessage = make_greeting(\"太郎\")\nprint(message)",
+      "testCases": [
+        {
+          "expectedOutput": "こんにちは、太郎さん！",
+          "description": "「こんにちは、太郎さん！」と表示される"
+        }
+      ],
+      "hint": "return \"こんにちは、\" + name + \"さん！\" のように文字列を結合します"
+    }
+  ]
+}

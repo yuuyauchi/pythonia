@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": "code_ch2_calc",
+      "description": "このコードは、足し算と掛け算の例です。",
+      "code": "print(3 + 7)\nprint(4 * 5)",
+      "expectedOutput": "10\n20"
+    },
+    {
+      "id": "code_ch2_variable",
+      "description": "変数に数値を保存して、計算に使う例です。",
+      "code": "price = 1000\ntax = 100\ntotal = price + tax\nprint(total)",
+      "expectedOutput": "1100"
+    },
+    {
+      "id": "task_ch2_tax",
+      "description": "商品の価格が800円です。消費税10%を加えた合計金額を計算して表示してください。\n\nヒント: 800 * 1.1 で計算できます。",
+      "initialCode": "# 商品価格\nprice = 800\n\n# 消費税込みの金額を計算\ntotal = \n\nprint(total)",
+      "testCases": [
+        {
+          "expectedOutput": "880",
+          "description": "880.0 または 880 が表示されていればOK"
+        }
+      ],
+      "hint": "price * 1.1 で消費税込みの金額になります"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz_ch4_mcq_1",
+      "question": "次のコードを実行すると、何回「こんにちは」と表示されますか？",
+      "code": "for i in range(5):\n    print(\"こんにちは\")",
+      "choices": [
+        { "id": "a", "text": "4回" },
+        { "id": "b", "text": "5回" },
+        { "id": "c", "text": "6回" },
+        { "id": "d", "text": "無限に表示される" }
+      ],
+      "correctChoiceId": "b",
+      "explanation": "range(5)は0から4までの5つの数を生成するので、5回繰り返されます。"
+    },
+    {
+      "id": "quiz_ch4_fill_1",
+      "description": "次のコードの空欄を埋めて、1から10までの数を表示してください。",
+      "codeTemplate": "for i in range(1, ______):\n    print(i)",
+      "blanks": [
+        {
+          "id": "blank1",
+          "correctAnswer": "11",
+          "hint": "range(1, ?)で1から10まで。終わりの数は含まれません"
+        }
+      ],
+      "explanation": "range(1, 11)とすると、1から10までの数を生成します。終わりの数（11）は含まれません。"
+    },
+    {
+      "id": "quiz_ch4_mcq_2",
+      "question": "次のwhile文はいつ終了しますか？",
+      "code": "count = 0\nwhile count < 3:\n    print(count)\n    count = count + 1",
+      "choices": [
+        { "id": "a", "text": "countが3になったとき" },
+        { "id": "b", "text": "countが2になったとき" },
+        { "id": "c", "text": "countが4になったとき" },
+        { "id": "d", "text": "終了しない" }
+      ],
+      "correctChoiceId": "a",
+      "explanation": "count < 3という条件が偽になる、つまりcountが3になったときに終了します。0, 1, 2が表示されます。"
+    }
+  ]
+}

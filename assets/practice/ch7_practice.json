@@ -1,0 +1,13 @@
+{
+  "project_intros": [{"id": "intro_ch7", "title": "テキスト加工ツールを作ろう", "description": "文字列操作をマスターします。", "goals": ["文字列メソッドを使える", "フォーマットができる", "文字列を加工できる"], "finalOutput": "HELLO, WORLD!"}],
+  "guided_steps": [
+    {"id": "guided_ch7_format", "title": "ステップ1: 文字列を整形しよう", "instruction": "文字列メソッドを使って、大文字・小文字変換をしましょう。", "hints": ["upper()で大文字", "lower()で小文字"], "starterCode": "text = \"Hello World\"\n\n# 大文字に変換\n", "solution": "text = \"Hello World\"\n\n# 大文字に変換\nprint(text.upper())\n\n# 小文字に変換\nprint(text.lower())", "expectedOutput": "HELLO WORLD", "checkType": "output_contains", "checkValue": "HELLO"},
+    {"id": "guided_ch7_validate", "title": "ステップ2: 文字列をチェックしよう", "instruction": "文字列が特定の条件を満たすかチェックしましょう。", "hints": ["startswith()で始まりをチェック", "in で含まれるかチェック"], "starterCode": "email = \"test@example.com\"\n\n# @が含まれるかチェック\n", "solution": "email = \"test@example.com\"\n\n# @が含まれるかチェック\nif \"@\" in email:\n    print(\"有効なメールアドレスです\")\nelse:\n    print(\"無効なメールアドレスです\")", "expectedOutput": "有効なメールアドレスです", "checkType": "output_contains", "checkValue": "有効"}
+  ],
+  "challenges": [
+    {"id": "challenge_ch7_parse", "title": "チャレンジ: 文字列分割", "description": "文字列を分割して処理してください。", "instruction": "カンマ区切りの文字列を分割して、各要素を表示してください。", "starterCode": "data = \"りんご,バナナ,みかん\"\n\n# ここにコードを書いてください\n", "testCases": [{"description": "りんごが含まれる", "checkType": "output_contains", "expected": "りんご"}], "solution": "data = \"りんご,バナナ,みかん\"\n\nitems = data.split(\",\")\nfor item in items:\n    print(item)", "hints": ["split()で分割できます"]}
+  ],
+  "free_practices": [
+    {"id": "free_ch7_processor", "title": "自由制作: テキスト処理", "description": "文字列処理プログラムを作りましょう!", "prompt": "以下のようなプログラムを作ってください:\n・パスワード強度チェック\n・テキスト整形ツール\n・文字数カウンター", "starterCode": "# あなたのプログラムを書いてください\n", "exampleSolution": "def check_password(password):\n    if len(password) < 8:\n        return \"弱い: 8文字以上必要です\"\n    elif password.isalnum():\n        return \"普通: 記号を含めると強化されます\"\n    else:\n        return \"強い: 安全なパスワードです\"\n\nprint(check_password(\"abc123\"))", "tips": ["文字列メソッドを組み合わせましょう"]}
+  ]
+}

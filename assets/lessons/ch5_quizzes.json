@@ -1,0 +1,43 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz_ch5_mcq_1",
+      "question": "次のコードを実行すると、何が表示されますか？",
+      "code": "fruits = [\"りんご\", \"バナナ\", \"みかん\"]\nprint(fruits[1])",
+      "choices": [
+        { "id": "a", "text": "りんご" },
+        { "id": "b", "text": "バナナ" },
+        { "id": "c", "text": "みかん" },
+        { "id": "d", "text": "エラーが出る" }
+      ],
+      "correctChoiceId": "b",
+      "explanation": "リストのインデックスは0から始まります。fruits[1]は2番目の要素「バナナ」を指します。"
+    },
+    {
+      "id": "quiz_ch5_fill_1",
+      "description": "次のコードの空欄を埋めて、リストに「ぶどう」を追加してください。",
+      "codeTemplate": "fruits = [\"りんご\", \"バナナ\"]\nfruits.______(\"ぶどう\")\nprint(fruits)",
+      "blanks": [
+        {
+          "id": "blank1",
+          "correctAnswer": "append",
+          "hint": "リストに要素を追加するメソッドです"
+        }
+      ],
+      "explanation": "append()メソッドを使うと、リストの最後に新しい要素を追加できます。"
+    },
+    {
+      "id": "quiz_ch5_mcq_2",
+      "question": "次のコードを実行すると、何が表示されますか？",
+      "code": "person = {\"name\": \"太郎\", \"age\": 25}\nprint(person[\"name\"])",
+      "choices": [
+        { "id": "a", "text": "太郎" },
+        { "id": "b", "text": "25" },
+        { "id": "c", "text": "name" },
+        { "id": "d", "text": "{\"name\": \"太郎\", \"age\": 25}" }
+      ],
+      "correctChoiceId": "a",
+      "explanation": "辞書はキーで値にアクセスします。person[\"name\"]で「太郎」が取得できます。"
+    }
+  ]
+}

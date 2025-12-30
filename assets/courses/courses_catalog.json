@@ -1,0 +1,154 @@
+{
+  "courses": [
+    {
+      "id": "course_weather_bot",
+      "title": "天気通知ボットを作ろう",
+      "category": "beginner",
+      "difficulty": "初級",
+      "duration": "45分",
+      "price": 1000,
+      "thumbnail": "🌤️",
+      "description": "毎朝天気をチェックするのが面倒...そんな課題をPythonで解決!API連携の基礎を学びながら実用的なボットを作ります。",
+      "learningGoals": [
+        "API連携の基本を理解する",
+        "JSONデータの扱い方を学ぶ",
+        "実用的な自動化ツールを作る"
+      ],
+      "libraries": ["requests"],
+      "tags": ["API", "自動化", "初心者向け"],
+      "modules": [
+        { "id": "mod1", "type": "problem_discovery", "contentId": "weather_problem" },
+        { "id": "mod2", "type": "planning", "contentId": "weather_planning" },
+        { "id": "mod3", "type": "implementation", "contentId": "weather_impl_1" },
+        { "id": "mod4", "type": "implementation", "contentId": "weather_impl_2" },
+        { "id": "mod5", "type": "implementation", "contentId": "weather_impl_3" },
+        { "id": "mod6", "type": "reflection", "contentId": "weather_reflection" }
+      ]
+    },
+    {
+      "id": "course_file_organizer",
+      "title": "自動ファイル整理ツール",
+      "category": "beginner",
+      "difficulty": "初級",
+      "duration": "40分",
+      "price": 1000,
+      "thumbnail": "📁",
+      "description": "ダウンロードフォルダがごちゃごちゃ...ファイルを自動で整理するツールを作って、日常の作業を効率化しましょう!",
+      "learningGoals": [
+        "ファイル操作の基本を学ぶ",
+        "条件分岐による自動分類",
+        "実用的な効率化ツール作成"
+      ],
+      "libraries": ["pathlib", "shutil"],
+      "tags": ["ファイル操作", "自動化", "効率化"],
+      "modules": [
+        { "id": "mod1", "type": "problem_discovery", "contentId": "file_problem" },
+        { "id": "mod2", "type": "planning", "contentId": "file_planning" },
+        { "id": "mod3", "type": "implementation", "contentId": "file_impl_1" },
+        { "id": "mod4", "type": "implementation", "contentId": "file_impl_2" },
+        { "id": "mod5", "type": "reflection", "contentId": "file_reflection" }
+      ]
+    },
+    {
+      "id": "course_task_manager",
+      "title": "簡単なタスク管理アプリ",
+      "category": "beginner",
+      "difficulty": "初級",
+      "duration": "60分",
+      "price": 1000,
+      "thumbnail": "✅",
+      "description": "TODOを忘れてしまう問題を解決!データベースを使った本格的なタスク管理アプリを作成します。",
+      "learningGoals": [
+        "データベース基本を理解する",
+        "CRUD操作を実装できる",
+        "データの永続化を学ぶ"
+      ],
+      "libraries": ["sqlite3"],
+      "tags": ["データベース", "CRUD", "アプリ開発"],
+      "modules": [
+        { "id": "mod1", "type": "problem_discovery", "contentId": "task_problem" },
+        { "id": "mod2", "type": "planning", "contentId": "task_planning" },
+        { "id": "mod3", "type": "implementation", "contentId": "task_impl_1" },
+        { "id": "mod4", "type": "implementation", "contentId": "task_impl_2" },
+        { "id": "mod5", "type": "implementation", "contentId": "task_impl_3" },
+        { "id": "mod6", "type": "reflection", "contentId": "task_reflection" }
+      ]
+    },
+    {
+      "id": "course_excel_analyzer",
+      "title": "Excelデータ分析ツール",
+      "category": "intermediate",
+      "difficulty": "中級",
+      "duration": "90分",
+      "price": 1000,
+      "thumbnail": "📊",
+      "description": "大量のExcelデータを手作業で集計...そんな非効率な作業を自動化!pandasで本格的なデータ分析を学びます。",
+      "learningGoals": [
+        "Excel自動化をマスターする",
+        "データ集計・分析手法を学ぶ",
+        "グラフ作成と可視化"
+      ],
+      "libraries": ["openpyxl", "pandas", "matplotlib"],
+      "tags": ["データ分析", "Excel", "自動化"],
+      "modules": [
+        { "id": "mod1", "type": "problem_discovery", "contentId": "excel_problem" },
+        { "id": "mod2", "type": "planning", "contentId": "excel_planning" },
+        { "id": "mod3", "type": "implementation", "contentId": "excel_impl_1" },
+        { "id": "mod4", "type": "implementation", "contentId": "excel_impl_2" },
+        { "id": "mod5", "type": "implementation", "contentId": "excel_impl_3" },
+        { "id": "mod6", "type": "reflection", "contentId": "excel_reflection" }
+      ]
+    },
+    {
+      "id": "course_web_scraping",
+      "title": "Webスクレイピングで価格比較",
+      "category": "intermediate",
+      "difficulty": "中級",
+      "duration": "75分",
+      "price": 1000,
+      "thumbnail": "🕷️",
+      "description": "複数サイトで価格を比較するのが大変...Webスクレイピングで自動化し、最安値を見つけるツールを作ります。",
+      "learningGoals": [
+        "Webスクレイピング基礎",
+        "HTML解析の方法を学ぶ",
+        "倫理的な利用方法を理解する"
+      ],
+      "libraries": ["beautifulsoup4", "requests"],
+      "tags": ["スクレイピング", "Web", "データ収集"],
+      "modules": [
+        { "id": "mod1", "type": "problem_discovery", "contentId": "scraping_problem" },
+        { "id": "mod2", "type": "planning", "contentId": "scraping_planning" },
+        { "id": "mod3", "type": "implementation", "contentId": "scraping_impl_1" },
+        { "id": "mod4", "type": "implementation", "contentId": "scraping_impl_2" },
+        { "id": "mod5", "type": "implementation", "contentId": "scraping_impl_3" },
+        { "id": "mod6", "type": "reflection", "contentId": "scraping_reflection" }
+      ]
+    },
+    {
+      "id": "course_chatbot",
+      "title": "チャットボット開発",
+      "category": "advanced",
+      "difficulty": "上級",
+      "duration": "120分",
+      "price": 1000,
+      "thumbnail": "🤖",
+      "description": "よくある質問に毎回答えるのは非効率...Discordボットを作って、自動応答システムを構築します。",
+      "learningGoals": [
+        "API連携応用を学ぶ",
+        "非同期処理を理解する",
+        "イベント駆動設計を実践する"
+      ],
+      "libraries": ["discord.py", "asyncio"],
+      "tags": ["ボット", "非同期", "API"],
+      "modules": [
+        { "id": "mod1", "type": "problem_discovery", "contentId": "bot_problem" },
+        { "id": "mod2", "type": "planning", "contentId": "bot_planning" },
+        { "id": "mod3", "type": "implementation", "contentId": "bot_impl_1" },
+        { "id": "mod4", "type": "implementation", "contentId": "bot_impl_2" },
+        { "id": "mod5", "type": "implementation", "contentId": "bot_impl_3" },
+        { "id": "mod6", "type": "implementation", "contentId": "bot_impl_4" },
+        { "id": "mod7", "type": "reflection", "contentId": "bot_reflection" }
+      ]
+    }
+  ]
+}

@@ -88,9 +88,13 @@ export const PythonWebView: React.FC<PythonWebViewProps> = ({ onReady, onError }
           indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/'
         });
 
+        // Load commonly used packages
+        await pyodide.loadPackage(['micropip']);
+
         await pyodide.runPythonAsync(\`
 import sys
 import io
+import micropip
 
 class OutputCapture:
     def __init__(self):

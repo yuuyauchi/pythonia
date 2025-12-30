@@ -85,6 +85,11 @@ export const typography = {
     lineHeight: 20,
     fontFamily: 'Courier' as const,
   },
+  button: {
+    fontSize: 16,
+    fontWeight: '600' as const,
+    lineHeight: 24,
+  },
 };
 
 export const shadows = {

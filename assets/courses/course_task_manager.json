@@ -1,0 +1,353 @@
+{
+  "problem_discovery": [
+    {
+      "id": "task_problem",
+      "title": "課題を発見しよう",
+      "scenario": {
+        "title": "TODOを忘れてしまう...",
+        "description": "大学生の佐藤さんは、課題の締切やアルバイトのシフト、友達との約束など、やるべきことがたくさんあります。スマホのメモ帳に書いても、見返すのを忘れたり、メモが散らばってしまったり...重要なタスクを見逃してしまうことも。",
+        "timeSpent": "タスクを思い出すのに1日10分 × 365日 = 年間約60時間",
+        "painPoints": [
+          "メモが散らばって管理できない",
+          "完了したタスクがわからない",
+          "優先順位が把握できない",
+          "スマホを開かないと見れない"
+        ]
+      },
+      "problemAnalysis": {
+        "question1": "タスク管理で一番困っていることは何でしょうか?",
+        "options": [
+          "タスクをすぐ忘れてしまう",
+          "完了・未完了の区別が曖昧",
+          "複数のメモアプリに散らばっている",
+          "すべて"
+        ],
+        "correctAnswer": 3,
+        "explanation": "これらすべての課題を、データベースを使ったアプリで解決できます!"
+      },
+      "idealSolution": {
+        "title": "理想の状態は?",
+        "description": "一箇所でタスクを管理でき、完了・未完了が一目でわかり、データが永続的に保存されれば完璧です!",
+        "benefits": [
+          "すべてのタスクが一箇所に集約",
+          "完了状態を簡単に管理できる",
+          "検索や絞り込みが簡単",
+          "データが消えない"
+        ],
+        "beforeAfter": {
+          "before": "散らばったメモを探す × 毎日10分",
+          "after": "アプリで即座に確認・更新できる"
+        }
+      },
+      "technicalFeasibility": {
+        "title": "技術で解決できる?",
+        "answer": "Yes! Pythonとデータベースで実現できます",
+        "approach": [
+          "SQLiteでデータを永続化",
+          "CRUD操作で完全な管理",
+          "シンプルなCLIインターフェース"
+        ],
+        "libraries": [
+          {
+            "name": "sqlite3",
+            "purpose": "データベースでタスクを管理",
+            "reason": "標準ライブラリで追加インストール不要、軽量で高速"
+          }
+        ]
+      }
+    }
+  ],
+  "planning": [
+    {
+      "id": "task_planning",
+      "title": "解決策を設計しよう",
+      "requirements": {
+        "title": "必要な機能を洗い出そう",
+        "features": [
+          {
+            "feature": "タスクの追加",
+            "detail": "新しいタスクをデータベースに登録",
+            "priority": "必須"
+          },
+          {
+            "feature": "タスクの一覧表示",
+            "detail": "すべてのタスクを見やすく表示",
+            "priority": "必須"
+          },
+          {
+            "feature": "タスクの完了",
+            "detail": "タスクを完了状態に更新",
+            "priority": "必須"
+          },
+          {
+            "feature": "タスクの削除",
+            "detail": "不要なタスクを削除",
+            "priority": "必須"
+          },
+          {
+            "feature": "完了・未完了の絞り込み",
+            "detail": "状態に応じてタスクを表示",
+            "priority": "あれば便利"
+          }
+        ]
+      },
+      "technicalChoice": {
+        "title": "技術選定",
+        "choices": [
+          {
+            "aspect": "データ保存方法",
+            "options": [
+              {
+                "name": "SQLite",
+                "pros": ["標準ライブラリ", "高速", "信頼性が高い", "追加設定不要"],
+                "cons": [],
+                "selected": true
+              },
+              {
+                "name": "テキストファイル",
+                "pros": ["シンプル"],
+                "cons": ["検索が遅い", "データ整合性の問題"],
+                "selected": false
+              }
+            ]
+          },
+          {
+            "aspect": "インターフェース",
+            "options": [
+              {
+                "name": "コマンドラインインターフェース",
+                "pros": ["シンプル", "学習に最適"],
+                "cons": [],
+                "selected": true
+              }
+            ]
+          }
+        ]
+      },
+      "architecture": {
+        "title": "システム設計",
+        "flow": [
+          "1. データベースに接続",
+          "2. テーブルが存在しない場合は作成",
+          "3. ユーザーの操作に応じてCRUD処理",
+          "4. 結果を表示",
+          "5. データベース接続を閉じる"
+        ],
+        "dataFlow": "ユーザー入力 → SQL実行 → データベース → 結果取得 → 表示"
+      },
+      "developmentPlan": {
+        "title": "開発計画",
+        "steps": [
+          {
+            "step": 1,
+            "title": "データベース初期化",
+            "estimate": "10分"
+          },
+          {
+            "step": 2,
+            "title": "タスク追加・一覧機能",
+            "estimate": "20分"
+          },
+          {
+            "step": 3,
+            "title": "完了・削除機能",
+            "estimate": "20分"
+          },
+          {
+            "step": 4,
+            "title": "インターフェース改善",
+            "estimate": "10分"
+          }
+        ],
+        "totalEstimate": "約60分"
+      }
+    }
+  ],
+  "implementation": [
+    {
+      "id": "task_impl_1",
+      "title": "Step 1: データベースとテーブルの作成",
+      "objective": "SQLiteデータベースに接続し、タスクを保存するテーブルを作成しよう",
+      "explanation": "タスク管理アプリの基盤となるデータベースを準備します。SQLiteは標準ライブラリなので、追加のインストールなしで使えます。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "データベース接続",
+          "description": "sqlite3モジュールを使ってデータベースに接続します",
+          "code": "import sqlite3\n\n# データベースに接続(ファイルがなければ作成される)\nconn = sqlite3.connect('tasks.db')\ncursor = conn.cursor()"
+        },
+        {
+          "step": 2,
+          "title": "テーブル作成",
+          "description": "タスクを保存するテーブルを作成します",
+          "code": "# tasksテーブルを作成\ncursor.execute('''\n    CREATE TABLE IF NOT EXISTS tasks (\n        id INTEGER PRIMARY KEY AUTOINCREMENT,\n        title TEXT NOT NULL,\n        completed INTEGER DEFAULT 0,\n        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n    )\n''')\nconn.commit()"
+        },
+        {
+          "step": 3,
+          "title": "接続を閉じる",
+          "description": "使い終わったら接続を閉じます",
+          "code": "conn.close()\nprint('データベースを初期化しました!')"
+        }
+      ],
+      "starterCode": "import sqlite3\n\n# データベース接続とテーブル作成のコードを書いてください\n\n# ここにコードを書いてください\n",
+      "solution": "import sqlite3\n\n# データベースに接続\nconn = sqlite3.connect('tasks.db')\ncursor = conn.cursor()\n\n# tasksテーブルを作成\ncursor.execute('''\n    CREATE TABLE IF NOT EXISTS tasks (\n        id INTEGER PRIMARY KEY AUTOINCREMENT,\n        title TEXT NOT NULL,\n        completed INTEGER DEFAULT 0,\n        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n    )\n''')\n\nconn.commit()\nprint('データベースとテーブルを作成しました!')\n\n# テーブルの構造を確認\ncursor.execute(\"PRAGMA table_info(tasks)\")\ncolumns = cursor.fetchall()\nprint('\\nテーブル構造:')\nfor col in columns:\n    print(f'  {col[1]} ({col[2]})')\n\nconn.close()",
+      "hints": [
+        "CREATE TABLE IF NOT EXISTS で既にテーブルがある場合はエラーを回避",
+        "AUTOINCREMENT でIDが自動採番される",
+        "commit() を忘れるとデータが保存されません"
+      ],
+      "keyPoints": [
+        "SQLiteは標準ライブラリで追加インストール不要",
+        "CREATE TABLE でテーブルを定義",
+        "commit() でデータベースに変更を反映",
+        "close() で接続を終了"
+      ]
+    },
+    {
+      "id": "task_impl_2",
+      "title": "Step 2: タスクの追加と一覧表示",
+      "objective": "新しいタスクをデータベースに追加し、すべてのタスクを表示する機能を実装しよう",
+      "explanation": "CRUD操作のCreate(作成)とRead(読み取り)を実装します。これでタスクを登録して確認できるようになります。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "タスク追加関数",
+          "description": "新しいタスクをデータベースに挿入する関数を作ります",
+          "code": "def add_task(title):\n    conn = sqlite3.connect('tasks.db')\n    cursor = conn.cursor()\n    \n    cursor.execute('INSERT INTO tasks (title) VALUES (?)', (title,))\n    conn.commit()\n    \n    print(f'タスク「{title}」を追加しました!')\n    conn.close()"
+        },
+        {
+          "step": 2,
+          "title": "タスク一覧表示関数",
+          "description": "すべてのタスクを取得して表示します",
+          "code": "def show_tasks():\n    conn = sqlite3.connect('tasks.db')\n    cursor = conn.cursor()\n    \n    cursor.execute('SELECT id, title, completed FROM tasks ORDER BY id')\n    tasks = cursor.fetchall()\n    \n    if not tasks:\n        print('タスクがありません')\n    else:\n        print('\\n=== タスク一覧 ===')\n        for task in tasks:\n            status = '✓' if task[2] else ' '\n            print(f'[{status}] {task[0]}. {task[1]}')\n    \n    conn.close()"
+        }
+      ],
+      "starterCode": "import sqlite3\n\n# データベースを初期化\nconn = sqlite3.connect('tasks.db')\ncursor = conn.cursor()\ncursor.execute('''\n    CREATE TABLE IF NOT EXISTS tasks (\n        id INTEGER PRIMARY KEY AUTOINCREMENT,\n        title TEXT NOT NULL,\n        completed INTEGER DEFAULT 0,\n        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n    )\n''')\nconn.commit()\nconn.close()\n\n# タスク追加関数を作成してください\ndef add_task(title):\n    # ここにコードを書いてください\n    pass\n\n# タスク一覧表示関数を作成してください\ndef show_tasks():\n    # ここにコードを書いてください\n    pass\n\n# テスト\nadd_task('Pythonの勉強')\nadd_task('買い物に行く')\nshow_tasks()\n",
+      "solution": "import sqlite3\n\n# データベースを初期化\nconn = sqlite3.connect('tasks.db')\ncursor = conn.cursor()\ncursor.execute('''\n    CREATE TABLE IF NOT EXISTS tasks (\n        id INTEGER PRIMARY KEY AUTOINCREMENT,\n        title TEXT NOT NULL,\n        completed INTEGER DEFAULT 0,\n        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n    )\n''')\nconn.commit()\nconn.close()\n\ndef add_task(title):\n    '''新しいタスクを追加'''\n    conn = sqlite3.connect('tasks.db')\n    cursor = conn.cursor()\n    \n    cursor.execute('INSERT INTO tasks (title) VALUES (?)', (title,))\n    conn.commit()\n    \n    print(f'✓ タスク「{title}」を追加しました!')\n    conn.close()\n\ndef show_tasks():\n    '''すべてのタスクを表示'''\n    conn = sqlite3.connect('tasks.db')\n    cursor = conn.cursor()\n    \n    cursor.execute('SELECT id, title, completed FROM tasks ORDER BY id')\n    tasks = cursor.fetchall()\n    \n    if not tasks:\n        print('タスクがありません')\n    else:\n        print('\\n' + '=' * 40)\n        print('タスク一覧')\n        print('=' * 40)\n        for task in tasks:\n            task_id, title, completed = task\n            status = '✓' if completed else ' '\n            print(f'[{status}] {task_id}. {title}')\n        print('=' * 40)\n    \n    conn.close()\n\n# テスト\nadd_task('Pythonの勉強')\nadd_task('買い物に行く')\nadd_task('レポートを書く')\nshow_tasks()",
+      "hints": [
+        "INSERT で新しいレコードを追加",
+        "SELECT で データを取得",
+        "? を使ってSQLインジェクション対策",
+        "fetchall() ですべての結果を取得"
+      ],
+      "keyPoints": [
+        "プレースホルダー(?)でセキュアなSQL実行",
+        "INSERT でデータを追加(Create)",
+        "SELECT でデータを取得(Read)",
+        "関数化でコードを整理"
+      ]
+    },
+    {
+      "id": "task_impl_3",
+      "title": "Step 3: タスクの完了と削除機能",
+      "objective": "タスクを完了状態にする更新機能と、不要なタスクを削除する機能を実装しよう",
+      "explanation": "CRUD操作のUpdate(更新)とDelete(削除)を実装します。これで完全なタスク管理システムが完成します!",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "タスク完了関数",
+          "description": "指定したIDのタスクを完了状態に更新します",
+          "code": "def complete_task(task_id):\n    conn = sqlite3.connect('tasks.db')\n    cursor = conn.cursor()\n    \n    cursor.execute('UPDATE tasks SET completed = 1 WHERE id = ?', (task_id,))\n    conn.commit()\n    \n    if cursor.rowcount > 0:\n        print(f'タスクID {task_id} を完了にしました!')\n    else:\n        print(f'タスクID {task_id} が見つかりません')\n    \n    conn.close()"
+        },
+        {
+          "step": 2,
+          "title": "タスク削除関数",
+          "description": "指定したIDのタスクを削除します",
+          "code": "def delete_task(task_id):\n    conn = sqlite3.connect('tasks.db')\n    cursor = conn.cursor()\n    \n    cursor.execute('DELETE FROM tasks WHERE id = ?', (task_id,))\n    conn.commit()\n    \n    if cursor.rowcount > 0:\n        print(f'タスクID {task_id} を削除しました!')\n    else:\n        print(f'タスクID {task_id} が見つかりません')\n    \n    conn.close()"
+        }
+      ],
+      "starterCode": "import sqlite3\n\n# データベース初期化\nconn = sqlite3.connect('tasks.db')\ncursor = conn.cursor()\ncursor.execute('''\n    CREATE TABLE IF NOT EXISTS tasks (\n        id INTEGER PRIMARY KEY AUTOINCREMENT,\n        title TEXT NOT NULL,\n        completed INTEGER DEFAULT 0,\n        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n    )\n''')\nconn.commit()\nconn.close()\n\ndef add_task(title):\n    conn = sqlite3.connect('tasks.db')\n    cursor = conn.cursor()\n    cursor.execute('INSERT INTO tasks (title) VALUES (?)', (title,))\n    conn.commit()\n    print(f'✓ タスク「{title}」を追加しました!')\n    conn.close()\n\ndef show_tasks():\n    conn = sqlite3.connect('tasks.db')\n    cursor = conn.cursor()\n    cursor.execute('SELECT id, title, completed FROM tasks ORDER BY id')\n    tasks = cursor.fetchall()\n    \n    if not tasks:\n        print('タスクがありません')\n    else:\n        print('\\n' + '=' * 40)\n        print('タスク一覧')\n        print('=' * 40)\n        for task in tasks:\n            task_id, title, completed = task\n            status = '✓' if completed else ' '\n            print(f'[{status}] {task_id}. {title}')\n        print('=' * 40)\n    conn.close()\n\n# タスク完了関数を作成してください\ndef complete_task(task_id):\n    # ここにコードを書いてください\n    pass\n\n# タスク削除関数を作成してください\ndef delete_task(task_id):\n    # ここにコードを書いてください\n    pass\n\n# テスト\nadd_task('Pythonの勉強')\nadd_task('買い物に行く')\nadd_task('レポートを書く')\nshow_tasks()\n\ncomplete_task(1)\nshow_tasks()\n\ndelete_task(2)\nshow_tasks()\n",
+      "solution": "import sqlite3\n\n# データベース初期化\nconn = sqlite3.connect('tasks.db')\ncursor = conn.cursor()\ncursor.execute('''\n    CREATE TABLE IF NOT EXISTS tasks (\n        id INTEGER PRIMARY KEY AUTOINCREMENT,\n        title TEXT NOT NULL,\n        completed INTEGER DEFAULT 0,\n        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n    )\n''')\nconn.commit()\nconn.close()\n\ndef add_task(title):\n    '''新しいタスクを追加'''\n    conn = sqlite3.connect('tasks.db')\n    cursor = conn.cursor()\n    cursor.execute('INSERT INTO tasks (title) VALUES (?)', (title,))\n    conn.commit()\n    print(f'✓ タスク「{title}」を追加しました!')\n    conn.close()\n\ndef show_tasks():\n    '''すべてのタスクを表示'''\n    conn = sqlite3.connect('tasks.db')\n    cursor = conn.cursor()\n    cursor.execute('SELECT id, title, completed FROM tasks ORDER BY id')\n    tasks = cursor.fetchall()\n    \n    if not tasks:\n        print('タスクがありません')\n    else:\n        print('\\n' + '=' * 40)\n        print('タスク一覧')\n        print('=' * 40)\n        for task in tasks:\n            task_id, title, completed = task\n            status = '✓' if completed else ' '\n            print(f'[{status}] {task_id}. {title}')\n        print('=' * 40)\n    conn.close()\n\ndef complete_task(task_id):\n    '''タスクを完了状態にする'''\n    conn = sqlite3.connect('tasks.db')\n    cursor = conn.cursor()\n    \n    cursor.execute('UPDATE tasks SET completed = 1 WHERE id = ?', (task_id,))\n    conn.commit()\n    \n    if cursor.rowcount > 0:\n        print(f'✓ タスクID {task_id} を完了にしました!')\n    else:\n        print(f'✗ タスクID {task_id} が見つかりません')\n    \n    conn.close()\n\ndef delete_task(task_id):\n    '''タスクを削除'''\n    conn = sqlite3.connect('tasks.db')\n    cursor = conn.cursor()\n    \n    cursor.execute('DELETE FROM tasks WHERE id = ?', (task_id,))\n    conn.commit()\n    \n    if cursor.rowcount > 0:\n        print(f'✓ タスクID {task_id} を削除しました!')\n    else:\n        print(f'✗ タスクID {task_id} が見つかりません')\n    \n    conn.close()\n\n# テスト実行\nprint('=== タスク管理アプリのデモ ===')\nprint('\\n1. タスクを追加')\nadd_task('Pythonの勉強')\nadd_task('買い物に行く')\nadd_task('レポートを書く')\nshow_tasks()\n\nprint('\\n2. タスクを完了')\ncomplete_task(1)\nshow_tasks()\n\nprint('\\n3. タスクを削除')\ndelete_task(2)\nshow_tasks()\n\nprint('\\n✓ タスク管理システムの完成です!')",
+      "hints": [
+        "UPDATE で既存のデータを更新",
+        "DELETE でデータを削除",
+        "rowcount で影響を受けた行数を確認",
+        "WHERE句で対象を絞り込む"
+      ],
+      "keyPoints": [
+        "UPDATE でデータを更新(Update)",
+        "DELETE でデータを削除(Delete)",
+        "CRUD操作がすべて揃った",
+        "rowcountで操作結果を確認"
+      ]
+    }
+  ],
+  "reflection": [
+    {
+      "id": "task_reflection",
+      "title": "振り返りと改善",
+      "summary": {
+        "title": "作ったもの",
+        "description": "SQLiteデータベースを使った本格的なタスク管理アプリを作成しました。タスクの追加・表示・完了・削除のCRUD操作をすべて実装しました。",
+        "achievements": [
+          "データベースの基本を習得",
+          "CRUD操作を完全に実装",
+          "データの永続化を実現"
+        ]
+      },
+      "beforeAfter": {
+        "before": {
+          "time": "1日10分",
+          "method": "散らばったメモを探して確認",
+          "issues": ["メモが見つからない", "完了状態が不明", "データが消える"]
+        },
+        "after": {
+          "time": "数秒",
+          "method": "アプリで即座に確認・更新",
+          "benefits": ["一箇所で管理", "状態が明確", "データが永続化"]
+        },
+        "improvement": "年間約60時間の節約!"
+      },
+      "furtherImprovements": {
+        "title": "さらなる改善アイデア",
+        "ideas": [
+          {
+            "idea": "期限機能の追加",
+            "description": "タスクに期限を設定して、期限切れを通知",
+            "difficulty": "易",
+            "library": "datetime"
+          },
+          {
+            "idea": "優先度の設定",
+            "description": "高・中・低の優先度を設定して並び替え",
+            "difficulty": "易",
+            "library": "なし(カラム追加)"
+          },
+          {
+            "idea": "カテゴリ分類",
+            "description": "仕事・プライベート・勉強などカテゴリで分類",
+            "difficulty": "中",
+            "library": "なし(テーブル設計変更)"
+          },
+          {
+            "idea": "GUIインターフェース",
+            "description": "tkinterで視覚的なインターフェースを作成",
+            "difficulty": "中",
+            "library": "tkinter"
+          },
+          {
+            "idea": "タスクの検索機能",
+            "description": "キーワードでタスクを検索",
+            "difficulty": "易",
+            "library": "なし(LIKE句使用)"
+          },
+          {
+            "idea": "統計表示",
+            "description": "完了率や週別の進捗をグラフで可視化",
+            "difficulty": "中",
+            "library": "matplotlib"
+          }
+        ]
+      },
+      "nextChallenge": {
+        "title": "次のステップ",
+        "questions": [
+          "他にもデータベースで管理したい情報はありませんか?",
+          "この技術を使って日記アプリや家計簿が作れそうですか?",
+          "GUIを追加してもっと使いやすくできますか?"
+        ],
+        "encouragement": "データベースをマスターすれば、あらゆるアプリケーションの基礎が作れます!"
+      }
+    }
+  ]
+}

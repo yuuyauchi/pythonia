@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": "code_ch4_for",
+      "description": "for文で1から10までの数を表示する例です。",
+      "code": "for i in range(1, 11):\n    print(i)",
+      "expectedOutput": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10"
+    },
+    {
+      "id": "code_ch4_while",
+      "description": "while文で数を数える例です。",
+      "code": "count = 1\nwhile count <= 5:\n    print(count)\n    count = count + 1",
+      "expectedOutput": "1\n2\n3\n4\n5"
+    },
+    {
+      "id": "task_ch4_multiplication",
+      "description": "for文を使って、5の段（5×1から5×5まで）を表示するプログラムを書いてください。\n\n出力例：\n5\n10\n15\n20\n25",
+      "initialCode": "# 5の段を表示\nfor i in range(1, 6):\n    # ここに5×iの計算結果を表示するコードを書いてください\n    ",
+      "testCases": [
+        {
+          "expectedOutput": "5\n10\n15\n20\n25",
+          "description": "5, 10, 15, 20, 25が順番に表示される"
+        }
+      ],
+      "hint": "print(5 * i) で5×iの結果が表示されます"
+    }
+  ]
+}

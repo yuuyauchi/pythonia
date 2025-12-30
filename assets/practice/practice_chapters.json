@@ -1,0 +1,121 @@
+{
+  "chapters": [
+    {
+      "id": "ch1",
+      "title": "変数とprint",
+      "description": "自己紹介プログラムを作ってみよう",
+      "projectTitle": "自己紹介プログラム",
+      "steps": [
+        { "id": "ch1_p1", "type": "project_intro", "contentId": "intro_ch1" },
+        { "id": "ch1_p2", "type": "guided_step", "contentId": "guided_ch1_name" },
+        { "id": "ch1_p3", "type": "guided_step", "contentId": "guided_ch1_age" },
+        { "id": "ch1_p4", "type": "challenge", "contentId": "challenge_ch1_format" },
+        { "id": "ch1_p5", "type": "free_practice", "contentId": "free_ch1_profile" }
+      ]
+    },
+    {
+      "id": "ch2",
+      "title": "数値と計算",
+      "description": "お買い物計算アプリを作ってみよう",
+      "projectTitle": "お買い物計算アプリ",
+      "steps": [
+        { "id": "ch2_p1", "type": "project_intro", "contentId": "intro_ch2" },
+        { "id": "ch2_p2", "type": "guided_step", "contentId": "guided_ch2_price" },
+        { "id": "ch2_p3", "type": "guided_step", "contentId": "guided_ch2_tax" },
+        { "id": "ch2_p4", "type": "challenge", "contentId": "challenge_ch2_discount" },
+        { "id": "ch2_p5", "type": "free_practice", "contentId": "free_ch2_calculator" }
+      ]
+    },
+    {
+      "id": "ch3",
+      "title": "条件分岐（if文）",
+      "description": "年齢判定プログラムを作ってみよう",
+      "projectTitle": "年齢判定プログラム",
+      "steps": [
+        { "id": "ch3_p1", "type": "project_intro", "contentId": "intro_ch3" },
+        { "id": "ch3_p2", "type": "guided_step", "contentId": "guided_ch3_adult" },
+        { "id": "ch3_p3", "type": "guided_step", "contentId": "guided_ch3_category" },
+        { "id": "ch3_p4", "type": "challenge", "contentId": "challenge_ch3_grade" },
+        { "id": "ch3_p5", "type": "free_practice", "contentId": "free_ch3_check" }
+      ]
+    },
+    {
+      "id": "ch4",
+      "title": "繰り返し（for/while）",
+      "description": "九九表を作ってみよう",
+      "projectTitle": "九九表プログラム",
+      "steps": [
+        { "id": "ch4_p1", "type": "project_intro", "contentId": "intro_ch4" },
+        { "id": "ch4_p2", "type": "guided_step", "contentId": "guided_ch4_single" },
+        { "id": "ch4_p3", "type": "guided_step", "contentId": "guided_ch4_nested" },
+        { "id": "ch4_p4", "type": "challenge", "contentId": "challenge_ch4_pattern" },
+        { "id": "ch4_p5", "type": "free_practice", "contentId": "free_ch4_loop" }
+      ]
+    },
+    {
+      "id": "ch5",
+      "title": "リストと辞書",
+      "description": "買い物リストアプリを作ってみよう",
+      "projectTitle": "買い物リストアプリ",
+      "steps": [
+        { "id": "ch5_p1", "type": "project_intro", "contentId": "intro_ch5" },
+        { "id": "ch5_p2", "type": "guided_step", "contentId": "guided_ch5_list" },
+        { "id": "ch5_p3", "type": "guided_step", "contentId": "guided_ch5_dict" },
+        { "id": "ch5_p4", "type": "challenge", "contentId": "challenge_ch5_sum" },
+        { "id": "ch5_p5", "type": "free_practice", "contentId": "free_ch5_manager" }
+      ]
+    },
+    {
+      "id": "ch6",
+      "title": "関数の基本",
+      "description": "挨拶ボットを作ってみよう",
+      "projectTitle": "挨拶ボット",
+      "steps": [
+        { "id": "ch6_p1", "type": "project_intro", "contentId": "intro_ch6" },
+        { "id": "ch6_p2", "type": "guided_step", "contentId": "guided_ch6_greet" },
+        { "id": "ch6_p3", "type": "guided_step", "contentId": "guided_ch6_time" },
+        { "id": "ch6_p4", "type": "challenge", "contentId": "challenge_ch6_calc" },
+        { "id": "ch6_p5", "type": "free_practice", "contentId": "free_ch6_utils" }
+      ]
+    },
+    {
+      "id": "ch7",
+      "title": "文字列操作",
+      "description": "テキスト加工ツールを作ってみよう",
+      "projectTitle": "テキスト加工ツール",
+      "steps": [
+        { "id": "ch7_p1", "type": "project_intro", "contentId": "intro_ch7" },
+        { "id": "ch7_p2", "type": "guided_step", "contentId": "guided_ch7_format" },
+        { "id": "ch7_p3", "type": "guided_step", "contentId": "guided_ch7_validate" },
+        { "id": "ch7_p4", "type": "challenge", "contentId": "challenge_ch7_parse" },
+        { "id": "ch7_p5", "type": "free_practice", "contentId": "free_ch7_processor" }
+      ]
+    },
+    {
+      "id": "ch8",
+      "title": "クラスとオブジェクト",
+      "description": "生徒管理システムを作ってみよう",
+      "projectTitle": "生徒管理システム",
+      "steps": [
+        { "id": "ch8_p1", "type": "project_intro", "contentId": "intro_ch8" },
+        { "id": "ch8_p2", "type": "guided_step", "contentId": "guided_ch8_class" },
+        { "id": "ch8_p3", "type": "guided_step", "contentId": "guided_ch8_methods" },
+        { "id": "ch8_p4", "type": "challenge", "contentId": "challenge_ch8_bank" },
+        { "id": "ch8_p5", "type": "free_practice", "contentId": "free_ch8_objects" }
+      ]
+    },
+    {
+      "id": "ch9",
+      "title": "総合演習",
+      "description": "ミニゲームとアプリを作ってみよう",
+      "projectTitle": "総合プロジェクト",
+      "steps": [
+        { "id": "ch9_p1", "type": "project_intro", "contentId": "intro_ch9" },
+        { "id": "ch9_p2", "type": "guided_step", "contentId": "guided_ch9_game" },
+        { "id": "ch9_p3", "type": "challenge", "contentId": "challenge_ch9_bmi" },
+        { "id": "ch9_p4", "type": "challenge", "contentId": "challenge_ch9_quiz" },
+        { "id": "ch9_p5", "type": "free_practice", "contentId": "free_ch9_final" }
+      ]
+    }
+  ]
+}

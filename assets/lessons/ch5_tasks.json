@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": "code_ch5_list",
+      "description": "リストを作成して、要素を表示する例です。",
+      "code": "colors = [\"赤\", \"青\", \"緑\"]\nprint(colors[0])\nprint(colors[2])",
+      "expectedOutput": "赤\n緑"
+    },
+    {
+      "id": "code_ch5_dict",
+      "description": "辞書を使って、キーと値のペアでデータを管理する例です。",
+      "code": "book = {\n    \"title\": \"Python入門\",\n    \"price\": 2000,\n    \"pages\": 300\n}\nprint(book[\"title\"])\nprint(book[\"price\"])",
+      "expectedOutput": "Python入門\n2000"
+    },
+    {
+      "id": "task_ch5_shopping",
+      "description": "買い物リストを作成して、リストに商品を追加するプログラムを書いてください。\n\n1. 最初のリストに「牛乳」と「パン」が入っています\n2. append()を使って「卵」を追加してください\n3. リスト全体を表示してください",
+      "initialCode": "# 買い物リスト\nshopping_list = [\"牛乳\", \"パン\"]\n\n# 「卵」を追加\n\n\n# リストを表示\nprint(shopping_list)",
+      "testCases": [
+        {
+          "expectedOutput": "['牛乳', 'パン', '卵']",
+          "description": "牛乳、パン、卵の3つが含まれるリストが表示される"
+        }
+      ],
+      "hint": "shopping_list.append(\"卵\") でリストに追加できます"
+    }
+  ]
+}

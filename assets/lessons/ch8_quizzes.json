@@ -1,0 +1,30 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz_ch8_mcq_1",
+      "question": "次のコードを実行すると、何が表示されますか？",
+      "code": "class Dog:\n    def __init__(self, name):\n        self.name = name\n    \n    def bark(self):\n        return f\"{self.name}がワンワン！\"\n\nmy_dog = Dog(\"ポチ\")\nprint(my_dog.bark())",
+      "choices": [
+        { "id": "a", "text": "ポチがワンワン！" },
+        { "id": "b", "text": "my_dogがワンワン！" },
+        { "id": "c", "text": "Dogがワンワン！" },
+        { "id": "d", "text": "エラーが出る" }
+      ],
+      "correctChoiceId": "a",
+      "explanation": "Dogクラスのインスタンスmy_dogを作成し、nameに「ポチ」が設定されます。bark()メソッドを呼ぶと「ポチがワンワン！」が返されます。"
+    },
+    {
+      "id": "quiz_ch8_fill_1",
+      "description": "次のコードの空欄を埋めて、Personクラスを完成させてください。",
+      "codeTemplate": "class Person:\n    def ______(self, name, age):\n        self.name = name\n        self.age = age",
+      "blanks": [
+        {
+          "id": "blank1",
+          "correctAnswer": "__init__",
+          "hint": "クラスのインスタンスを初期化するメソッドです"
+        }
+      ],
+      "explanation": "__init__はクラスのコンストラクタ（初期化メソッド）です。インスタンス作成時に自動的に呼ばれます。"
+    }
+  ]
+}

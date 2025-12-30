@@ -11,6 +11,112 @@
         { "id": "ch1_s4", "type": "quiz_fill", "contentId": "quiz_ch1_fill_1" },
         { "id": "ch1_s5", "type": "code_task", "contentId": "task_ch1_print_name" }
       ]
+    },
+    {
+      "id": "ch2",
+      "title": "数値と計算",
+      "description": "Pythonで計算をしてみましょう。",
+      "steps": [
+        { "id": "ch2_s1", "type": "slide", "contentId": "slide_ch2_intro" },
+        { "id": "ch2_s2", "type": "code_read", "contentId": "code_ch2_calc" },
+        { "id": "ch2_s3", "type": "quiz_mcq", "contentId": "quiz_ch2_mcq_1" },
+        { "id": "ch2_s4", "type": "code_read", "contentId": "code_ch2_variable" },
+        { "id": "ch2_s5", "type": "quiz_fill", "contentId": "quiz_ch2_fill_1" },
+        { "id": "ch2_s6", "type": "code_task", "contentId": "task_ch2_tax" }
+      ]
+    },
+    {
+      "id": "ch3",
+      "title": "条件分岐（if文）",
+      "description": "条件によって処理を変えてみましょう。",
+      "steps": [
+        { "id": "ch3_s1", "type": "slide", "contentId": "slide_ch3_intro" },
+        { "id": "ch3_s2", "type": "code_read", "contentId": "code_ch3_if" },
+        { "id": "ch3_s3", "type": "quiz_mcq", "contentId": "quiz_ch3_mcq_1" },
+        { "id": "ch3_s4", "type": "code_read", "contentId": "code_ch3_elif" },
+        { "id": "ch3_s5", "type": "quiz_fill", "contentId": "quiz_ch3_fill_1" },
+        { "id": "ch3_s6", "type": "code_task", "contentId": "task_ch3_age" }
+      ]
+    },
+    {
+      "id": "ch4",
+      "title": "繰り返し（for/while）",
+      "description": "同じ処理を繰り返してみましょう。",
+      "steps": [
+        { "id": "ch4_s1", "type": "slide", "contentId": "slide_ch4_intro" },
+        { "id": "ch4_s2", "type": "code_read", "contentId": "code_ch4_for" },
+        { "id": "ch4_s3", "type": "quiz_mcq", "contentId": "quiz_ch4_mcq_1" },
+        { "id": "ch4_s4", "type": "quiz_fill", "contentId": "quiz_ch4_fill_1" },
+        { "id": "ch4_s5", "type": "code_read", "contentId": "code_ch4_while" },
+        { "id": "ch4_s6", "type": "quiz_mcq", "contentId": "quiz_ch4_mcq_2" },
+        { "id": "ch4_s7", "type": "code_task", "contentId": "task_ch4_multiplication" }
+      ]
+    },
+    {
+      "id": "ch5",
+      "title": "リストと辞書",
+      "description": "複数のデータをまとめて扱ってみましょう。",
+      "steps": [
+        { "id": "ch5_s1", "type": "slide", "contentId": "slide_ch5_intro" },
+        { "id": "ch5_s2", "type": "code_read", "contentId": "code_ch5_list" },
+        { "id": "ch5_s3", "type": "quiz_mcq", "contentId": "quiz_ch5_mcq_1" },
+        { "id": "ch5_s4", "type": "quiz_fill", "contentId": "quiz_ch5_fill_1" },
+        { "id": "ch5_s5", "type": "code_read", "contentId": "code_ch5_dict" },
+        { "id": "ch5_s6", "type": "quiz_mcq", "contentId": "quiz_ch5_mcq_2" },
+        { "id": "ch5_s7", "type": "code_task", "contentId": "task_ch5_shopping" }
+      ]
+    },
+    {
+      "id": "ch6",
+      "title": "関数の基本",
+      "description": "処理をまとめて再利用できるようにしましょう。",
+      "steps": [
+        { "id": "ch6_s1", "type": "slide", "contentId": "slide_ch6_intro" },
+        { "id": "ch6_s2", "type": "code_read", "contentId": "code_ch6_function" },
+        { "id": "ch6_s3", "type": "quiz_mcq", "contentId": "quiz_ch6_mcq_1" },
+        { "id": "ch6_s4", "type": "code_read", "contentId": "code_ch6_return" },
+        { "id": "ch6_s5", "type": "quiz_fill", "contentId": "quiz_ch6_fill_1" },
+        { "id": "ch6_s6", "type": "code_task", "contentId": "task_ch6_greeting" }
+      ]
+    },
+    {
+      "id": "ch7",
+      "title": "文字列操作",
+      "description": "テキストを自在に扱ってみましょう。",
+      "steps": [
+        { "id": "ch7_s1", "type": "slide", "contentId": "slide_ch7_intro" },
+        { "id": "ch7_s2", "type": "code_read", "contentId": "code_ch7_concat" },
+        { "id": "ch7_s3", "type": "quiz_mcq", "contentId": "quiz_ch7_mcq_1" },
+        { "id": "ch7_s4", "type": "code_read", "contentId": "code_ch7_methods" },
+        { "id": "ch7_s5", "type": "quiz_fill", "contentId": "quiz_ch7_fill_1" },
+        { "id": "ch7_s6", "type": "code_task", "contentId": "task_ch7_profile" }
+      ]
+    },
+    {
+      "id": "ch8",
+      "title": "クラスとオブジェクト",
+      "description": "オブジェクト指向プログラミングの基本を学びましょう。",
+      "steps": [
+        { "id": "ch8_s1", "type": "slide", "contentId": "slide_ch8_intro" },
+        { "id": "ch8_s2", "type": "code_read", "contentId": "code_ch8_simple_class" },
+        { "id": "ch8_s3", "type": "quiz_mcq", "contentId": "quiz_ch8_mcq_1" },
+        { "id": "ch8_s4", "type": "code_read", "contentId": "code_ch8_methods" },
+        { "id": "ch8_s5", "type": "quiz_fill", "contentId": "quiz_ch8_fill_1" },
+        { "id": "ch8_s6", "type": "code_task", "contentId": "task_ch8_student_class" }
+      ]
+    },
+    {
+      "id": "ch9",
+      "title": "総合演習",
+      "description": "これまでの知識を組み合わせて実践してみましょう。",
+      "steps": [
+        { "id": "ch9_s1", "type": "slide", "contentId": "slide_ch9_intro" },
+        { "id": "ch9_s2", "type": "code_read", "contentId": "code_ch9_example" },
+        { "id": "ch9_s3", "type": "quiz_mcq", "contentId": "quiz_ch9_mcq_1" },
+        { "id": "ch9_s4", "type": "code_task", "contentId": "task_ch9_number_game" },
+        { "id": "ch9_s5", "type": "code_task", "contentId": "task_ch9_bmi" },
+        { "id": "ch9_s6", "type": "slide", "contentId": "slide_ch9_conclusion" }
+      ]
     }
   ]
 }

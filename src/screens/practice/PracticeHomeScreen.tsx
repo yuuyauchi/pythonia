@@ -8,7 +8,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { colors, typography, spacing } from '../../constants/theme';
-import { getChapters } from '../../lib/lessonLoader';
+import { getPracticeChapters } from '../../lib/practiceLoader';
 import { useLessonProgressStore } from '../../store/lessonProgressStore';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -16,12 +16,12 @@ type Props = {
   navigation: NativeStackNavigationProp<any>;
 };
 
-export default function LessonsHomeScreen({ navigation }: Props) {
-  const chapters = getChapters();
-  const { getChapterProgress, currentChapterId, currentStepId } = useLessonProgressStore();
+export default function PracticeHomeScreen({ navigation }: Props) {
+  const chapters = getPracticeChapters();
+  const { getChapterProgress, currentChapterId } = useLessonProgressStore();
 
   const handleChapterPress = (chapterId: string) => {
-    navigation.navigate('ChapterDetail', { chapterId });
+    navigation.navigate('PracticeDetail', { chapterId });
   };
 
   const renderChapterCard = (chapter: typeof chapters[0]) => {
@@ -48,7 +48,10 @@ export default function LessonsHomeScreen({ navigation }: Props) {
         onPress={() => handleChapterPress(chapter.id)}
       >
         <View style={styles.chapterHeader}>
-          <Text style={styles.chapterTitle}>{chapter.title}</Text>
+          <View style={styles.chapterTitleContainer}>
+            <Text style={styles.chapterTitle}>{chapter.title}</Text>
+            <Text style={styles.projectTitle}>{chapter.projectTitle}</Text>
+          </View>
           <Text style={[styles.statusText, { color: statusColor }]}>
             {statusText}
           </Text>
@@ -77,29 +80,32 @@ export default function LessonsHomeScreen({ navigation }: Props) {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.header}>
-          <Text style={styles.title}>学ぶ</Text>
-          <Text style={styles.subtitle}>Python基礎レッスン</Text>
+          <Text style={styles.title}>書く</Text>
+          <Text style={styles.subtitle}>実践プロジェクト</Text>
+          <Text style={styles.description}>
+            学んだことを活かして、実際にプログラムを作ってみましょう!
+          </Text>
         </View>
 
         {/* Current Progress Card */}
         {currentChapterId && (
           <View style={styles.continueCard}>
-            <Text style={styles.continueTitle}>昨日の続きから</Text>
+            <Text style={styles.continueTitle}>続きから始める</Text>
             <Text style={styles.continueChapter}>
-              {chapters.find((ch) => ch.id === currentChapterId)?.title}
+              {chapters.find((ch) => ch.id === currentChapterId)?.projectTitle}
             </Text>
             <TouchableOpacity
               style={styles.continueButton}
               onPress={() => handleChapterPress(currentChapterId)}
             >
-              <Text style={styles.continueButtonText}>続きを学ぶ</Text>
+              <Text style={styles.continueButtonText}>続きを作る</Text>
             </TouchableOpacity>
           </View>
         )}
 
         {/* Chapter List */}
         <View style={styles.chapterList}>
-          <Text style={styles.sectionTitle}>全8章</Text>
+          <Text style={styles.sectionTitle}>全9プロジェクト</Text>
           {chapters.map(renderChapterCard)}
         </View>
       </ScrollView>
@@ -125,6 +131,11 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xs,
   },
   subtitle: {
+    ...typography.h3,
+    color: colors.primary,
+    marginBottom: spacing.xs,
+  },
+  description: {
     ...typography.body,
     color: colors.textSecondary,
   },
@@ -182,13 +193,22 @@ const styles = StyleSheet.create({
   chapterHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: spacing.xs,
+    alignItems: 'flex-start',
+    marginBottom: spacing.sm,
+  },
+  chapterTitleContainer: {
+    flex: 1,
+    marginRight: spacing.md,
   },
   chapterTitle: {
     ...typography.h3,
     color: colors.text,
-    flex: 1,
+    marginBottom: 2,
+  },
+  projectTitle: {
+    ...typography.caption,
+    color: colors.primary,
+    fontWeight: '600',
   },
   statusText: {
     ...typography.caption,

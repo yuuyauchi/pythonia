@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": "code_ch8_simple_class",
+      "description": "シンプルなクラスの例です。Carクラスを定義して、インスタンスを作成します。",
+      "code": "class Car:\n    def __init__(self, brand, color):\n        self.brand = brand\n        self.color = color\n    \n    def info(self):\n        return f\"{self.color}の{self.brand}\"\n\nmy_car = Car(\"トヨタ\", \"赤\")\nprint(my_car.info())",
+      "expectedOutput": "赤のトヨタ"
+    },
+    {
+      "id": "code_ch8_methods",
+      "description": "__init__メソッドとその他のメソッドを持つクラスの例です。",
+      "code": "class Counter:\n    def __init__(self):\n        self.count = 0\n    \n    def increment(self):\n        self.count += 1\n    \n    def get_count(self):\n        return self.count\n\ncounter = Counter()\ncounter.increment()\ncounter.increment()\nprint(counter.get_count())",
+      "expectedOutput": "2"
+    },
+    {
+      "id": "task_ch8_student_class",
+      "description": "Studentクラスを作成してください。\n\n要件：\n- __init__メソッドで name（名前）と score（点数）を受け取る\n- is_pass()メソッドで、scoreが60以上なら「合格」、それ以外なら「不合格」を返す\n\n例：\nstudent = Student(\"太郎\", 75)\nprint(student.is_pass())  # → 合格",
+      "initialCode": "class Student:\n    def __init__(self, name, score):\n        # ここを完成させてください\n        \n    \n    def is_pass(self):\n        # ここを完成させてください\n        \n\n# テスト\nstudent = Student(\"太郎\", 75)\nprint(student.is_pass())",
+      "testCases": [
+        {
+          "expectedOutput": "合格",
+          "description": "score=75の場合、「合格」と表示される"
+        }
+      ],
+      "hint": "__init__でself.nameとself.scoreに値を代入します。is_pass()でself.scoreが60以上かチェックします"
+    }
+  ]
+}

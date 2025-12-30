@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": "code_ch3_if",
+      "description": "天気によってメッセージを変える例です。",
+      "code": "weather = \"晴れ\"\nif weather == \"晴れ\":\n    print(\"散歩に行こう！\")\nelse:\n    print(\"家で過ごそう\")",
+      "expectedOutput": "散歩に行こう！"
+    },
+    {
+      "id": "code_ch3_elif",
+      "description": "elifを使って、複数の条件を調べる例です。",
+      "code": "score = 85\nif score >= 90:\n    print(\"優秀です！\")\nelif score >= 70:\n    print(\"良い成績です\")\nelse:\n    print(\"頑張りましょう\")",
+      "expectedOutput": "良い成績です"
+    },
+    {
+      "id": "task_ch3_age",
+      "description": "年齢を判定するプログラムを書いてください。\n\n- 20歳以上なら「成人です」\n- 20歳未満なら「未成年です」\n\nと表示してください。",
+      "initialCode": "# 年齢\nage = 18\n\n# if文で判定\nif age >= 20:\n    print(\"成人です\")\nelse:\n    # ここを完成させてください\n    ",
+      "testCases": [
+        {
+          "expectedOutput": "未成年です",
+          "description": "age=18の場合、「未成年です」と表示される"
+        }
+      ],
+      "hint": "elseの部分にprint(\"未成年です\")を書きます"
+    }
+  ]
+}

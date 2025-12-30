@@ -1,0 +1,13 @@
+{
+  "project_intros": [{"id": "intro_ch6", "title": "挨拶ボットを作ろう", "description": "関数を使って処理をまとめます。", "goals": ["関数を定義できる", "引数を使える", "戻り値を返せる"], "finalOutput": "おはよう、太郎さん!"}],
+  "guided_steps": [
+    {"id": "guided_ch6_greet", "title": "ステップ1: 挨拶関数を作ろう", "instruction": "名前を受け取って挨拶する関数を作りましょう。", "hints": ["def greet(name): で定義", "return で値を返します"], "starterCode": "# 関数を定義\n\n# 関数を呼び出し\n", "solution": "# 関数を定義\ndef greet(name):\n    return \"こんにちは、\" + name + \"さん!\"\n\n# 関数を呼び出し\nmessage = greet(\"太郎\")\nprint(message)", "expectedOutput": "こんにちは、太郎さん!", "checkType": "output_contains", "checkValue": "太郎"},
+    {"id": "guided_ch6_time", "title": "ステップ2: 時間帯で挨拶を変えよう", "instruction": "時間帯によって挨拶を変える関数を作りましょう。", "hints": ["if文と関数を組み合わせます"], "starterCode": "# 関数を定義\n\n", "solution": "# 関数を定義\ndef greet_by_time(name, hour):\n    if hour < 12:\n        return \"おはよう、\" + name + \"さん!\"\n    elif hour < 18:\n        return \"こんにちは、\" + name + \"さん!\"\n    else:\n        return \"こんばんは、\" + name + \"さん!\"\n\nprint(greet_by_time(\"太郎\", 9))", "expectedOutput": "おはよう、太郎さん!", "checkType": "output_contains", "checkValue": "おはよう"}
+  ],
+  "challenges": [
+    {"id": "challenge_ch6_calc", "title": "チャレンジ: 計算関数", "description": "計算をする関数を作ってください。", "instruction": "2つの数を受け取って、四則演算の結果を全て表示する関数を作ってください。", "starterCode": "# ここにコードを書いてください\n", "testCases": [{"description": "足し算の結果が含まれる", "checkType": "output_contains", "expected": "15"}], "solution": "def calculate(a, b):\n    print(\"足し算: \" + str(a + b))\n    print(\"引き算: \" + str(a - b))\n    print(\"掛け算: \" + str(a * b))\n    print(\"割り算: \" + str(a / b))\n\ncalculate(10, 5)", "hints": ["関数の中で複数の計算ができます"]}
+  ],
+  "free_practices": [
+    {"id": "free_ch6_utils", "title": "自由制作: 便利関数集", "description": "便利な関数を作ってみましょう!", "prompt": "以下のような関数を作ってください:\n・温度変換(摂氏⇔華氏)\n・BMI計算\n・文字数カウント", "starterCode": "# あなたの関数を書いてください\n", "exampleSolution": "def calc_bmi(weight, height):\n    bmi = weight / (height ** 2)\n    return round(bmi, 1)\n\nresult = calc_bmi(60, 1.7)\nprint(\"BMI: \" + str(result))", "tips": ["関数を組み合わせると便利です"]}
+  ]
+}

@@ -1,0 +1,366 @@
+{
+  "problem_discovery": [
+    {
+      "id": "excel_problem",
+      "title": "課題を発見しよう",
+      "scenario": {
+        "title": "毎週のExcelデータ集計が大変...",
+        "description": "営業部の佐藤さんは、毎週月曜日に営業データをExcelで集計しています。売上データを開いて、合計を計算して、グラフを作成して...この作業、毎週2時間もかかっています。",
+        "timeSpent": "毎週2時間 × 52週 = 年間約104時間",
+        "painPoints": [
+          "同じ作業を毎週繰り返している",
+          "手作業でミスが起こりやすい",
+          "複数のExcelファイルを扱うのが面倒",
+          "グラフ作成に時間がかかる"
+        ]
+      },
+      "problemAnalysis": {
+        "question1": "この状況で一番困っていることは何でしょうか?",
+        "options": [
+          "毎週同じ作業を繰り返すこと",
+          "手作業でミスが起こること",
+          "時間がかかりすぎること",
+          "すべて"
+        ],
+        "correctAnswer": 3,
+        "explanation": "どれも重要な課題です。これらすべてをPythonで自動化できます!"
+      },
+      "idealSolution": {
+        "title": "理想の状態は?",
+        "description": "ボタン1つで自動的にデータ集計とグラフ作成が完了したら便利ですよね!",
+        "benefits": [
+          "手作業が不要になる",
+          "ミスがなくなる",
+          "2時間の作業が数秒で完了",
+          "他の重要な業務に時間を使える"
+        ],
+        "beforeAfter": {
+          "before": "毎週2時間 × 手作業で集計",
+          "after": "数秒!プログラムが自動処理"
+        }
+      },
+      "technicalFeasibility": {
+        "title": "技術で解決できる?",
+        "answer": "Yes! Pythonで実現できます",
+        "approach": [
+          "openpyxl でExcelファイルを読み込み",
+          "pandas でデータ分析",
+          "matplotlib でグラフ作成"
+        ],
+        "libraries": [
+          {
+            "name": "openpyxl",
+            "purpose": "Excelファイルの読み書き",
+            "reason": "Pythonから直接Excelを操作できる"
+          },
+          {
+            "name": "pandas",
+            "purpose": "データ分析と集計",
+            "reason": "大量データの処理が簡単にできる"
+          },
+          {
+            "name": "matplotlib",
+            "purpose": "グラフの作成",
+            "reason": "美しいグラフを自動生成できる"
+          }
+        ]
+      }
+    }
+  ],
+  "planning": [
+    {
+      "id": "excel_planning",
+      "title": "解決策を設計しよう",
+      "requirements": {
+        "title": "必要な機能を洗い出そう",
+        "features": [
+          {
+            "feature": "Excelデータの読み込み",
+            "detail": "売上データをExcelファイルから読み込む",
+            "priority": "必須"
+          },
+          {
+            "feature": "データの集計",
+            "detail": "合計、平均、最大値などを自動計算",
+            "priority": "必須"
+          },
+          {
+            "feature": "グラフの自動生成",
+            "detail": "売上推移を棒グラフや折れ線グラフで可視化",
+            "priority": "必須"
+          },
+          {
+            "feature": "結果をExcelに保存",
+            "detail": "集計結果とグラフを新しいExcelファイルに保存",
+            "priority": "あれば便利"
+          },
+          {
+            "feature": "複数ファイル対応",
+            "detail": "複数のExcelファイルを一括処理",
+            "priority": "あれば便利"
+          }
+        ]
+      },
+      "technicalChoice": {
+        "title": "技術選定",
+        "choices": [
+          {
+            "aspect": "Excelファイル操作",
+            "options": [
+              {
+                "name": "openpyxl",
+                "pros": ["xlsx形式に対応", "読み書き両方可能", "セル操作が簡単"],
+                "cons": ["大きいファイルは遅い"],
+                "selected": true
+              },
+              {
+                "name": "xlrd/xlwt",
+                "pros": ["軽量"],
+                "cons": ["古い形式のみ対応"],
+                "selected": false
+              }
+            ]
+          },
+          {
+            "aspect": "データ分析",
+            "options": [
+              {
+                "name": "pandas",
+                "pros": ["強力な分析機能", "Excelと相性良い", "コードが簡潔"],
+                "cons": [],
+                "selected": true
+              }
+            ]
+          },
+          {
+            "aspect": "グラフ作成",
+            "options": [
+              {
+                "name": "matplotlib",
+                "pros": ["多様なグラフ対応", "カスタマイズ可能", "標準的"],
+                "cons": [],
+                "selected": true
+              }
+            ]
+          }
+        ]
+      },
+      "architecture": {
+        "title": "システム設計",
+        "flow": [
+          "1. openpyxl でExcelファイルを読み込み",
+          "2. pandas でデータフレームに変換",
+          "3. データの集計処理(合計、平均など)",
+          "4. matplotlib でグラフを生成",
+          "5. 結果を新しいExcelファイルに保存"
+        ],
+        "dataFlow": "Excel → pandas DataFrame → 集計 → グラフ化 → Excel出力"
+      },
+      "developmentPlan": {
+        "title": "開発計画",
+        "steps": [
+          {
+            "step": 1,
+            "title": "Excelファイルの読み込み",
+            "estimate": "10分"
+          },
+          {
+            "step": 2,
+            "title": "データの集計処理",
+            "estimate": "20分"
+          },
+          {
+            "step": 3,
+            "title": "グラフの生成",
+            "estimate": "20分"
+          },
+          {
+            "step": 4,
+            "title": "結果の保存機能",
+            "estimate": "15分"
+          }
+        ],
+        "totalEstimate": "約65分"
+      }
+    }
+  ],
+  "implementation": [
+    {
+      "id": "excel_impl_1",
+      "title": "Step 1: Excelデータの読み込みと基本操作",
+      "objective": "openpyxlとpandasを使ってExcelデータを読み込み、構造を理解しよう",
+      "explanation": "まずはExcelファイルのデータをPythonで読み込む方法を学びます。モックデータを使って、実際のExcel操作をシミュレートします。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "モックデータの準備",
+          "description": "実際のExcelデータと同じ構造のデータを用意します",
+          "code": "# 売上データのモック (実際のExcelと同じ構造)\nsales_data = [\n    {'日付': '2024-01-01', '商品': 'ノートPC', '売上': 150000},\n    {'日付': '2024-01-02', '商品': 'マウス', '売上': 3000},\n    {'日付': '2024-01-03', '商品': 'キーボード', '売上': 8000},\n    {'日付': '2024-01-04', '商品': 'ノートPC', '売上': 150000},\n    {'日付': '2024-01-05', '商品': 'モニター', '売上': 45000}\n]"
+        },
+        {
+          "step": 2,
+          "title": "データの表示",
+          "description": "モックデータを表示して構造を確認します",
+          "code": "for item in sales_data:\n    print(f\"{item['日付']}: {item['商品']} - ¥{item['売上']:,}\")"
+        }
+      ],
+      "starterCode": "# Excelデータのモックを作成してください\n\n# ここにコードを書いてください\n",
+      "solution": "# 売上データのモック\nsales_data = [\n    {'日付': '2024-01-01', '商品': 'ノートPC', '売上': 150000},\n    {'日付': '2024-01-02', '商品': 'マウス', '売上': 3000},\n    {'日付': '2024-01-03', '商品': 'キーボード', '売上': 8000},\n    {'日付': '2024-01-04', '商品': 'ノートPC', '売上': 150000},\n    {'日付': '2024-01-05', '商品': 'モニター', '売上': 45000}\n]\n\nprint('=' * 40)\nprint('📊 売上データ一覧')\nprint('=' * 40)\n\nfor item in sales_data:\n    print(f\"{item['日付']}: {item['商品']:10s} - ¥{item['売上']:,}\")\n\nprint('=' * 40)\nprint(f'合計データ数: {len(sales_data)}件')\nprint('=' * 40)\n\nprint('\\n📝 Note: 実際の開発では、openpyxlやpandasを使ってExcelファイルを読み込みます')",
+      "hints": [
+        "辞書のリストでExcelの行データを表現できます",
+        "各辞書がExcelの1行に対応しています",
+        "実務ではopenpyxlやpandasでファイルを読み込みます"
+      ],
+      "keyPoints": [
+        "Excelデータの構造を理解することが重要",
+        "Pythonの辞書とリストでデータを扱える",
+        "実際のファイル操作はライブラリを使用",
+        "データの表示方法を工夫すると見やすくなる"
+      ]
+    },
+    {
+      "id": "excel_impl_2",
+      "title": "Step 2: データの集計と分析",
+      "objective": "売上データを集計して、合計・平均・最大値などを計算しよう",
+      "explanation": "Excelで手作業でやっていた集計作業を、Pythonで自動化します。合計、平均、最大値などを計算する方法を学びます。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "基本的な集計",
+          "description": "売上の合計と平均を計算します",
+          "code": "total_sales = sum(item['売上'] for item in sales_data)\naverage_sales = total_sales / len(sales_data)\n\nprint(f\"合計売上: ¥{total_sales:,}\")\nprint(f\"平均売上: ¥{average_sales:,.0f}\")"
+        },
+        {
+          "step": 2,
+          "title": "商品別の集計",
+          "description": "商品ごとの売上を集計します",
+          "code": "product_sales = {}\nfor item in sales_data:\n    product = item['商品']\n    if product not in product_sales:\n        product_sales[product] = 0\n    product_sales[product] += item['売上']\n\nfor product, sales in product_sales.items():\n    print(f\"{product}: ¥{sales:,}\")"
+        }
+      ],
+      "starterCode": "sales_data = [\n    {'日付': '2024-01-01', '商品': 'ノートPC', '売上': 150000},\n    {'日付': '2024-01-02', '商品': 'マウス', '売上': 3000},\n    {'日付': '2024-01-03', '商品': 'キーボード', '売上': 8000},\n    {'日付': '2024-01-04', '商品': 'ノートPC', '売上': 150000},\n    {'日付': '2024-01-05', '商品': 'モニター', '売上': 45000}\n]\n\n# ここに集計コードを書いてください\n",
+      "solution": "sales_data = [\n    {'日付': '2024-01-01', '商品': 'ノートPC', '売上': 150000},\n    {'日付': '2024-01-02', '商品': 'マウス', '売上': 3000},\n    {'日付': '2024-01-03', '商品': 'キーボード', '売上': 8000},\n    {'日付': '2024-01-04', '商品': 'ノートPC', '売上': 150000},\n    {'日付': '2024-01-05', '商品': 'モニター', '売上': 45000}\n]\n\n# 基本統計の計算\ntotal_sales = sum(item['売上'] for item in sales_data)\naverage_sales = total_sales / len(sales_data)\nmax_sales = max(item['売上'] for item in sales_data)\nmin_sales = min(item['売上'] for item in sales_data)\n\nprint('=' * 50)\nprint('📊 売上統計サマリー')\nprint('=' * 50)\nprint(f'合計売上: ¥{total_sales:,}')\nprint(f'平均売上: ¥{average_sales:,.0f}')\nprint(f'最高売上: ¥{max_sales:,}')\nprint(f'最低売上: ¥{min_sales:,}')\nprint('=' * 50)\n\n# 商品別集計\nproduct_sales = {}\nfor item in sales_data:\n    product = item['商品']\n    if product not in product_sales:\n        product_sales[product] = 0\n    product_sales[product] += item['売上']\n\nprint('\\n📦 商品別売上')\nprint('=' * 50)\nfor product, sales in sorted(product_sales.items(), key=lambda x: x[1], reverse=True):\n    percentage = (sales / total_sales) * 100\n    print(f'{product:12s}: ¥{sales:,} ({percentage:.1f}%)')\nprint('=' * 50)",
+      "hints": [
+        "sum()関数でリストの合計を計算できます",
+        "辞書を使って商品別の集計ができます",
+        "sorted()で売上順に並べ替えられます"
+      ],
+      "keyPoints": [
+        "Pythonの組み込み関数で統計計算が簡単",
+        "辞書を使ったグループ化集計",
+        "パーセンテージ計算で割合を可視化",
+        "データの並べ替えで見やすく表示"
+      ]
+    },
+    {
+      "id": "excel_impl_3",
+      "title": "Step 3: データの可視化とレポート作成",
+      "objective": "集計データをグラフで可視化し、見やすいレポートを作成しよう",
+      "explanation": "数字だけでなく、グラフで視覚的に分かりやすく表示します。ASCII アートで簡易的なグラフを作成します。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "棒グラフの作成",
+          "description": "商品別売上を棒グラフで表示します",
+          "code": "def create_bar_chart(data_dict, max_width=30):\n    max_value = max(data_dict.values())\n    for key, value in data_dict.items():\n        bar_length = int((value / max_value) * max_width)\n        bar = '█' * bar_length\n        print(f'{key:12s} {bar} ¥{value:,}')"
+        },
+        {
+          "step": 2,
+          "title": "レポート出力",
+          "description": "統計情報とグラフを含む完全なレポートを作成",
+          "code": "print('\\n📊 売上分析レポート')\nprint('=' * 60)\nprint(f'分析期間: {sales_data[0][\"日付\"]} ~ {sales_data[-1][\"日付\"]}')\nprint(f'\\n【統計サマリー】')\nprint(f'合計売上: ¥{total_sales:,}')\nprint(f'\\n【商品別売上グラフ】')\ncreate_bar_chart(product_sales)"
+        }
+      ],
+      "starterCode": "sales_data = [\n    {'日付': '2024-01-01', '商品': 'ノートPC', '売上': 150000},\n    {'日付': '2024-01-02', '商品': 'マウス', '売上': 3000},\n    {'日付': '2024-01-03', '商品': 'キーボード', '売上': 8000},\n    {'日付': '2024-01-04', '商品': 'ノートPC', '売上': 150000},\n    {'日付': '2024-01-05', '商品': 'モニター', '売上': 45000}\n]\n\n# 商品別集計\nproduct_sales = {}\nfor item in sales_data:\n    product = item['商品']\n    if product not in product_sales:\n        product_sales[product] = 0\n    product_sales[product] += item['売上']\n\n# ここにグラフ作成コードを書いてください\n",
+      "solution": "def create_bar_chart(data_dict, max_width=40):\n    '''棒グラフを作成'''\n    if not data_dict:\n        return\n    \n    max_value = max(data_dict.values())\n    sorted_data = sorted(data_dict.items(), key=lambda x: x[1], reverse=True)\n    \n    for key, value in sorted_data:\n        bar_length = int((value / max_value) * max_width)\n        bar = '█' * bar_length\n        print(f'{key:12s} │{bar} ¥{value:,}')\n\ndef create_sales_report(sales_data):\n    '''売上レポートを生成'''\n    # 基本統計\n    total_sales = sum(item['売上'] for item in sales_data)\n    average_sales = total_sales / len(sales_data)\n    max_sales = max(item['売上'] for item in sales_data)\n    \n    # 商品別集計\n    product_sales = {}\n    for item in sales_data:\n        product = item['商品']\n        if product not in product_sales:\n            product_sales[product] = 0\n        product_sales[product] += item['売上']\n    \n    # レポート出力\n    print('\\n' + '=' * 70)\n    print('📊 売上分析レポート'.center(70))\n    print('=' * 70)\n    print(f'\\n📅 分析期間: {sales_data[0][\"日付\"]} ~ {sales_data[-1][\"日付\"]}')\n    print(f'📦 取引件数: {len(sales_data)}件')\n    \n    print('\\n【統計サマリー】')\n    print('─' * 70)\n    print(f'💰 合計売上  : ¥{total_sales:,}')\n    print(f'📊 平均売上  : ¥{average_sales:,.0f}')\n    print(f'🔝 最高売上  : ¥{max_sales:,}')\n    \n    print('\\n【商品別売上グラフ】')\n    print('─' * 70)\n    create_bar_chart(product_sales)\n    \n    print('\\n【商品別構成比】')\n    print('─' * 70)\n    for product, sales in sorted(product_sales.items(), key=lambda x: x[1], reverse=True):\n        percentage = (sales / total_sales) * 100\n        print(f'{product:12s} : ¥{sales:,} ({percentage:.1f}%)')\n    \n    print('=' * 70)\n    print('✅ レポート生成完了\\n')\n\n# データ\nsales_data = [\n    {'日付': '2024-01-01', '商品': 'ノートPC', '売上': 150000},\n    {'日付': '2024-01-02', '商品': 'マウス', '売上': 3000},\n    {'日付': '2024-01-03', '商品': 'キーボード', '売上': 8000},\n    {'日付': '2024-01-04', '商品': 'ノートPC', '売上': 150000},\n    {'日付': '2024-01-05', '商品': 'モニター', '売上': 45000}\n]\n\ncreate_sales_report(sales_data)",
+      "hints": [
+        "関数を使うとコードが整理されます",
+        "ASCIIアートで簡易グラフを作成できます",
+        "実務ではmatplotlibで本格的なグラフを作成"
+      ],
+      "keyPoints": [
+        "データの可視化で理解が深まる",
+        "関数化でコードの再利用性が向上",
+        "レポート形式で結果を整理",
+        "実務ではmatplotlibやseabornを使用"
+      ]
+    }
+  ],
+  "reflection": [
+    {
+      "id": "excel_reflection",
+      "title": "振り返りと改善",
+      "summary": {
+        "title": "作ったもの",
+        "description": "Excelの売上データを自動で集計・分析し、グラフ付きレポートを生成するプログラムを作成しました。",
+        "achievements": [
+          "データの読み込みと構造理解",
+          "集計・統計処理の自動化",
+          "データの可視化とレポート生成"
+        ]
+      },
+      "beforeAfter": {
+        "before": {
+          "time": "毎週2時間",
+          "method": "手作業でExcel操作",
+          "issues": ["時間がかかる", "ミスが起こりやすい", "繰り返し作業"]
+        },
+        "after": {
+          "time": "数秒(自動)",
+          "method": "プログラムを実行するだけ",
+          "benefits": ["超高速", "正確", "再現性がある"]
+        },
+        "improvement": "年間約104時間の節約!"
+      },
+      "furtherImprovements": {
+        "title": "さらなる改善アイデア",
+        "ideas": [
+          {
+            "idea": "複数ファイル一括処理",
+            "description": "フォルダ内の全Excelファイルを一括で処理",
+            "difficulty": "易",
+            "library": "os, glob"
+          },
+          {
+            "idea": "グラフを画像として保存",
+            "description": "matplotlibで本格的なグラフを作成して保存",
+            "difficulty": "中",
+            "library": "matplotlib"
+          },
+          {
+            "idea": "月次レポート自動生成",
+            "description": "毎月1日に自動でレポートを生成",
+            "difficulty": "中",
+            "library": "schedule"
+          },
+          {
+            "idea": "異常値検知",
+            "description": "通常と異なる売上を自動で検出",
+            "difficulty": "中",
+            "library": "pandas, numpy"
+          },
+          {
+            "idea": "Excelへの書き込み",
+            "description": "集計結果を新しいExcelファイルに保存",
+            "difficulty": "中",
+            "library": "openpyxl"
+          },
+          {
+            "idea": "ダッシュボード作成",
+            "description": "インタラクティブなWebダッシュボード",
+            "difficulty": "高",
+            "library": "streamlit, plotly"
+          }
+        ]
+      },
+      "nextChallenge": {
+        "title": "次の課題を見つけよう",
+        "questions": [
+          "他にも定期的に処理しているExcelファイルはありませんか?",
+          "データ分析で困っていることはありませんか?",
+          "チーム全体で使えるツールにできませんか?"
+        ],
+        "encouragement": "データ分析の自動化は、ビジネスに大きなインパクトを与えます!"
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz_ch3_mcq_1",
+      "question": "次のコードを実行すると、何が表示されますか？",
+      "code": "age = 25\nif age >= 20:\n    print(\"成人です\")",
+      "choices": [
+        { "id": "a", "text": "成人です" },
+        { "id": "b", "text": "何も表示されない" },
+        { "id": "c", "text": "age >= 20" },
+        { "id": "d", "text": "エラーが出る" }
+      ],
+      "correctChoiceId": "a",
+      "explanation": "ageは25なので、20以上という条件を満たします。そのため「成人です」と表示されます。"
+    },
+    {
+      "id": "quiz_ch3_fill_1",
+      "description": "次のコードの空欄を埋めて、scoreが60以上なら「合格」、それ以外なら「不合格」と表示するようにしてください。",
+      "codeTemplate": "score = 75\nif score >= 60:\n    print(\"合格\")\n______:\n    print(\"不合格\")",
+      "blanks": [
+        {
+          "id": "blank1",
+          "correctAnswer": "else",
+          "hint": "条件を満たさない場合の処理を書くキーワードです"
+        }
+      ],
+      "explanation": "elseを使うと、if文の条件を満たさない場合の処理を書けます。"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { PythonRunResult, PyodideMessage } from '../types/python';
+import { usePackageStore } from '../store/packageStore';
 
 type PendingExecution = {
   resolve: (result: PythonRunResult) => void;
@@ -153,6 +154,140 @@ class PythonRunnerService {
     });
   }
 
+  /**
+   * Install a Python package using micropip
+   */
+  async installPackage(packageName: string): Promise<{ success: boolean; error?: string }> {
+    const packageStore = usePackageStore.getState();
+
+    // Check if already installed
+    if (packageStore.isPackageInstalled(packageName)) {
+      return { success: true };
+    }
+
+    // Check if currently installing
+    if (packageStore.isPackageInstalling(packageName)) {
+      // Wait for installation to complete
+      return new Promise((resolve) => {
+        const checkInterval = setInterval(() => {
+          if (packageStore.isPackageInstalled(packageName)) {
+            clearInterval(checkInterval);
+            resolve({ success: true });
+          } else if (!packageStore.isPackageInstalling(packageName)) {
+            // Installation failed
+            clearInterval(checkInterval);
+            resolve({ success: false, error: 'Package installation failed' });
+          }
+        }, 100);
+      });
+    }
+
+    // Mark as installing
+    packageStore.markPackageAsInstalling(packageName);
+
+    try {
+      // Install using micropip
+      const installCode = `
+import micropip
+await micropip.install('${packageName}')
+print('Package ${packageName} installed successfully')
+`;
+
+      const result = await this.runPython(installCode);
+
+      if (result.success) {
+        // Mark as installed
+        packageStore.markPackageAsInstalled(packageName);
+        return { success: true };
+      } else {
+        // Mark as error
+        packageStore.markPackageInstallError(packageName, result.stderr || 'Unknown error');
+        packageStore.clearInstallingPackage(packageName);
+        return { success: false, error: result.stderr || 'Installation failed' };
+      }
+    } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      packageStore.markPackageInstallError(packageName, errorMsg);
+      packageStore.clearInstallingPackage(packageName);
+      return { success: false, error: errorMsg };
+    }
+  }
+
+  /**
+   * Install multiple packages
+   */
+  async installPackages(packageNames: string[]): Promise<{
+    success: boolean;
+    results: Array<{ package: string; success: boolean; error?: string }>;
+  }> {
+    // Python standard library modules that should not be installed via micropip
+    const STANDARD_LIBRARY = [
+      'abc', 'aifc', 'argparse', 'array', 'ast', 'asynchat', 'asyncio', 'asyncore',
+      'atexit', 'audioop', 'base64', 'bdb', 'binascii', 'binhex', 'bisect', 'builtins',
+      'bz2', 'calendar', 'cgi', 'cgitb', 'chunk', 'cmath', 'cmd', 'code', 'codecs',
+      'codeop', 'collections', 'colorsys', 'compileall', 'concurrent', 'configparser',
+      'contextlib', 'contextvars', 'copy', 'copyreg', 'cProfile', 'crypt', 'csv',
+      'ctypes', 'curses', 'dataclasses', 'datetime', 'dbm', 'decimal', 'difflib',
+      'dis', 'distutils', 'doctest', 'email', 'encodings', 'enum', 'errno', 'faulthandler',
+      'fcntl', 'filecmp', 'fileinput', 'fnmatch', 'fractions', 'ftplib', 'functools',
+      'gc', 'getopt', 'getpass', 'gettext', 'glob', 'graphlib', 'grp', 'gzip',
+      'hashlib', 'heapq', 'hmac', 'html', 'http', 'imaplib', 'imghdr', 'imp', 'importlib',
+      'inspect', 'io', 'ipaddress', 'itertools', 'json', 'keyword', 'lib2to3', 'linecache',
+      'locale', 'logging', 'lzma', 'mailbox', 'mailcap', 'marshal', 'math', 'mimetypes',
+      'mmap', 'modulefinder', 'msilib', 'msvcrt', 'multiprocessing', 'netrc', 'nis',
+      'nntplib', 'numbers', 'operator', 'optparse', 'os', 'ossaudiodev', 'parser',
+      'pathlib', 'pdb', 'pickle', 'pickletools', 'pipes', 'pkgutil', 'platform',
+      'plistlib', 'poplib', 'posix', 'posixpath', 'pprint', 'profile', 'pstats',
+      'pty', 'pwd', 'py_compile', 'pyclbr', 'pydoc', 'queue', 'quopri', 'random',
+      're', 'readline', 'reprlib', 'resource', 'rlcompleter', 'runpy', 'sched',
+      'secrets', 'select', 'selectors', 'shelve', 'shlex', 'shutil', 'signal',
+      'site', 'smtpd', 'smtplib', 'sndhdr', 'socket', 'socketserver', 'spwd', 'sqlite3',
+      'ssl', 'stat', 'statistics', 'string', 'stringprep', 'struct', 'subprocess',
+      'sunau', 'symtable', 'sys', 'sysconfig', 'syslog', 'tabnanny', 'tarfile',
+      'telnetlib', 'tempfile', 'termios', 'test', 'textwrap', 'threading', 'time',
+      'timeit', 'tkinter', 'token', 'tokenize', 'tomllib', 'trace', 'traceback',
+      'tracemalloc', 'tty', 'turtle', 'turtledemo', 'types', 'typing', 'unicodedata',
+      'unittest', 'urllib', 'uu', 'uuid', 'venv', 'warnings', 'wave', 'weakref',
+      'webbrowser', 'winreg', 'winsound', 'wsgiref', 'xdrlib', 'xml', 'xmlrpc',
+      'zipapp', 'zipfile', 'zipimport', 'zlib', '_thread',
+    ];
+
+    const results = [];
+
+    // Filter out standard library packages
+    const packagesToInstall = packageNames.filter(
+      (packageName) => !STANDARD_LIBRARY.includes(packageName.toLowerCase())
+    );
+
+    // Add skipped standard library packages as successful
+    for (const packageName of packageNames) {
+      if (STANDARD_LIBRARY.includes(packageName.toLowerCase())) {
+        results.push({
+          package: packageName,
+          success: true,
+          error: undefined,
+        });
+      }
+    }
+
+    // Install remaining packages
+    for (const packageName of packagesToInstall) {
+      const result = await this.installPackage(packageName);
+      results.push({
+        package: packageName,
+        success: result.success,
+        error: result.error,
+      });
+    }
+
+    const allSuccess = results.every((r) => r.success);
+
+    return {
+      success: allSuccess,
+      results,
+    };
+  }
+
   cleanup() {
     // Clear all pending executions
     this.pendingExecutions.forEach(({ timeout, reject }) => {
@@ -172,6 +307,19 @@ export const pythonRunner = PythonRunnerService.getInstance();
 // Convenience function for running Python code
 export async function runPython(code: string, input?: string): Promise<PythonRunResult> {
   return pythonRunner.runPython(code, input);
+}
+
+// Convenience function for installing a package
+export async function installPackage(packageName: string): Promise<{ success: boolean; error?: string }> {
+  return pythonRunner.installPackage(packageName);
+}
+
+// Convenience function for installing multiple packages
+export async function installPackages(packageNames: string[]): Promise<{
+  success: boolean;
+  results: Array<{ package: string; success: boolean; error?: string }>;
+}> {
+  return pythonRunner.installPackages(packageNames);
 }
 
 // Export for testing/debugging

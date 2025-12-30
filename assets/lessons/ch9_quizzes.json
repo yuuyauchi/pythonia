@@ -1,0 +1,17 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz_ch9_mcq_1",
+      "question": "次のコードを実行すると、何が表示されますか？",
+      "code": "def calculate(x, y):\n    if x > y:\n        return x - y\n    else:\n        return y - x\n\nresult = calculate(10, 15)\nprint(result)",
+      "choices": [
+        { "id": "a", "text": "5" },
+        { "id": "b", "text": "-5" },
+        { "id": "c", "text": "25" },
+        { "id": "d", "text": "エラーが出る" }
+      ],
+      "correctChoiceId": "a",
+      "explanation": "xは10、yは15なので、y > xの条件が満たされ、y - x（15 - 10 = 5）が返されます。"
+    }
+  ]
+}

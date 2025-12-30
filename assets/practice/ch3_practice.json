@@ -1,0 +1,90 @@
+{
+  "project_intros": [
+    {
+      "id": "intro_ch3",
+      "title": "年齢判定プログラムを作ろう",
+      "description": "if文を使って、年齢によって異なるメッセージを表示するプログラムを作ります。",
+      "goals": [
+        "if文で条件分岐ができる",
+        "elif, elseを使える",
+        "比較演算子を使える"
+      ],
+      "finalOutput": "年齢: 25歳\n→ 成人です"
+    }
+  ],
+  "guided_steps": [
+    {
+      "id": "guided_ch3_adult",
+      "title": "ステップ1: 成人判定をしよう",
+      "instruction": "年齢が20歳以上なら「成人です」、そうでなければ「未成年です」と表示しましょう。",
+      "hints": [
+        "if age >= 20: で条件を書きます",
+        "else: で「そうでない場合」を書きます",
+        "条件の後は : (コロン)を忘れずに",
+        "条件の中の処理はインデント(字下げ)が必要です"
+      ],
+      "starterCode": "age = 25\n\n# if文を使って判定してください\n",
+      "solution": "age = 25\n\n# if文を使って判定してください\nif age >= 20:\n    print(\"成人です\")\nelse:\n    print(\"未成年です\")",
+      "expectedOutput": "成人です",
+      "checkType": "output_contains",
+      "checkValue": "成人です"
+    },
+    {
+      "id": "guided_ch3_category",
+      "title": "ステップ2: 年齢区分を細かく分けよう",
+      "instruction": "年齢を3つに区分しましょう:\n・20歳以上: 成人\n・13歳以上20歳未満: 中高生\n・13歳未満: 子供",
+      "hints": [
+        "elif を使って複数の条件を書けます",
+        "条件は上から順番に判定されます",
+        "age >= 20, age >= 13 のように書きます"
+      ],
+      "starterCode": "age = 15\n\n# if, elif, elseを使って判定してください\n",
+      "solution": "age = 15\n\n# if, elif, elseを使って判定してください\nif age >= 20:\n    print(\"成人\")\nelif age >= 13:\n    print(\"中高生\")\nelse:\n    print(\"子供\")",
+      "expectedOutput": "中高生",
+      "checkType": "output_contains",
+      "checkValue": "中高生"
+    }
+  ],
+  "challenges": [
+    {
+      "id": "challenge_ch3_grade",
+      "title": "チャレンジ: 学年判定プログラム",
+      "description": "年齢から学年を判定するプログラムを作ってください。",
+      "instruction": "以下の条件で判定してください:\n\n・6歳: 小学1年生\n・7歳: 小学2年生\n・8歳: 小学3年生\n・それ以外: 対象外\n\n年齢を表示してから、判定結果を表示してください。",
+      "starterCode": "age = 7\n\n# ここにコードを書いてください\n",
+      "testCases": [
+        {
+          "description": "年齢が表示されている",
+          "checkType": "output_contains",
+          "expected": "7"
+        },
+        {
+          "description": "学年が表示されている",
+          "checkType": "output_contains",
+          "expected": "2年生"
+        }
+      ],
+      "solution": "age = 7\n\nprint(\"年齢: \" + str(age) + \"歳\")\n\nif age == 6:\n    print(\"小学1年生\")\nelif age == 7:\n    print(\"小学2年生\")\nelif age == 8:\n    print(\"小学3年生\")\nelse:\n    print(\"対象外\")",
+      "hints": [
+        "== は「等しい」という意味です",
+        "if age == 6: のように書きます",
+        "複数の条件は elif で繋げます"
+      ]
+    }
+  ],
+  "free_practices": [
+    {
+      "id": "free_ch3_check",
+      "title": "自由制作: オリジナル判定プログラム",
+      "description": "学んだif文を使って、判定プログラムを作ってみましょう!",
+      "prompt": "以下のようなアイデアで判定プログラムを作ってみてください:\n\n・テストの点数で評価を判定(90点以上:A, 80点以上:B...)\n・BMI値で体型を判定\n・気温で服装を提案\n・時間帯で挨拶を変える\n\n自由に工夫してみましょう!",
+      "starterCode": "# あなたのオリジナル判定プログラムを書いてください\n",
+      "exampleSolution": "# テスト点数評価プログラム\nscore = 85\n\nprint(\"テストの点数: \" + str(score) + \"点\")\n\nif score >= 90:\n    print(\"評価: A\")\n    print(\"素晴らしい!\")\nelif score >= 80:\n    print(\"評価: B\")\n    print(\"よくできました!\")\nelif score >= 70:\n    print(\"評価: C\")\n    print(\"もう少し頑張りましょう\")\nelif score >= 60:\n    print(\"評価: D\")\n    print(\"復習が必要です\")\nelse:\n    print(\"評価: F\")\n    print(\"再試験が必要です\")",
+      "tips": [
+        "条件は上から順番に判定されます",
+        "判定結果に応じてメッセージを変えると良いです",
+        "実際に使えそうなものを考えると楽しいです"
+      ]
+    }
+  ]
+}

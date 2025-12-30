@@ -1,0 +1,386 @@
+{
+  "problem_discovery": [
+    {
+      "id": "file_problem",
+      "title": "課題を発見しよう",
+      "scenario": {
+        "title": "ダウンロードフォルダが散らかっている...",
+        "description": "フリーランスデザイナーの佐藤さんは、毎日たくさんのファイルをダウンロードします。画像、PDF、ZIP、動画...気づけばダウンロードフォルダは数百のファイルでごちゃごちゃに。必要なファイルを探すのに毎回時間がかかります。",
+        "timeSpent": "ファイル探し 平均5分 × 週5回 = 月間約1.5時間の無駄",
+        "painPoints": [
+          "必要なファイルを探すのに時間がかかる",
+          "手動で整理するのが面倒",
+          "どこに何があるか分からなくなる",
+          "定期的に整理しないとカオスになる"
+        ]
+      },
+      "problemAnalysis": {
+        "question1": "この状況で一番困っていることは何でしょうか?",
+        "options": [
+          "ファイルを探す時間の無駄",
+          "手動整理の手間",
+          "フォルダ構造が分からない",
+          "すべて"
+        ],
+        "correctAnswer": 3,
+        "explanation": "すべての問題が絡み合っています。でも大丈夫、Pythonで一気に解決できます!"
+      },
+      "idealSolution": {
+        "title": "理想の状態は?",
+        "description": "ファイルをダウンロードしたら、自動で種類ごとにフォルダ分けされたら便利ですよね!",
+        "benefits": [
+          "自動で整理されるので手間いらず",
+          "ファイルがすぐに見つかる",
+          "フォルダが常に綺麗に保たれる",
+          "作業効率が大幅アップ"
+        ],
+        "beforeAfter": {
+          "before": "月1回 × 30分の整理作業",
+          "after": "0分!自動で整理される"
+        }
+      },
+      "technicalFeasibility": {
+        "title": "技術で解決できる?",
+        "answer": "Yes! Pythonで実現できます",
+        "approach": [
+          "ファイルの拡張子を判定",
+          "種類ごとにフォルダに移動",
+          "重複ファイル名を自動処理"
+        ],
+        "libraries": [
+          {
+            "name": "pathlib",
+            "purpose": "ファイル操作を簡単に",
+            "reason": "モダンで直感的なファイルパス操作が可能"
+          },
+          {
+            "name": "shutil",
+            "purpose": "ファイル移動・コピー",
+            "reason": "安全で信頼性の高いファイル操作"
+          }
+        ]
+      }
+    }
+  ],
+  "planning": [
+    {
+      "id": "file_planning",
+      "title": "解決策を設計しよう",
+      "requirements": {
+        "title": "必要な機能を洗い出そう",
+        "features": [
+          {
+            "feature": "ファイル種類の判定",
+            "detail": "拡張子からファイルの種類(画像、文書など)を判定",
+            "priority": "必須"
+          },
+          {
+            "feature": "自動フォルダ作成",
+            "detail": "画像用、文書用などのフォルダを自動作成",
+            "priority": "必須"
+          },
+          {
+            "feature": "ファイル移動",
+            "detail": "判定した種類に応じてファイルを適切なフォルダに移動",
+            "priority": "必須"
+          },
+          {
+            "feature": "重複対応",
+            "detail": "同名ファイルがある場合の処理",
+            "priority": "あれば便利"
+          }
+        ]
+      },
+      "technicalChoice": {
+        "title": "技術選定",
+        "choices": [
+          {
+            "aspect": "ファイル操作ライブラリ",
+            "options": [
+              {
+                "name": "pathlib + shutil",
+                "pros": ["標準ライブラリ", "モダンで読みやすい", "クロスプラットフォーム"],
+                "cons": [],
+                "selected": true
+              },
+              {
+                "name": "os + shutil",
+                "pros": ["標準ライブラリ"],
+                "cons": ["古い記法", "パス操作が煩雑"],
+                "selected": false
+              }
+            ]
+          },
+          {
+            "aspect": "ファイル分類方法",
+            "options": [
+              {
+                "name": "拡張子ベース",
+                "pros": ["シンプル", "高速", "確実"],
+                "cons": ["拡張子がない場合は判定不可"],
+                "selected": true
+              },
+              {
+                "name": "MIMEタイプ",
+                "pros": ["正確"],
+                "cons": ["複雑", "パフォーマンス低下"],
+                "selected": false
+              }
+            ]
+          }
+        ]
+      },
+      "architecture": {
+        "title": "システム設計",
+        "flow": [
+          "1. ダウンロードフォルダ内のファイルを取得",
+          "2. 各ファイルの拡張子を確認",
+          "3. 拡張子からファイル種類を判定",
+          "4. 種類ごとのフォルダを作成(存在しない場合)",
+          "5. ファイルを適切なフォルダに移動"
+        ],
+        "dataFlow": "ファイルリスト → 拡張子抽出 → 種類判定 → フォルダ作成 → 移動"
+      },
+      "developmentPlan": {
+        "title": "開発計画",
+        "steps": [
+          {
+            "step": 1,
+            "title": "ファイル種類の定義",
+            "estimate": "5分"
+          },
+          {
+            "step": 2,
+            "title": "ファイルリスト取得と拡張子判定",
+            "estimate": "15分"
+          },
+          {
+            "step": 3,
+            "title": "フォルダ作成とファイル移動",
+            "estimate": "15分"
+          },
+          {
+            "step": 4,
+            "title": "重複処理と完成度向上",
+            "estimate": "10分"
+          }
+        ],
+        "totalEstimate": "約45分"
+      }
+    }
+  ],
+  "implementation": [
+    {
+      "id": "file_impl_1",
+      "title": "Step 1: ファイル種類を判定しよう",
+      "objective": "拡張子からファイルの種類を判定する仕組みを作ろう",
+      "explanation": "ファイルを整理するには、まず「このファイルは何の種類か?」を判定する必要があります。拡張子(ファイル名の最後の「.jpg」「.pdf」など)から判定できます。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "ファイル種類の定義",
+          "description": "どの拡張子をどのカテゴリに分類するか決めます",
+          "code": "# ファイル種類の定義\nfile_categories = {\n    '画像': ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg'],\n    '文書': ['.pdf', '.doc', '.docx', '.txt', '.xlsx', '.pptx'],\n    '動画': ['.mp4', '.avi', '.mov', '.wmv', '.mkv'],\n    '音楽': ['.mp3', '.wav', '.flac', '.aac'],\n    '圧縮': ['.zip', '.rar', '.7z', '.tar', '.gz']\n}"
+        },
+        {
+          "step": 2,
+          "title": "拡張子から種類を判定",
+          "description": "ファイル名から拡張子を取得し、カテゴリを返す関数を作ります",
+          "code": "def get_file_category(filename):\n    # 拡張子を取得(小文字に変換)\n    ext = filename[filename.rfind('.'):].lower()\n    \n    # カテゴリを検索\n    for category, extensions in file_categories.items():\n        if ext in extensions:\n            return category\n    \n    return 'その他'  # 該当しない場合"
+        }
+      ],
+      "starterCode": "# ファイル種類の定義\nfile_categories = {\n    '画像': ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg'],\n    '文書': ['.pdf', '.doc', '.docx', '.txt', '.xlsx', '.pptx'],\n    '動画': ['.mp4', '.avi', '.mov', '.wmv', '.mkv'],\n    '音楽': ['.mp3', '.wav', '.flac', '.aac'],\n    '圧縮': ['.zip', '.rar', '.7z', '.tar', '.gz']\n}\n\n# ここにファイル種類を判定する関数を書いてください\n# def get_file_category(filename):\n\n# テスト\ntest_files = ['photo.jpg', 'report.pdf', 'music.mp3', 'archive.zip']\nfor file in test_files:\n    # category = get_file_category(file)\n    # print(f'{file} → {category}')\n    pass\n",
+      "solution": "# ファイル種類の定義\nfile_categories = {\n    '画像': ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg'],\n    '文書': ['.pdf', '.doc', '.docx', '.txt', '.xlsx', '.pptx'],\n    '動画': ['.mp4', '.avi', '.mov', '.wmv', '.mkv'],\n    '音楽': ['.mp3', '.wav', '.flac', '.aac'],\n    '圧縮': ['.zip', '.rar', '.7z', '.tar', '.gz']\n}\n\ndef get_file_category(filename):\n    '''ファイル名から種類を判定する'''\n    # 拡張子を取得(小文字に変換)\n    if '.' not in filename:\n        return 'その他'\n    \n    ext = filename[filename.rfind('.'):].lower()\n    \n    # カテゴリを検索\n    for category, extensions in file_categories.items():\n        if ext in extensions:\n            return category\n    \n    return 'その他'  # 該当しない場合\n\n# テスト\ntest_files = ['photo.jpg', 'report.pdf', 'music.mp3', 'archive.zip', 'data.csv', 'noextension']\n\nprint('=' * 40)\nprint('ファイル種類判定テスト')\nprint('=' * 40)\n\nfor file in test_files:\n    category = get_file_category(file)\n    print(f'{file:20s} → {category}')\n\nprint('=' * 40)\nprint('判定成功!')",
+      "hints": [
+        "rfind()で最後の'.'の位置を見つけられます",
+        "lower()で小文字に統一すると判定が確実です",
+        "拡張子がない場合も考慮しましょう"
+      ],
+      "keyPoints": [
+        "辞書でファイル種類を整理",
+        "拡張子は小文字に統一して判定",
+        "該当しない場合は「その他」に分類",
+        "関数化でコードを再利用可能に"
+      ]
+    },
+    {
+      "id": "file_impl_2",
+      "title": "Step 2: ファイルを整理しよう",
+      "objective": "ファイルを種類ごとのフォルダに移動する機能を実装しよう",
+      "explanation": "ファイルの種類が判定できたら、次は実際にファイルを移動します。pathlibとshutilを使って安全にファイル操作を行います。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "pathlibの基本",
+          "description": "pathlibでファイルパスを扱います",
+          "code": "from pathlib import Path\n\n# ファイルパスの作成\nfile_path = Path('photo.jpg')\nprint(f'ファイル名: {file_path.name}')\nprint(f'拡張子: {file_path.suffix}')"
+        },
+        {
+          "step": 2,
+          "title": "フォルダ作成",
+          "description": "種類ごとのフォルダを作成します",
+          "code": "import shutil\nfrom pathlib import Path\n\ndef create_category_folders(base_path, categories):\n    '''カテゴリごとのフォルダを作成'''\n    for category in categories:\n        folder_path = base_path / category\n        folder_path.mkdir(exist_ok=True)\n        print(f'フォルダ作成: {category}')"
+        },
+        {
+          "step": 3,
+          "title": "ファイル移動",
+          "description": "ファイルを適切なフォルダに移動します",
+          "code": "def move_file(file_path, category, base_path):\n    '''ファイルを移動'''\n    dest_folder = base_path / category\n    dest_path = dest_folder / file_path.name\n    \n    # 同名ファイルがある場合の処理\n    if dest_path.exists():\n        print(f'⚠️  {file_path.name} は既に存在します')\n        return\n    \n    shutil.move(str(file_path), str(dest_path))\n    print(f'✓ {file_path.name} → {category}/')"
+        }
+      ],
+      "starterCode": "from pathlib import Path\nimport shutil\n\n# ファイル種類の定義\nfile_categories = {\n    '画像': ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg'],\n    '文書': ['.pdf', '.doc', '.docx', '.txt', '.xlsx', '.pptx'],\n    '動画': ['.mp4', '.avi', '.mov', '.wmv', '.mkv'],\n    '音楽': ['.mp3', '.wav', '.flac', '.aac'],\n    '圧縮': ['.zip', '.rar', '.7z', '.tar', '.gz']\n}\n\ndef get_file_category(filename):\n    '''ファイル名から種類を判定する'''\n    if '.' not in filename:\n        return 'その他'\n    \n    ext = filename[filename.rfind('.'):].lower()\n    \n    for category, extensions in file_categories.items():\n        if ext in extensions:\n            return category\n    \n    return 'その他'\n\n# ここにファイル整理の関数を書いてください\n# def organize_files(source_path):\n\n# テスト用のモックデータ\ntest_files = [\n    'vacation_photo.jpg',\n    'work_report.pdf',\n    'favorite_song.mp3',\n    'project_files.zip',\n    'presentation.pptx'\n]\n\nprint('整理対象のファイル:')\nfor f in test_files:\n    category = get_file_category(f)\n    print(f'  {f:25s} → {category}')\n",
+      "solution": "from pathlib import Path\nimport shutil\n\n# ファイル種類の定義\nfile_categories = {\n    '画像': ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg'],\n    '文書': ['.pdf', '.doc', '.docx', '.txt', '.xlsx', '.pptx'],\n    '動画': ['.mp4', '.avi', '.mov', '.wmv', '.mkv'],\n    '音楽': ['.mp3', '.wav', '.flac', '.aac'],\n    '圧縮': ['.zip', '.rar', '.7z', '.tar', '.gz']\n}\n\ndef get_file_category(filename):\n    '''ファイル名から種類を判定する'''\n    if '.' not in filename:\n        return 'その他'\n    \n    ext = filename[filename.rfind('.'):].lower()\n    \n    for category, extensions in file_categories.items():\n        if ext in extensions:\n            return category\n    \n    return 'その他'\n\ndef organize_files_demo():\n    '''ファイル整理のデモンストレーション'''\n    # テスト用のモックデータ\n    test_files = [\n        'vacation_photo.jpg',\n        'work_report.pdf',\n        'favorite_song.mp3',\n        'project_files.zip',\n        'presentation.pptx',\n        'family_video.mp4',\n        'notes.txt'\n    ]\n    \n    print('=' * 50)\n    print('📁 ファイル整理デモ')\n    print('=' * 50)\n    print()\n    \n    # ステップ1: 分類状況を表示\n    print('【ステップ1】ファイルを分類中...')\n    print()\n    \n    category_count = {}\n    for filename in test_files:\n        category = get_file_category(filename)\n        \n        if category not in category_count:\n            category_count[category] = []\n        category_count[category].append(filename)\n    \n    # ステップ2: カテゴリごとに表示\n    print('【ステップ2】分類結果:')\n    print()\n    \n    for category, files in sorted(category_count.items()):\n        print(f'📂 {category}フォルダ ({len(files)}ファイル)')\n        for filename in files:\n            print(f'   ✓ {filename}')\n        print()\n    \n    # ステップ3: 整理完了\n    print('=' * 50)\n    print('✅ ファイル整理完了!')\n    print('=' * 50)\n    print()\n    print('📝 Note: 実際の環境では以下のようにファイルを移動します:')\n    print('   shutil.move(source_path, destination_path)')\n    print()\n    print('⚠️  このデモでは実際のファイル移動は行いません')\n\n# デモを実行\norganize_files_demo()",
+      "hints": [
+        "Path オブジェクトで安全にパス操作",
+        "mkdir(exist_ok=True) でフォルダ作成",
+        "shutil.move() でファイル移動",
+        "同名ファイルのチェックを忘れずに"
+      ],
+      "keyPoints": [
+        "pathlibでモダンなファイル操作",
+        "フォルダが存在しなければ自動作成",
+        "ファイル移動は慎重に(shutil使用)",
+        "エラーハンドリングが重要"
+      ]
+    }
+  ],
+  "reflection": [
+    {
+      "id": "file_reflection",
+      "title": "振り返りと改善",
+      "summary": {
+        "title": "作ったもの",
+        "description": "ファイルの拡張子から種類を判定し、自動で整理するツールを作成しました。画像、文書、動画などを自動で分類できます。",
+        "achievements": [
+          "ファイル操作の基本を習得",
+          "pathlib, shutilの使い方を学習",
+          "実用的な自動化ツールを完成"
+        ]
+      },
+      "beforeAfter": {
+        "before": {
+          "time": "月30分",
+          "method": "手動でファイルをドラッグ&ドロップ",
+          "issues": ["面倒", "時間がかかる", "忘れる"]
+        },
+        "after": {
+          "time": "0秒(自動)",
+          "method": "スクリプトを実行するだけ",
+          "benefits": ["楽", "確実", "時間節約"]
+        },
+        "improvement": "年間約6時間の節約!"
+      },
+      "furtherImprovements": {
+        "title": "さらなる改善アイデア",
+        "ideas": [
+          {
+            "idea": "自動実行",
+            "description": "新しいファイルがダウンロードされたら自動で整理",
+            "difficulty": "中",
+            "library": "watchdog"
+          },
+          {
+            "idea": "重複ファイル対応",
+            "description": "同名ファイルがある場合、連番を付けて保存",
+            "difficulty": "易",
+            "library": "なし(文字列操作)"
+          },
+          {
+            "idea": "日付別フォルダ",
+            "description": "作成日時や更新日時でサブフォルダ作成",
+            "difficulty": "易",
+            "library": "datetime"
+          },
+          {
+            "idea": "ファイルサイズ別整理",
+            "description": "大きいファイルは別フォルダに移動",
+            "difficulty": "易",
+            "library": "なし(Path.stat())"
+          },
+          {
+            "idea": "古いファイル削除",
+            "description": "一定期間経過したファイルを自動削除",
+            "difficulty": "易",
+            "library": "datetime"
+          },
+          {
+            "idea": "Googleドライブ連携",
+            "description": "整理後、重要ファイルを自動バックアップ",
+            "difficulty": "中",
+            "library": "google-api-python-client"
+          },
+          {
+            "idea": "レポート機能",
+            "description": "整理したファイル数や容量をレポート出力",
+            "difficulty": "易",
+            "library": "なし(集計処理)"
+          },
+          {
+            "idea": "GUI版",
+            "description": "ドラッグ&ドロップで使えるGUIアプリ化",
+            "difficulty": "中",
+            "library": "tkinter"
+          }
+        ]
+      },
+      "realWorldApplication": {
+        "title": "実務での応用例",
+        "examples": [
+          {
+            "scenario": "フォトグラファー",
+            "application": "撮影データを日付・イベント別に自動整理",
+            "benefit": "整理時間50%削減"
+          },
+          {
+            "scenario": "営業担当",
+            "application": "顧客資料を会社名・種類別に自動分類",
+            "benefit": "資料検索時間70%削減"
+          },
+          {
+            "scenario": "学生",
+            "application": "授業資料を科目・週別に自動整理",
+            "benefit": "復習効率向上"
+          }
+        ]
+      },
+      "skillsLearned": {
+        "title": "学んだスキル",
+        "skills": [
+          {
+            "skill": "ファイルシステム操作",
+            "description": "pathlib, shutilでファイル・フォルダを安全に操作",
+            "application": "バックアップツール、ログ管理など"
+          },
+          {
+            "skill": "条件分岐による自動化",
+            "description": "拡張子によって処理を変える仕組み",
+            "application": "データ処理、ワークフロー自動化"
+          },
+          {
+            "skill": "エラーハンドリング",
+            "description": "ファイル操作時の例外処理",
+            "application": "堅牢なアプリケーション開発"
+          }
+        ]
+      },
+      "nextChallenge": {
+        "title": "次の課題を見つけよう",
+        "questions": [
+          "他にも繰り返し行っているファイル操作はありませんか?",
+          "複数のフォルダをまとめて処理したいことはありませんか?",
+          "定期的に整理が必要なデータはありませんか?"
+        ],
+        "encouragement": "小さな不便を見つけて自動化する。それがプログラミングの醍醐味です!今回学んだファイル操作は、様々な場面で応用できる重要なスキルです。"
+      },
+      "tips": {
+        "title": "実装のコツ",
+        "tips": [
+          "まずは小規模なテストフォルダで動作確認",
+          "重要なファイルは事前にバックアップ",
+          "ログを出力して何が起きているか把握",
+          "段階的に機能を追加していく"
+        ]
+      }
+    }
+  ]
+}

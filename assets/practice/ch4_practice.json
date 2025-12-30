@@ -1,0 +1,85 @@
+{
+  "project_intros": [
+    {
+      "id": "intro_ch4",
+      "title": "九九表を作ろう",
+      "description": "for文とwhile文を使って、繰り返し処理をマスターします。",
+      "goals": [
+        "for文で繰り返しができる",
+        "range()を使える",
+        "ネストした繰り返しを理解できる"
+      ],
+      "finalOutput": "1 x 1 = 1\n1 x 2 = 2\n..."
+    }
+  ],
+  "guided_steps": [
+    {
+      "id": "guided_ch4_single",
+      "title": "ステップ1: 1から10まで表示しよう",
+      "instruction": "for文を使って、1から10までの数字を表示しましょう。",
+      "hints": [
+        "range(1, 11) で1から10まで",
+        "for i in range(1, 11): のように書きます"
+      ],
+      "starterCode": "# for文を使って1から10を表示\n",
+      "solution": "# for文を使って1から10を表示\nfor i in range(1, 11):\n    print(i)",
+      "expectedOutput": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10",
+      "checkType": "output_contains",
+      "checkValue": "10"
+    },
+    {
+      "id": "guided_ch4_nested",
+      "title": "ステップ2: 九九表を作ろう",
+      "instruction": "二重のfor文を使って、九九表を作りましょう。",
+      "hints": [
+        "for文の中にfor文を書きます",
+        "外側のループで段を、内側のループで掛ける数を制御します"
+      ],
+      "starterCode": "# 九九表を作成\n",
+      "solution": "# 九九表を作成\nfor i in range(1, 10):\n    for j in range(1, 10):\n        result = i * j\n        print(str(i) + \" x \" + str(j) + \" = \" + str(result))",
+      "expectedOutput": "1 x 1 = 1",
+      "checkType": "output_contains",
+      "checkValue": "x"
+    }
+  ],
+  "challenges": [
+    {
+      "id": "challenge_ch4_pattern",
+      "title": "チャレンジ: パターン表示",
+      "description": "繰り返しを使って、星印のパターンを表示してください。",
+      "instruction": "以下のようなパターンを表示してください:\n*\n**\n***\n****\n*****",
+      "starterCode": "# ここにコードを書いてください\n",
+      "testCases": [
+        {
+          "description": "5行出力されている",
+          "checkType": "line_count",
+          "expected": 5
+        },
+        {
+          "description": "星印が含まれている",
+          "checkType": "output_contains",
+          "expected": "*"
+        }
+      ],
+      "solution": "for i in range(1, 6):\n    stars = \"*\" * i\n    print(stars)",
+      "hints": [
+        "文字列 * 数値 で繰り返せます",
+        "\"*\" * 3 は \"***\" になります"
+      ]
+    }
+  ],
+  "free_practices": [
+    {
+      "id": "free_ch4_loop",
+      "title": "自由制作: 繰り返しプログラム",
+      "description": "繰り返しを使ったプログラムを作ってみましょう!",
+      "prompt": "繰り返しを使ったプログラムを作ってください。例:\n・カウントダウンタイマー\n・FizzBuzz\n・図形のパターン\n・合計値の計算",
+      "starterCode": "# あなたのプログラムを書いてください\n",
+      "exampleSolution": "# FizzBuzz\nfor i in range(1, 31):\n    if i % 15 == 0:\n        print(\"FizzBuzz\")\n    elif i % 3 == 0:\n        print(\"Fizz\")\n    elif i % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(i)",
+      "tips": [
+        "繰り返しと条件分岐を組み合わせると面白いです",
+        "実用的なプログラムを考えてみましょう"
+      ]
+    }
+  ]
+}

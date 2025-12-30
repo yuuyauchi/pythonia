@@ -1,0 +1,362 @@
+{
+  "problem_discovery": [
+    {
+      "id": "scraping_problem",
+      "title": "課題を発見しよう",
+      "scenario": {
+        "title": "ネット通販の価格比較が面倒...",
+        "description": "大学生の山田さんは、教科書を買う前に複数のネット通販サイトで価格を比較しています。Amazon、楽天、Yahoo!ショッピング...それぞれのサイトを開いて、検索して、価格をメモして...この作業、1つの商品で10分もかかります。",
+        "timeSpent": "1商品10分 × 月20商品 = 月間約3.3時間",
+        "painPoints": [
+          "複数サイトを手動で確認する手間",
+          "価格の記録とメモが面倒",
+          "最安値を見逃すことがある",
+          "価格変動を追跡できない"
+        ]
+      },
+      "problemAnalysis": {
+        "question1": "この状況で一番困っていることは何でしょうか?",
+        "options": [
+          "複数サイトを確認する手間",
+          "価格を記録する作業",
+          "最安値を見逃すこと",
+          "すべて"
+        ],
+        "correctAnswer": 3,
+        "explanation": "どれも重要な課題です。これらすべてをWebスクレイピングで解決できます!"
+      },
+      "idealSolution": {
+        "title": "理想の状態は?",
+        "description": "商品名を入力するだけで、自動的に複数サイトの価格を比較できたら便利ですよね!",
+        "benefits": [
+          "複数サイトを自動で巡回",
+          "価格を自動で取得・比較",
+          "最安値が一目で分かる",
+          "価格変動の追跡も可能"
+        ],
+        "beforeAfter": {
+          "before": "1商品10分 × 手動で確認",
+          "after": "数秒!プログラムが自動比較"
+        }
+      },
+      "technicalFeasibility": {
+        "title": "技術で解決できる?",
+        "answer": "Yes! Pythonで実現できます",
+        "approach": [
+          "requests で Webページを取得",
+          "BeautifulSoup で HTMLを解析",
+          "価格情報を抽出して比較"
+        ],
+        "libraries": [
+          {
+            "name": "requests",
+            "purpose": "Webページの取得",
+            "reason": "HTTPリクエストを簡単に送信できる"
+          },
+          {
+            "name": "beautifulsoup4",
+            "purpose": "HTMLの解析",
+            "reason": "HTMLから必要な情報を簡単に抽出できる"
+          }
+        ]
+      }
+    }
+  ],
+  "planning": [
+    {
+      "id": "scraping_planning",
+      "title": "解決策を設計しよう",
+      "requirements": {
+        "title": "必要な機能を洗い出そう",
+        "features": [
+          {
+            "feature": "Webページの取得",
+            "detail": "通販サイトのページをダウンロード",
+            "priority": "必須"
+          },
+          {
+            "feature": "価格情報の抽出",
+            "detail": "HTMLから価格データを取り出す",
+            "priority": "必須"
+          },
+          {
+            "feature": "複数サイト対応",
+            "detail": "複数の通販サイトから同時に価格を取得",
+            "priority": "必須"
+          },
+          {
+            "feature": "価格比較表示",
+            "detail": "取得した価格を見やすく比較表示",
+            "priority": "必須"
+          },
+          {
+            "feature": "最安値の通知",
+            "detail": "どのサイトが最安値か自動で判定",
+            "priority": "あれば便利"
+          },
+          {
+            "feature": "価格履歴の保存",
+            "detail": "価格の変動を追跡できるように保存",
+            "priority": "あれば便利"
+          }
+        ]
+      },
+      "technicalChoice": {
+        "title": "技術選定",
+        "choices": [
+          {
+            "aspect": "Webページ取得",
+            "options": [
+              {
+                "name": "requests",
+                "pros": ["シンプル", "高速", "広く使われている"],
+                "cons": ["JavaScriptは実行できない"],
+                "selected": true
+              },
+              {
+                "name": "selenium",
+                "pros": ["JavaScript実行可能"],
+                "cons": ["重い", "セットアップが複雑"],
+                "selected": false
+              }
+            ]
+          },
+          {
+            "aspect": "HTML解析",
+            "options": [
+              {
+                "name": "BeautifulSoup",
+                "pros": ["使いやすい", "ドキュメント充実", "柔軟"],
+                "cons": [],
+                "selected": true
+              },
+              {
+                "name": "正規表現",
+                "pros": ["高速"],
+                "cons": ["複雑", "エラーが起きやすい"],
+                "selected": false
+              }
+            ]
+          }
+        ]
+      },
+      "architecture": {
+        "title": "システム設計",
+        "flow": [
+          "1. requests で通販サイトのページを取得",
+          "2. BeautifulSoup で HTMLを解析",
+          "3. CSS セレクタで価格要素を特定",
+          "4. 価格データを抽出して数値化",
+          "5. 複数サイトの価格を比較",
+          "6. 最安値を判定して表示"
+        ],
+        "dataFlow": "URL → HTML → BeautifulSoup → 価格抽出 → 比較 → 表示"
+      },
+      "developmentPlan": {
+        "title": "開発計画",
+        "steps": [
+          {
+            "step": 1,
+            "title": "HTML構造の理解とモックデータ作成",
+            "estimate": "15分"
+          },
+          {
+            "step": 2,
+            "title": "価格抽出ロジックの実装",
+            "estimate": "20分"
+          },
+          {
+            "step": 3,
+            "title": "複数サイト対応と比較機能",
+            "estimate": "20分"
+          },
+          {
+            "step": 4,
+            "title": "結果の見やすい表示",
+            "estimate": "10分"
+          }
+        ],
+        "totalEstimate": "約65分"
+      }
+    }
+  ],
+  "implementation": [
+    {
+      "id": "scraping_impl_1",
+      "title": "Step 1: HTML構造の理解とデータ抽出の基礎",
+      "objective": "HTMLの構造を理解し、モックデータから価格情報を抽出する方法を学ぼう",
+      "explanation": "Webスクレイピングの第一歩は、HTMLの構造を理解することです。まずはモックHTMLデータを使って、価格情報の抽出方法を学びます。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "モックHTMLデータの準備",
+          "description": "実際の通販サイトと同じ構造のHTMLを用意します",
+          "code": "# 通販サイトのモックHTML\nmock_html = '''\n<div class=\"product\">\n    <h2 class=\"product-name\">Pythonプログラミング入門</h2>\n    <span class=\"price\">¥2,980</span>\n    <div class=\"stock\">在庫あり</div>\n</div>\n'''"
+        },
+        {
+          "step": 2,
+          "title": "HTMLからデータを抽出",
+          "description": "モックHTMLから商品名と価格を取り出します",
+          "code": "# 簡易的な価格抽出 (実際はBeautifulSoupを使用)\nif '¥' in mock_html:\n    # 価格部分を検索\n    price_start = mock_html.find('¥')\n    price_str = mock_html[price_start:price_start+10]\n    print(f'価格: {price_str}')"
+        }
+      ],
+      "starterCode": "# 通販サイトのモックHTMLデータを作成してください\n\n# ここにコードを書いてください\n",
+      "solution": "# 通販サイトのモックデータ (辞書形式で扱いやすく)\nproduct_data = {\n    'site_name': 'Amazon',\n    'product_name': 'Pythonプログラミング入門',\n    'price': 2980,\n    'stock': '在庫あり',\n    'url': 'https://example.com/product/123'\n}\n\n# 複数サイトのモックデータ\nsites_data = [\n    {'site': 'Amazon', 'product': 'Pythonプログラミング入門', 'price': 2980},\n    {'site': '楽天', 'product': 'Pythonプログラミング入門', 'price': 3200},\n    {'site': 'Yahoo!', 'product': 'Pythonプログラミング入門', 'price': 2850}\n]\n\nprint('=' * 60)\nprint('🔍 商品情報の抽出')\nprint('=' * 60)\nprint(f'商品名: {product_data[\"product_name\"]}')\nprint(f'販売サイト: {product_data[\"site_name\"]}')\nprint(f'価格: ¥{product_data[\"price\"]:,}')\nprint(f'在庫状況: {product_data[\"stock\"]}')\nprint('=' * 60)\n\nprint('\\n📊 複数サイトのデータ')\nprint('=' * 60)\nfor site in sites_data:\n    print(f'{site[\"site\"]:10s}: ¥{site[\"price\"]:,}')\nprint('=' * 60)\n\nprint('\\n📝 Note: 実際の開発では、requestsでHTMLを取得し、BeautifulSoupで解析します')",
+      "hints": [
+        "HTMLの構造を辞書で表現できます",
+        "実際のスクレイピングではrequestsとBeautifulSoupを使用",
+        "まずはデータ構造の理解が重要"
+      ],
+      "keyPoints": [
+        "HTMLの構造を理解することが重要",
+        "Pythonの辞書でデータを扱える",
+        "実際のスクレイピングはライブラリを使用",
+        "モックデータで開発の流れを学べる"
+      ]
+    },
+    {
+      "id": "scraping_impl_2",
+      "title": "Step 2: 価格データの解析と数値化",
+      "objective": "文字列形式の価格データを数値に変換し、比較できるようにしよう",
+      "explanation": "Webページから取得した価格は「¥2,980」のような文字列です。これを数値に変換して、比較や計算ができるようにします。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "価格文字列の解析",
+          "description": "「¥2,980」から数値の2980を取り出します",
+          "code": "def parse_price(price_str):\n    '''価格文字列を数値に変換'''\n    # ¥記号とカンマを除去\n    price_clean = price_str.replace('¥', '').replace(',', '')\n    return int(price_clean)\n\nprice = parse_price('¥2,980')\nprint(f'数値化された価格: {price}')"
+        },
+        {
+          "step": 2,
+          "title": "複数サイトの価格を数値化",
+          "description": "各サイトの価格を数値に変換して比較します",
+          "code": "sites = [\n    {'site': 'Amazon', 'price_str': '¥2,980'},\n    {'site': '楽天', 'price_str': '¥3,200'}\n]\n\nfor site in sites:\n    site['price'] = parse_price(site['price_str'])\n    print(f\"{site['site']}: {site['price']}円\")"
+        }
+      ],
+      "starterCode": "sites_data = [\n    {'site': 'Amazon', 'price_str': '¥2,980'},\n    {'site': '楽天', 'price_str': '¥3,200'},\n    {'site': 'Yahoo!', 'price_str': '¥2,850'}\n]\n\n# ここに価格解析コードを書いてください\n",
+      "solution": "def parse_price(price_str):\n    '''価格文字列を数値に変換'''\n    # ¥記号、カンマ、スペースを除去\n    price_clean = price_str.replace('¥', '').replace(',', '').replace(' ', '').strip()\n    try:\n        return int(price_clean)\n    except ValueError:\n        return 0\n\ndef format_price(price):\n    '''価格を見やすく整形'''\n    return f'¥{price:,}'\n\n# サイトデータ\nsites_data = [\n    {'site': 'Amazon', 'price_str': '¥2,980'},\n    {'site': '楽天', 'price_str': '¥3,200'},\n    {'site': 'Yahoo!', 'price_str': '¥2,850'},\n    {'site': 'メルカリ', 'price_str': '¥2,500'}\n]\n\nprint('=' * 60)\nprint('💰 価格データの解析')\nprint('=' * 60)\n\n# 価格を数値化\nfor site in sites_data:\n    site['price'] = parse_price(site['price_str'])\n    print(f'{site[\"site\"]:12s}: {site[\"price_str\"]:10s} → {site[\"price\"]}円')\n\nprint('\\n' + '=' * 60)\nprint('📊 価格比較')\nprint('=' * 60)\n\n# 価格順にソート\nsorted_sites = sorted(sites_data, key=lambda x: x['price'])\n\nfor i, site in enumerate(sorted_sites, 1):\n    if i == 1:\n        label = '🥇 最安値'\n    elif i == 2:\n        label = '🥈 2番目'\n    elif i == 3:\n        label = '🥉 3番目'\n    else:\n        label = f'   {i}番目'\n    \n    print(f'{label} - {site[\"site\"]:12s}: {format_price(site[\"price\"])}')\n\n# 価格差の計算\nmin_price = sorted_sites[0]['price']\nmax_price = sorted_sites[-1]['price']\nprice_diff = max_price - min_price\n\nprint('\\n' + '=' * 60)\nprint(f'💡 最安値との差額: {format_price(price_diff)}')\nprint(f'💰 節約できる金額: 最大 {format_price(price_diff)}')\nprint('=' * 60)",
+      "hints": [
+        "replace()で不要な文字を除去できます",
+        "try-exceptでエラー処理をしましょう",
+        "sorted()で価格順に並べ替えられます"
+      ],
+      "keyPoints": [
+        "文字列の価格を数値に変換する重要性",
+        "エラー処理で堅牢なコードを作る",
+        "ソート機能で最安値を簡単に見つける",
+        "価格差の計算で節約額が分かる"
+      ]
+    },
+    {
+      "id": "scraping_impl_3",
+      "title": "Step 3: 価格比較ツールの完成",
+      "objective": "複数サイトの価格を自動で比較し、最安値を見つけるツールを完成させよう",
+      "explanation": "これまで学んだことを統合して、実用的な価格比較ツールを作ります。最安値の通知や、お得度の計算も追加します。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "価格比較関数の作成",
+          "description": "複数サイトの価格を比較する関数を作ります",
+          "code": "def compare_prices(sites_data):\n    '''価格を比較して分析'''\n    sorted_sites = sorted(sites_data, key=lambda x: x['price'])\n    best = sorted_sites[0]\n    worst = sorted_sites[-1]\n    \n    print(f'最安値: {best[\"site\"]} - ¥{best[\"price\"]:,}')\n    print(f'最高値: {worst[\"site\"]} - ¥{worst[\"price\"]:,}')\n    print(f'価格差: ¥{worst[\"price\"] - best[\"price\"]:,}')"
+        },
+        {
+          "step": 2,
+          "title": "お得度の計算",
+          "description": "各サイトが最安値と比べてどれくらい高いか表示",
+          "code": "min_price = min(site['price'] for site in sites_data)\n\nfor site in sites_data:\n    diff = site['price'] - min_price\n    if diff == 0:\n        print(f\"{site['site']}: 最安値! 🎉\")\n    else:\n        print(f\"{site['site']}: +¥{diff:,} 高い\")"
+        }
+      ],
+      "starterCode": "def parse_price(price_str):\n    price_clean = price_str.replace('¥', '').replace(',', '').strip()\n    return int(price_clean)\n\nsites_data = [\n    {'site': 'Amazon', 'price_str': '¥2,980'},\n    {'site': '楽天', 'price_str': '¥3,200'},\n    {'site': 'Yahoo!', 'price_str': '¥2,850'},\n    {'site': 'メルカリ', 'price_str': '¥2,500'}\n]\n\n# 価格を数値化\nfor site in sites_data:\n    site['price'] = parse_price(site['price_str'])\n\n# ここに価格比較ツールを完成させてください\n",
+      "solution": "def parse_price(price_str):\n    '''価格文字列を数値に変換'''\n    price_clean = price_str.replace('¥', '').replace(',', '').strip()\n    try:\n        return int(price_clean)\n    except ValueError:\n        return 0\n\ndef create_price_comparison_report(product_name, sites_data):\n    '''価格比較レポートを生成'''\n    # 価格を数値化\n    for site in sites_data:\n        if 'price' not in site:\n            site['price'] = parse_price(site['price_str'])\n    \n    # 価格順にソート\n    sorted_sites = sorted(sites_data, key=lambda x: x['price'])\n    min_price = sorted_sites[0]['price']\n    max_price = sorted_sites[-1]['price']\n    avg_price = sum(s['price'] for s in sites_data) / len(sites_data)\n    \n    # レポート表示\n    print('\\n' + '=' * 70)\n    print(f'🔍 価格比較レポート: {product_name}'.center(70))\n    print('=' * 70)\n    \n    print('\\n【サイト別価格一覧】')\n    print('─' * 70)\n    \n    for i, site in enumerate(sorted_sites, 1):\n        price = site['price']\n        diff = price - min_price\n        diff_percent = ((price - min_price) / min_price * 100) if min_price > 0 else 0\n        \n        if i == 1:\n            badge = '🥇 最安値'\n            extra = '← おすすめ!'\n        elif i == 2:\n            badge = '🥈'\n        elif i == 3:\n            badge = '🥉'\n        else:\n            badge = f'  '\n        \n        if diff == 0:\n            diff_str = ''\n            extra_str = '← おすすめ!'\n        else:\n            diff_str = f'(+¥{diff:,}, +{diff_percent:.1f}%)'\n            extra_str = ''\n        \n        print(f'{badge} {site[\"site\"]:12s}: ¥{price:,} {diff_str} {extra_str}')\n    \n    print('\\n【価格統計】')\n    print('─' * 70)\n    print(f'💰 最安値    : ¥{min_price:,} ({sorted_sites[0][\"site\"]})')\n    print(f'💸 最高値    : ¥{max_price:,} ({sorted_sites[-1][\"site\"]})')\n    print(f'📊 平均価格  : ¥{avg_price:,.0f}')\n    print(f'📈 価格差    : ¥{max_price - min_price:,}')\n    \n    savings_percent = ((max_price - min_price) / max_price * 100) if max_price > 0 else 0\n    print(f'\\n💡 最安値で買うと、最大 ¥{max_price - min_price:,} ({savings_percent:.1f}%) お得!')\n    \n    print('=' * 70)\n    print(f'✅ 推奨購入先: {sorted_sites[0][\"site\"]} (¥{min_price:,})\\n')\n\n# 商品データ\nproduct_name = 'Pythonプログラミング入門'\nsites_data = [\n    {'site': 'Amazon', 'price_str': '¥2,980'},\n    {'site': '楽天', 'price_str': '¥3,200'},\n    {'site': 'Yahoo!', 'price_str': '¥2,850'},\n    {'site': 'メルカリ', 'price_str': '¥2,500'},\n    {'site': 'ヨドバシ', 'price_str': '¥3,080'}\n]\n\ncreate_price_comparison_report(product_name, sites_data)",
+      "hints": [
+        "sorted()で最安値を簡単に見つけられます",
+        "パーセンテージ計算でお得度を可視化",
+        "関数化で再利用しやすいコードに"
+      ],
+      "keyPoints": [
+        "複数サイトの価格を自動比較",
+        "最安値の自動検出",
+        "価格差やお得度の計算",
+        "実用的なレポート形式で出力"
+      ]
+    }
+  ],
+  "reflection": [
+    {
+      "id": "scraping_reflection",
+      "title": "振り返りと改善",
+      "summary": {
+        "title": "作ったもの",
+        "description": "複数の通販サイトの価格を自動で比較し、最安値を見つけ出すプログラムを作成しました。",
+        "achievements": [
+          "Webデータの取得と解析方法を習得",
+          "価格データの処理と比較ロジック",
+          "実用的な価格比較ツールを完成"
+        ]
+      },
+      "beforeAfter": {
+        "before": {
+          "time": "1商品10分",
+          "method": "手動で各サイトを確認",
+          "issues": ["時間がかかる", "見逃しがある", "記録が面倒"]
+        },
+        "after": {
+          "time": "数秒(自動)",
+          "method": "プログラムを実行するだけ",
+          "benefits": ["超高速", "正確", "最安値を必ず見つける"]
+        },
+        "improvement": "月間約3.3時間の節約!"
+      },
+      "furtherImprovements": {
+        "title": "さらなる改善アイデア",
+        "ideas": [
+          {
+            "idea": "実際のWebサイトからスクレイピング",
+            "description": "requestsとBeautifulSoupで実サイトから取得",
+            "difficulty": "中",
+            "library": "requests, beautifulsoup4"
+          },
+          {
+            "idea": "価格履歴の追跡",
+            "description": "日々の価格変動をグラフ化",
+            "difficulty": "中",
+            "library": "matplotlib, sqlite3"
+          },
+          {
+            "idea": "価格アラート機能",
+            "description": "目標価格を下回ったら通知",
+            "difficulty": "中",
+            "library": "schedule"
+          },
+          {
+            "idea": "CSVエクスポート",
+            "description": "比較結果をCSVファイルに保存",
+            "difficulty": "易",
+            "library": "csv"
+          },
+          {
+            "idea": "商品レビューも取得",
+            "description": "価格だけでなく評価も比較",
+            "difficulty": "中",
+            "library": "beautifulsoup4"
+          },
+          {
+            "idea": "Webアプリ化",
+            "description": "ブラウザで使える比較ツール",
+            "difficulty": "高",
+            "library": "flask, streamlit"
+          }
+        ]
+      },
+      "nextChallenge": {
+        "title": "次の課題を見つけよう",
+        "questions": [
+          "他にも定期的にチェックしているWebサイトはありませんか?",
+          "ニュースや天気など、自動収集したい情報はありませんか?",
+          "友達や家族にも役立つツールにできませんか?"
+        ],
+        "encouragement": "Webスクレイピングは、情報収集を自動化する強力な技術です!"
+      }
+    }
+  ]
+}

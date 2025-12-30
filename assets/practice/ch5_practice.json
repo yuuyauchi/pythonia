@@ -1,0 +1,13 @@
+{
+  "project_intros": [{"id": "intro_ch5", "title": "買い物リストアプリを作ろう", "description": "リストと辞書を使ってデータを管理します。", "goals": ["リストを操作できる", "辞書を使える", "データを整理できる"], "finalOutput": "買い物リスト: りんご, バナナ, みかん"}],
+  "guided_steps": [
+    {"id": "guided_ch5_list", "title": "ステップ1: 買い物リストを作ろう", "instruction": "リストに商品を追加して表示しましょう。", "hints": ["リストは [] で作ります", "append()で追加できます"], "starterCode": "# リストを作成\nshopping_list = []\n\n# 商品を追加\n", "solution": "# リストを作成\nshopping_list = []\n\n# 商品を追加\nshopping_list.append(\"りんご\")\nshopping_list.append(\"バナナ\")\nshopping_list.append(\"みかん\")\n\nprint(shopping_list)", "expectedOutput": "['りんご', 'バナナ', 'みかん']", "checkType": "output_contains", "checkValue": "りんご"},
+    {"id": "guided_ch5_dict", "title": "ステップ2: 価格も管理しよう", "instruction": "辞書を使って商品と価格を管理しましょう。", "hints": ["辞書は {} で作ります", "prices[\"りんご\"] = 100 のように追加"], "starterCode": "# 辞書を作成\nprices = {}\n\n# 商品と価格を追加\n", "solution": "# 辞書を作成\nprices = {}\n\n# 商品と価格を追加\nprices[\"りんご\"] = 100\nprices[\"バナナ\"] = 80\nprices[\"みかん\"] = 60\n\nprint(prices)", "expectedOutput": "{'りんご': 100, 'バナナ': 80, 'みかん': 60}", "checkType": "output_contains", "checkValue": "100"}
+  ],
+  "challenges": [
+    {"id": "challenge_ch5_sum", "title": "チャレンジ: 合計金額を計算", "description": "買い物リストの合計金額を計算してください。", "instruction": "商品と価格の辞書を作り、合計金額を計算して表示してください。", "starterCode": "# ここにコードを書いてください\n", "testCases": [{"description": "合計金額が表示されている", "checkType": "output_contains", "expected": "240"}], "solution": "prices = {\"りんご\": 100, \"バナナ\": 80, \"みかん\": 60}\n\ntotal = 0\nfor price in prices.values():\n    total += price\n\nprint(\"合計金額: \" + str(total) + \"円\")", "hints": ["values()で価格だけ取り出せます", "total += price で加算"]}
+  ],
+  "free_practices": [
+    {"id": "free_ch5_manager", "title": "自由制作: データ管理プログラム", "description": "リストや辞書を使ったプログラムを作りましょう!", "prompt": "以下のようなプログラムを作ってください:\n・在庫管理\n・成績管理\n・メニュー管理", "starterCode": "# あなたのプログラムを書いてください\n", "exampleSolution": "# 在庫管理\nstock = {\"りんご\": 10, \"バナナ\": 5, \"みかん\": 8}\n\nprint(\"=== 在庫一覧 ===\")\nfor item, count in stock.items():\n    print(item + \": \" + str(count) + \"個\")", "tips": ["items()でキーと値を同時に取得", "実用的な管理システムを考えましょう"]}
+  ]
+}

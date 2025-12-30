@@ -1,0 +1,30 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz_ch7_mcq_1",
+      "question": "次のコードを実行すると、何が表示されますか？",
+      "code": "text = \"Hello\" + \" \" + \"World\"\nprint(text)",
+      "choices": [
+        { "id": "a", "text": "Hello World" },
+        { "id": "b", "text": "HelloWorld" },
+        { "id": "c", "text": "Hello + World" },
+        { "id": "d", "text": "エラーが出る" }
+      ],
+      "correctChoiceId": "a",
+      "explanation": "文字列は+演算子で結合できます。\"Hello\" + \" \" + \"World\"は「Hello World」になります。"
+    },
+    {
+      "id": "quiz_ch7_fill_1",
+      "description": "次のコードの空欄を埋めて、変数nameを使って「私の名前は太郎です」と表示してください。",
+      "codeTemplate": "name = \"太郎\"\nmessage = ______\"私の名前は{name}です\"\nprint(message)",
+      "blanks": [
+        {
+          "id": "blank1",
+          "correctAnswer": "f",
+          "hint": "文字列に変数を埋め込むためのプレフィックスです"
+        }
+      ],
+      "explanation": "f-string（f\"...\"）を使うと、{}の中に変数を埋め込めます。"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "project_intros": [
+    {
+      "id": "intro_ch1",
+      "title": "自己紹介プログラムを作ろう",
+      "description": "printと変数を使って、自分のことを紹介するプログラムを段階的に作っていきます。",
+      "goals": [
+        "変数に値を代入できる",
+        "printで変数を表示できる",
+        "複数の情報を組み合わせて表示できる"
+      ],
+      "finalOutput": "こんにちは！私の名前は太郎です。\n年齢は20歳です。\n好きなものはプログラミングです。"
+    }
+  ],
+  "guided_steps": [
+    {
+      "id": "guided_ch1_name",
+      "title": "ステップ1: 名前を表示しよう",
+      "instruction": "変数nameに自分の名前を代入して、「こんにちは！私の名前は〇〇です。」と表示してみましょう。",
+      "hints": [
+        "変数への代入は name = \"太郎\" のように書きます",
+        "printで変数を表示するには print(変数名) とします",
+        "文字列を連結するには + を使います"
+      ],
+      "starterCode": "# ここに名前を代入してください\nname = \n\n# ここでprintを使って表示してください\n",
+      "solution": "# ここに名前を代入してください\nname = \"太郎\"\n\n# ここでprintを使って表示してください\nprint(\"こんにちは!私の名前は\" + name + \"です。\")",
+      "expectedOutput": "こんにちは!私の名前は太郎です。",
+      "checkType": "output_contains",
+      "checkValue": "こんにちは"
+    },
+    {
+      "id": "guided_ch1_age",
+      "title": "ステップ2: 年齢も追加しよう",
+      "instruction": "さっきのコードに続けて、年齢も表示してみましょう。変数ageに年齢を代入して、「年齢は〇〇歳です。」と表示します。",
+      "hints": [
+        "数値は \"\" で囲まずに書きます: age = 20",
+        "数値を文字列と連結するには str(age) で文字列に変換します",
+        "前のコードの下に追加していきます"
+      ],
+      "starterCode": "name = \"太郎\"\nprint(\"こんにちは!私の名前は\" + name + \"です。\")\n\n# ここに年齢を代入してください\nage = \n\n# ここで年齢を表示してください\n",
+      "solution": "name = \"太郎\"\nprint(\"こんにちは!私の名前は\" + name + \"です。\")\n\n# ここに年齢を代入してください\nage = 20\n\n# ここで年齢を表示してください\nprint(\"年齢は\" + str(age) + \"歳です。\")",
+      "expectedOutput": "こんにちは!私の名前は太郎です。\n年齢は20歳です。",
+      "checkType": "output_contains",
+      "checkValue": "年齢は"
+    }
+  ],
+  "challenges": [
+    {
+      "id": "challenge_ch1_format",
+      "title": "チャレンジ: 好きなものも追加",
+      "description": "名前と年齢に加えて、好きなもの(favorite)も表示してください。",
+      "instruction": "変数name、age、favoriteを使って、以下の形式で3行表示してください:\n\nこんにちは!私の名前は〇〇です。\n年齢は△△歳です。\n好きなものは□□です。",
+      "starterCode": "# ここにコードを書いてください\n",
+      "testCases": [
+        {
+          "description": "3行出力されている",
+          "checkType": "line_count",
+          "expected": 3
+        },
+        {
+          "description": "「こんにちは」が含まれている",
+          "checkType": "output_contains",
+          "expected": "こんにちは"
+        },
+        {
+          "description": "「年齢は」が含まれている",
+          "checkType": "output_contains",
+          "expected": "年齢は"
+        },
+        {
+          "description": "「好きなものは」が含まれている",
+          "checkType": "output_contains",
+          "expected": "好きなものは"
+        }
+      ],
+      "solution": "name = \"太郎\"\nage = 20\nfavorite = \"プログラミング\"\n\nprint(\"こんにちは!私の名前は\" + name + \"です。\")\nprint(\"年齢は\" + str(age) + \"歳です。\")\nprint(\"好きなものは\" + favorite + \"です。\")",
+      "hints": [
+        "3つの変数 name, age, favorite を用意します",
+        "printを3回使って、それぞれの情報を表示します",
+        "数値のageはstr()で文字列に変換することを忘れずに"
+      ]
+    }
+  ],
+  "free_practices": [
+    {
+      "id": "free_ch1_profile",
+      "title": "自由制作: オリジナル自己紹介",
+      "description": "学んだことを活かして、自分だけの自己紹介プログラムを作ってみましょう!",
+      "prompt": "以下の情報を含めて、自由に自己紹介プログラムを作成してください:\n\n・名前\n・年齢\n・好きなもの\n・その他、紹介したいこと(趣味、出身地、将来の夢など)\n\n表示の仕方は自由です。工夫してみましょう!",
+      "starterCode": "# あなたのオリジナル自己紹介プログラムを書いてください\n",
+      "exampleSolution": "name = \"太郎\"\nage = 20\nfavorite = \"プログラミング\"\nhobby = \"ゲーム\"\ndream = \"エンジニア\"\n\nprint(\"========== 自己紹介 ==========\")\nprint(\"名前: \" + name)\nprint(\"年齢: \" + str(age) + \"歳\")\nprint(\"好きなもの: \" + favorite)\nprint(\"趣味: \" + hobby)\nprint(\"将来の夢: \" + dream)\nprint(\"=============================\")\nprint(\"よろしくお願いします!\")",
+      "tips": [
+        "装飾として = や - を使うと見やすくなります",
+        "複数の変数を使って情報を整理しましょう",
+        "最後に挨拶を入れると良いでしょう"
+      ]
+    }
+  ]
+}

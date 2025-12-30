@@ -4,9 +4,9 @@ import { RootTabParamList } from '../types/navigation';
 import { colors } from '../constants/theme';
 
 // Import screens
-import LessonsHomeScreen from '../screens/lessons/LessonsHomeScreen';
-import EditorScreen from '../screens/editor/EditorScreen';
-import HandsOnPlaceholderScreen from '../screens/handsOn/HandsOnPlaceholderScreen';
+import LessonsStackNavigator from './LessonsStackNavigator';
+import PracticeStackNavigator from './PracticeStackNavigator';
+import CoursesStackNavigator from './CoursesStackNavigator';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
@@ -32,7 +32,7 @@ export default function BottomTabNavigator() {
     >
       <Tab.Screen
         name="LessonsTab"
-        component={LessonsHomeScreen}
+        component={LessonsStackNavigator}
         options={{
           title: '学ぶ',
           tabBarLabel: '学ぶ',
@@ -41,18 +41,20 @@ export default function BottomTabNavigator() {
       />
       <Tab.Screen
         name="EditorTab"
-        component={EditorScreen}
+        component={PracticeStackNavigator}
         options={{
           title: '書く',
           tabBarLabel: '書く',
+          headerShown: false, // Will use stack navigator's header
         }}
       />
       <Tab.Screen
         name="HandsOnTab"
-        component={HandsOnPlaceholderScreen}
+        component={CoursesStackNavigator}
         options={{
           title: '作る',
           tabBarLabel: '作る',
+          headerShown: false, // Will use stack navigator's header
         }}
       />
       <Tab.Screen

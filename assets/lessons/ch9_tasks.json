@@ -1,0 +1,34 @@
+{
+  "tasks": [
+    {
+      "id": "code_ch9_example",
+      "description": "これまでの知識を組み合わせた例です。リスト、繰り返し、条件分岐を使っています。",
+      "code": "numbers = [10, 25, 30, 45, 50]\n\nfor num in numbers:\n    if num >= 30:\n        print(f\"{num}は30以上です\")\n    else:\n        print(f\"{num}は30未満です\")",
+      "expectedOutput": "10は30未満です\n25は30未満です\n30は30以上です\n45は30以上です\n50は30以上です"
+    },
+    {
+      "id": "task_ch9_number_game",
+      "description": "簡単な数当てゲームを作ってください。\n\n正解の数を30に設定し、ユーザーの予想（guess）が：\n- 正解なら「正解です！」\n- 正解より大きければ「もっと小さい数です」\n- 正解より小さければ「もっと大きい数です」\n\nと表示してください。",
+      "initialCode": "# 正解の数\nanswer = 30\n\n# ユーザーの予想\nguess = 25\n\n# if文で判定\n",
+      "testCases": [
+        {
+          "expectedOutput": "もっと大きい数です",
+          "description": "guess=25の場合、「もっと大きい数です」と表示される"
+        }
+      ],
+      "hint": "if guess == answer: で正解判定、elif guess > answer: で大きすぎる判定、else: で小さすぎる判定をします"
+    },
+    {
+      "id": "task_ch9_bmi",
+      "description": "BMI（体格指数）を計算するプログラムを作ってください。\n\nBMI = 体重(kg) ÷ 身長(m) ÷ 身長(m)\n\n計算した結果を表示し、さらに：\n- BMIが18.5未満なら「やせ型」\n- BMIが18.5以上25未満なら「標準」\n- BMIが25以上なら「肥満」\n\nと判定してください。",
+      "initialCode": "# 体重と身長\nweight = 65  # kg\nheight = 1.70  # m\n\n# BMIを計算\nbmi = \n\nprint(f\"BMI: {bmi}\")\n\n# 判定\n",
+      "testCases": [
+        {
+          "expectedOutput": "BMI: 22.49134948096886\n標準",
+          "description": "BMIと判定結果が表示される（BMIの小数点以下は異なってもOK）"
+        }
+      ],
+      "hint": "bmi = weight / height / height で計算できます。if文でBMIの値によって判定します"
+    }
+  ]
+}

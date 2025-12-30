@@ -1,0 +1,332 @@
+{
+  "problem_discovery": [
+    {
+      "id": "weather_problem",
+      "title": "課題を発見しよう",
+      "scenario": {
+        "title": "毎朝の天気チェックが面倒...",
+        "description": "サラリーマンの田中さんは、毎朝出勤前に天気をチェックしています。スマホで天気アプリを開いて、今日の天気と気温を確認...この作業、毎日繰り返していると意外と時間がかかります。",
+        "timeSpent": "毎朝2分 × 365日 = 年間約12時間",
+        "painPoints": [
+          "アプリを開く手間がかかる",
+          "複数の地域の天気を確認したい",
+          "忘れてしまうことがある",
+          "傘が必要かすぐに知りたい"
+        ]
+      },
+      "problemAnalysis": {
+        "question1": "この状況で一番困っていることは何でしょうか?",
+        "options": [
+          "天気アプリを開く手間",
+          "毎日忘れずにチェックすること",
+          "複数地域の確認が面倒",
+          "すべて"
+        ],
+        "correctAnswer": 3,
+        "explanation": "どれも重要な課題です。これらすべてを技術で解決できます!"
+      },
+      "idealSolution": {
+        "title": "理想の状態は?",
+        "description": "毎朝決まった時間に、自動で天気情報が通知されたら便利ですよね!",
+        "benefits": [
+          "手動でチェックする必要がない",
+          "見逃すことがない",
+          "複数地域も一度に確認できる",
+          "時間の節約になる"
+        ],
+        "beforeAfter": {
+          "before": "毎朝2分 × アプリを開いて確認",
+          "after": "0分!自動で通知が届く"
+        }
+      },
+      "technicalFeasibility": {
+        "title": "技術で解決できる?",
+        "answer": "Yes! Pythonで実現できます",
+        "approach": [
+          "天気API から情報を取得",
+          "毎日決まった時間に自動実行",
+          "見やすい形式で通知"
+        ],
+        "libraries": [
+          {
+            "name": "requests",
+            "purpose": "天気APIからデータを取得",
+            "reason": "HTTPリクエストを簡単に送信できる"
+          }
+        ]
+      }
+    }
+  ],
+  "planning": [
+    {
+      "id": "weather_planning",
+      "title": "解決策を設計しよう",
+      "requirements": {
+        "title": "必要な機能を洗い出そう",
+        "features": [
+          {
+            "feature": "天気情報の取得",
+            "detail": "APIから現在の天気と気温を取得する",
+            "priority": "必須"
+          },
+          {
+            "feature": "見やすい表示",
+            "detail": "天気・気温・降水確率を分かりやすく表示",
+            "priority": "必須"
+          },
+          {
+            "feature": "複数地域対応",
+            "detail": "自宅と会社など複数の場所の天気を取得",
+            "priority": "あれば便利"
+          },
+          {
+            "feature": "傘アドバイス",
+            "detail": "降水確率に応じて傘の必要性を通知",
+            "priority": "あれば便利"
+          }
+        ]
+      },
+      "technicalChoice": {
+        "title": "技術選定",
+        "choices": [
+          {
+            "aspect": "天気データの取得方法",
+            "options": [
+              {
+                "name": "OpenWeather API",
+                "pros": ["無料プランあり", "豊富なデータ", "ドキュメントが充実"],
+                "cons": ["APIキーが必要"],
+                "selected": true
+              },
+              {
+                "name": "Webスクレイピング",
+                "pros": ["APIキー不要"],
+                "cons": ["不安定", "規約違反のリスク"],
+                "selected": false
+              }
+            ]
+          },
+          {
+            "aspect": "データ取得ライブラリ",
+            "options": [
+              {
+                "name": "requests",
+                "pros": ["シンプル", "使いやすい", "標準的"],
+                "cons": [],
+                "selected": true
+              }
+            ]
+          }
+        ]
+      },
+      "architecture": {
+        "title": "システム設計",
+        "flow": [
+          "1. OpenWeather APIに天気をリクエスト",
+          "2. JSON形式でデータを受信",
+          "3. 必要な情報(天気・気温・降水確率)を抽出",
+          "4. 見やすく整形して表示",
+          "5. (発展)傘が必要か判定して通知"
+        ],
+        "dataFlow": "API → JSON → Python辞書 → 整形 → 表示"
+      },
+      "developmentPlan": {
+        "title": "開発計画",
+        "steps": [
+          {
+            "step": 1,
+            "title": "APIキー取得とテスト",
+            "estimate": "5分"
+          },
+          {
+            "step": 2,
+            "title": "基本的な天気取得",
+            "estimate": "15分"
+          },
+          {
+            "step": 3,
+            "title": "データの整形と表示",
+            "estimate": "15分"
+          },
+          {
+            "step": 4,
+            "title": "傘アドバイス機能追加",
+            "estimate": "10分"
+          }
+        ],
+        "totalEstimate": "約45分"
+      }
+    }
+  ],
+  "implementation": [
+    {
+      "id": "weather_impl_1",
+      "title": "Step 1: 天気データの構造を理解しよう",
+      "objective": "天気APIのデータ構造を学び、モックデータを使って処理の基礎を作ろう",
+      "explanation": "実際の開発では天気APIからデータを取得しますが、学習環境ではモックデータを使います。まずはデータの構造を理解することが重要です。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "モックデータの準備",
+          "description": "実際のAPIレスポンスと同じ構造のデータを用意します",
+          "code": "# 天気APIのモックデータ (実際のAPIと同じ構造)\nmock_weather_data = {\n    \"weather\": [{\"description\": \"晴れ\"}],\n    \"main\": {\n        \"temp\": 25,\n        \"feels_like\": 23,\n        \"humidity\": 60\n    },\n    \"name\": \"Tokyo\"\n}"
+        },
+        {
+          "step": 2,
+          "title": "データの表示",
+          "description": "モックデータから情報を取り出して表示します",
+          "code": "city = mock_weather_data[\"name\"]\nprint(f\"都市: {city}\")\nprint(f\"データ: {mock_weather_data}\")"
+        }
+      ],
+      "starterCode": "# 天気データのモックを作成してください\n\n# ここにコードを書いてください\n",
+      "solution": "# 天気APIのモックデータ\nmock_weather_data = {\n    \"weather\": [{\"description\": \"晴れ\"}],\n    \"main\": {\n        \"temp\": 25,\n        \"feels_like\": 23,\n        \"humidity\": 60\n    },\n    \"name\": \"Tokyo\"\n}\n\ncity = mock_weather_data[\"name\"]\nweather = mock_weather_data[\"weather\"][0][\"description\"]\ntemp = mock_weather_data[\"main\"][\"temp\"]\n\nprint(f\"都市: {city}\")\nprint(f\"天気: {weather}\")\nprint(f\"気温: {temp}°C\")\n\nprint(\"\\n📝 Note: 実際の開発では、urllib.requestやfetchAPIを使ってデータを取得します\")",
+      "hints": [
+        "辞書のキーを使ってデータにアクセスします",
+        "weather は リスト の中に入っているので [0] で取り出します",
+        "実務では実際のAPIを使いますが、学習では構造理解が重要です"
+      ],
+      "keyPoints": [
+        "APIのデータ構造を理解することが最重要",
+        "モックデータで開発の流れを学べる",
+        "実際のAPIは urllib.request などで取得可能",
+        "JSONデータは辞書形式で扱える"
+      ]
+    },
+    {
+      "id": "weather_impl_2",
+      "title": "Step 2: 天気データの取得と抽出",
+      "objective": "APIから取得したJSONデータを解析して、必要な情報を取り出そう",
+      "explanation": "APIからのレスポンスはJSON形式です。この中から天気・気温・降水確率などの必要な情報を抽出します。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "JSONデータの確認",
+          "description": "まずデータ構造を確認しましょう",
+          "explanation": "APIのレスポンスは辞書形式で、weather, main, windなどのキーがあります"
+        },
+        {
+          "step": 2,
+          "title": "必要なデータの抽出",
+          "description": "天気の説明、気温、湿度を取り出します",
+          "code": "if response.status_code == 200:\n    data = response.json()\n    \n    # 天気情報の抽出\n    weather_desc = data['weather'][0]['description']\n    temp = data['main']['temp']\n    humidity = data['main']['humidity']\n    \n    print(f\"天気: {weather_desc}\")\n    print(f\"気温: {temp}°C\")\n    print(f\"湿度: {humidity}%\")\nelse:\n    print(\"エラー: データ取得に失敗しました\")"
+        }
+      ],
+      "starterCode": "# モックデータ\nmock_weather_data = {\n    \"weather\": [{\"description\": \"晴れ\"}],\n    \"main\": {\n        \"temp\": 25,\n        \"feels_like\": 23,\n        \"humidity\": 60\n    },\n    \"name\": \"Tokyo\"\n}\n\n# ここにデータ抽出のコードを書いてください\n",
+      "solution": "# モックデータ\nmock_weather_data = {\n    \"weather\": [{\"description\": \"晴れ\"}],\n    \"main\": {\n        \"temp\": 25,\n        \"feels_like\": 23,\n        \"humidity\": 60\n    },\n    \"name\": \"Tokyo\"\n}\n\n# 天気情報の抽出\nweather_desc = mock_weather_data['weather'][0]['description']\ntemp = mock_weather_data['main']['temp']\nhumidity = mock_weather_data['main']['humidity']\nfeels_like = mock_weather_data['main']['feels_like']\ncity = mock_weather_data['name']\n\nprint(f\"都市: {city}\")\nprint(f\"天気: {weather_desc}\")\nprint(f\"気温: {temp}°C\")\nprint(f\"体感温度: {feels_like}°C\")\nprint(f\"湿度: {humidity}%\")",
+      "hints": [
+        "data['weather']はリストなので[0]で最初の要素を取得",
+        "data['main']に気温関連の情報が含まれています",
+        "if文でstatus_codeをチェックしてエラー処理"
+      ],
+      "keyPoints": [
+        "JSONデータは辞書とリストの組み合わせ",
+        "エラーハンドリングは重要",
+        "f-stringで見やすく整形"
+      ]
+    },
+    {
+      "id": "weather_impl_3",
+      "title": "Step 3: 傘アドバイス機能の追加",
+      "objective": "降水確率に基づいて、傘が必要かアドバイスする機能を追加しよう",
+      "explanation": "天気情報に基づいて、傘が必要かどうかを判定する機能を追加します。これで実用的なツールになります!",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "傘判定関数の作成",
+          "description": "天気の説明から傘の必要性を判定する関数を作ります",
+          "code": "def need_umbrella(weather_desc):\n    \"\"\"天気から傘が必要か判定\"\"\"\n    rain_keywords = ['雨', 'rain', '雷', 'thunder']\n    for keyword in rain_keywords:\n        if keyword in weather_desc.lower():\n            return True\n    return False"
+        },
+        {
+          "step": 2,
+          "title": "アドバイス表示",
+          "description": "判定結果に基づいてメッセージを表示",
+          "code": "# 傘が必要か判定\nif need_umbrella(weather_desc):\n    print(\"\\n☔ 傘を持って行きましょう!\")\nelse:\n    print(\"\\n☀️ 傘は不要です!\")"
+        }
+      ],
+      "starterCode": "# モックデータ\nmock_weather_data = {\n    \"weather\": [{\"description\": \"晴れ\"}],\n    \"main\": {\"temp\": 25, \"humidity\": 60},\n    \"name\": \"Tokyo\"\n}\n\nweather_desc = mock_weather_data['weather'][0]['description']\ntemp = mock_weather_data['main']['temp']\nhumidity = mock_weather_data['main']['humidity']\n\nprint(f\"都市: Tokyo\")\nprint(f\"天気: {weather_desc}\")\nprint(f\"気温: {temp}°C\")\nprint(f\"湿度: {humidity}%\")\n\n# ここに傘判定機能を追加してください\n",
+      "solution": "def need_umbrella(weather_desc):\n    '''天気から傘が必要か判定'''\n    rain_keywords = ['雨', 'rain', '雷', 'thunder', 'drizzle']\n    for keyword in rain_keywords:\n        if keyword in weather_desc.lower():\n            return True\n    return False\n\ndef get_weather_emoji(weather_desc):\n    '''天気に応じた絵文字を返す'''\n    if '晴' in weather_desc or 'clear' in weather_desc.lower():\n        return '☀️'\n    elif '雨' in weather_desc or 'rain' in weather_desc.lower():\n        return '🌧️'\n    elif '曇' in weather_desc or 'cloud' in weather_desc.lower():\n        return '☁️'\n    elif '雪' in weather_desc or 'snow' in weather_desc.lower():\n        return '❄️'\n    else:\n        return '🌤️'\n\n# モックデータ\nmock_weather_data = {\n    'weather': [{'description': '晴れ'}],\n    'main': {'temp': 25, 'humidity': 60},\n    'name': 'Tokyo'\n}\n\nweather_desc = mock_weather_data['weather'][0]['description']\ntemp = mock_weather_data['main']['temp']\nhumidity = mock_weather_data['main']['humidity']\ncity = mock_weather_data['name']\n\nemoji = get_weather_emoji(weather_desc)\n\nprint('=' * 30)\nprint(f'{emoji} {city}の天気情報')\nprint('=' * 30)\nprint(f'天気: {weather_desc}')\nprint(f'気温: {temp}°C')\nprint(f'湿度: {humidity}%')\nprint('=' * 30)\n\n# 傘が必要か判定\nif need_umbrella(weather_desc):\n    print('☔ 傘を持って行きましょう!')\nelse:\n    print('☀️ 傘は不要です!')\nprint('=' * 30)",
+      "hints": [
+        "関数を使うとコードが整理されます",
+        "lower()で大文字小文字を統一して判定",
+        "絵文字を使うと見やすくなります"
+      ],
+      "keyPoints": [
+        "関数を使ってロジックを分離",
+        "ユーザーにとって分かりやすい表示",
+        "実用的な機能の追加"
+      ]
+    }
+  ],
+  "reflection": [
+    {
+      "id": "weather_reflection",
+      "title": "振り返りと改善",
+      "summary": {
+        "title": "作ったもの",
+        "description": "天気APIを使って、現在の天気情報を取得し、傘が必要かアドバイスするプログラムを作成しました。",
+        "achievements": [
+          "API連携の基本を習得",
+          "JSONデータの扱い方を学習",
+          "実用的なツールを完成"
+        ]
+      },
+      "beforeAfter": {
+        "before": {
+          "time": "毎朝2分",
+          "method": "手動でアプリを開いて確認",
+          "issues": ["手間がかかる", "忘れることがある"]
+        },
+        "after": {
+          "time": "0秒(自動)",
+          "method": "プログラムを実行するだけ",
+          "benefits": ["手間なし", "確実", "カスタマイズ可能"]
+        },
+        "improvement": "年間約12時間の節約!"
+      },
+      "furtherImprovements": {
+        "title": "さらなる改善アイデア",
+        "ideas": [
+          {
+            "idea": "毎朝自動実行",
+            "description": "cronやタスクスケジューラーで毎朝7時に自動実行",
+            "difficulty": "易",
+            "library": "schedule"
+          },
+          {
+            "idea": "複数都市対応",
+            "description": "自宅と会社など複数の場所の天気を一度に確認",
+            "difficulty": "易",
+            "library": "なし(繰り返し処理)"
+          },
+          {
+            "idea": "LINE通知",
+            "description": "LINEに天気情報を通知",
+            "difficulty": "中",
+            "library": "line-bot-sdk"
+          },
+          {
+            "idea": "週間天気予報",
+            "description": "今日だけでなく1週間の天気を表示",
+            "difficulty": "易",
+            "library": "なし(別のAPIエンドポイント)"
+          },
+          {
+            "idea": "服装アドバイス",
+            "description": "気温に応じた服装の提案",
+            "difficulty": "易",
+            "library": "なし(条件分岐)"
+          }
+        ]
+      },
+      "nextChallenge": {
+        "title": "次の課題を見つけよう",
+        "questions": [
+          "他にも毎日繰り返している作業はありませんか?",
+          "この技術を使って解決できる問題は?",
+          "周りの人が困っていることはありませんか?"
+        ],
+        "encouragement": "課題を見つける目を養うことが、エンジニアとして成長する第一歩です!"
+      }
+    }
+  ]
+}

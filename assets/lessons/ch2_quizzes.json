@@ -1,0 +1,30 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz_ch2_mcq_1",
+      "question": "次のコードを実行すると、何が表示されますか？",
+      "code": "print(10 + 5)",
+      "choices": [
+        { "id": "a", "text": "15" },
+        { "id": "b", "text": "10 + 5" },
+        { "id": "c", "text": "105" },
+        { "id": "d", "text": "エラーが出る" }
+      ],
+      "correctChoiceId": "a",
+      "explanation": "10 + 5は計算されて15になります。print()でその結果が表示されます。"
+    },
+    {
+      "id": "quiz_ch2_fill_1",
+      "description": "次のコードの空欄を埋めて、price（価格）に1000を代入してください。",
+      "codeTemplate": "______ = 1000\nprint(price)",
+      "blanks": [
+        {
+          "id": "blank1",
+          "correctAnswer": "price",
+          "hint": "変数の名前を書きます"
+        }
+      ],
+      "explanation": "変数名 = 値 という形で、変数に値を代入します。"
+    }
+  ]
+}

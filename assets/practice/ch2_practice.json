@@ -1,0 +1,93 @@
+{
+  "project_intros": [
+    {
+      "id": "intro_ch2",
+      "title": "お買い物計算アプリを作ろう",
+      "description": "数値計算を使って、商品の価格計算をするプログラムを作ります。",
+      "goals": [
+        "数値の計算ができる",
+        "変数を使った計算ができる",
+        "消費税の計算ができる"
+      ],
+      "finalOutput": "商品価格: 1000円\n消費税(10%): 100円\n合計金額: 1100円"
+    }
+  ],
+  "guided_steps": [
+    {
+      "id": "guided_ch2_price",
+      "title": "ステップ1: 商品価格を表示しよう",
+      "instruction": "変数priceに商品の価格を代入して、「商品価格: 〇〇円」と表示してみましょう。",
+      "hints": [
+        "数値は \"\" で囲まずに書きます",
+        "文字列と数値を連結するには str() で変換します"
+      ],
+      "starterCode": "# 商品価格を代入してください\nprice = \n\n# 価格を表示してください\n",
+      "solution": "# 商品価格を代入してください\nprice = 1000\n\n# 価格を表示してください\nprint(\"商品価格: \" + str(price) + \"円\")",
+      "expectedOutput": "商品価格: 1000円",
+      "checkType": "output_contains",
+      "checkValue": "商品価格"
+    },
+    {
+      "id": "guided_ch2_tax",
+      "title": "ステップ2: 消費税を計算しよう",
+      "instruction": "商品価格から消費税(10%)を計算して表示しましょう。tax = price * 0.1 で計算できます。",
+      "hints": [
+        "掛け算は * を使います",
+        "10%は 0.1 で表現できます",
+        "小数になる場合は int() で整数に変換できます"
+      ],
+      "starterCode": "price = 1000\nprint(\"商品価格: \" + str(price) + \"円\")\n\n# 消費税を計算してください\ntax = \n\n# 消費税を表示してください\n",
+      "solution": "price = 1000\nprint(\"商品価格: \" + str(price) + \"円\")\n\n# 消費税を計算してください\ntax = int(price * 0.1)\n\n# 消費税を表示してください\nprint(\"消費税(10%): \" + str(tax) + \"円\")",
+      "expectedOutput": "商品価格: 1000円\n消費税(10%): 100円",
+      "checkType": "output_contains",
+      "checkValue": "消費税"
+    }
+  ],
+  "challenges": [
+    {
+      "id": "challenge_ch2_discount",
+      "title": "チャレンジ: 割引計算を追加",
+      "description": "商品価格、割引額、消費税、最終金額を計算して表示してください。",
+      "instruction": "以下の計算をして表示してください:\n\n1. 元の価格: 2000円\n2. 割引: 300円\n3. 割引後の価格を計算\n4. 消費税(10%)を計算\n5. 最終金額(割引後+消費税)を計算\n\nすべての金額を表示してください。",
+      "starterCode": "# ここにコードを書いてください\n",
+      "testCases": [
+        {
+          "description": "元の価格が含まれている",
+          "checkType": "output_contains",
+          "expected": "2000"
+        },
+        {
+          "description": "割引額が含まれている",
+          "checkType": "output_contains",
+          "expected": "300"
+        },
+        {
+          "description": "最終金額(1870)が含まれている",
+          "checkType": "output_contains",
+          "expected": "1870"
+        }
+      ],
+      "solution": "original_price = 2000\ndiscount = 300\n\ndiscounted_price = original_price - discount\ntax = int(discounted_price * 0.1)\ntotal = discounted_price + tax\n\nprint(\"元の価格: \" + str(original_price) + \"円\")\nprint(\"割引: \" + str(discount) + \"円\")\nprint(\"割引後: \" + str(discounted_price) + \"円\")\nprint(\"消費税: \" + str(tax) + \"円\")\nprint(\"最終金額: \" + str(total) + \"円\")",
+      "hints": [
+        "引き算は - を使います",
+        "計算の順序: 元の価格 - 割引 = 割引後の価格",
+        "最終金額 = 割引後の価格 + 消費税"
+      ]
+    }
+  ],
+  "free_practices": [
+    {
+      "id": "free_ch2_calculator",
+      "title": "自由制作: オリジナル計算機",
+      "description": "学んだ計算を使って、便利な計算プログラムを作ってみましょう!",
+      "prompt": "以下のいずれか、または複数を組み合わせた計算プログラムを作ってください:\n\n・複数商品の合計金額計算\n・割引率(%)を使った計算\n・おつりの計算\n・ポイント還元の計算\n\n自由に工夫してみましょう!",
+      "starterCode": "# あなたのオリジナル計算プログラムを書いてください\n",
+      "exampleSolution": "# 複数商品のお買い物計算\nitem1 = 500\nitem2 = 800\nitem3 = 1200\n\nsubtotal = item1 + item2 + item3\nprint(\"小計: \" + str(subtotal) + \"円\")\n\n# 10%ポイント還元\npoints = int(subtotal * 0.1)\nprint(\"獲得ポイント: \" + str(points) + \"ポイント\")\n\n# 消費税込み\ntax = int(subtotal * 0.1)\ntotal = subtotal + tax\nprint(\"お支払い金額: \" + str(total) + \"円\")\n\n# おつり計算\npayment = 3000\nchange = payment - total\nprint(\"お預かり: \" + str(payment) + \"円\")\nprint(\"おつり: \" + str(change) + \"円\")",
+      "tips": [
+        "実際のレシートをイメージすると分かりやすいです",
+        "変数名を分かりやすくすると読みやすくなります",
+        "計算の順序に注意しましょう"
+      ]
+    }
+  ]
+}

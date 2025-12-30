@@ -1,0 +1,30 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz_ch6_mcq_1",
+      "question": "次のコードを実行すると、何が表示されますか？",
+      "code": "def greet():\n    print(\"こんにちは！\")\n\ngreet()",
+      "choices": [
+        { "id": "a", "text": "こんにちは！" },
+        { "id": "b", "text": "greet()" },
+        { "id": "c", "text": "def greet():" },
+        { "id": "d", "text": "何も表示されない" }
+      ],
+      "correctChoiceId": "a",
+      "explanation": "greet()関数を呼び出すと、関数内のprint文が実行されて「こんにちは！」と表示されます。"
+    },
+    {
+      "id": "quiz_ch6_fill_1",
+      "description": "次のコードの空欄を埋めて、2つの数を足した結果を返す関数を完成させてください。",
+      "codeTemplate": "def add(a, b):\n    ______ a + b\n\nresult = add(3, 5)\nprint(result)",
+      "blanks": [
+        {
+          "id": "blank1",
+          "correctAnswer": "return",
+          "hint": "関数から値を返すキーワードです"
+        }
+      ],
+      "explanation": "returnを使うと、関数から値を返すことができます。この場合、a + bの結果（8）が返されます。"
+    }
+  ]
+}
