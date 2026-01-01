@@ -1,0 +1,143 @@
+{
+  "problem_discovery": [{
+    "id": "ml_problem",
+    "title": "課題を発見しよう",
+    "scenario": {
+      "title": "データから未来を予測したい...",
+      "description": "営業部の高橋さんは、過去の売上データから来月の売上を予測したいと考えています。Excelで手作業で分析していますが、精度が低く、時間もかかります。",
+      "timeSpent": "月次分析に毎月5時間 = 年間60時間",
+      "painPoints": ["手作業での分析は時間がかかる", "予測精度が低い", "複数の要因を考慮できない", "データ量が増えると対応できない"]
+    },
+    "problemAnalysis": {
+      "question1": "この状況で一番困っていることは何でしょうか?",
+      "options": ["手作業の時間", "予測精度の低さ", "スケーラビリティ", "すべて"],
+      "correctAnswer": 3,
+      "explanation": "機械学習を使えば、これらすべてを解決し、高精度な予測が可能になります!"
+    },
+    "idealSolution": {
+      "title": "理想の状態は?",
+      "description": "過去のデータを学習して、自動的に未来を予測するシステムがあれば便利ですよね!",
+      "benefits": ["自動で高精度な予測", "複数要因を考慮可能", "データが増えても対応", "年間60時間の節約"],
+      "beforeAfter": {"before": "毎月5時間 × 手作業分析", "after": "数秒!AIが自動予測"}
+    },
+    "technicalFeasibility": {
+      "title": "技術で解決できる?",
+      "answer": "Yes! scikit-learnで簡単に実現",
+      "approach": ["データの前処理", "モデルの訓練", "予測の実行"],
+      "libraries": [
+        {"name": "scikit-learn", "purpose": "機械学習", "reason": "初心者でも使いやすい標準ライブラリ"},
+        {"name": "pandas", "purpose": "データ処理", "reason": "データ分析の必須ツール"},
+        {"name": "numpy", "purpose": "数値計算", "reason": "高速な配列操作"}
+      ]
+    }
+  }],
+  "planning": [{
+    "id": "ml_planning",
+    "title": "解決策を設計しよう",
+    "requirements": {
+      "title": "必要な機能を洗い出そう",
+      "features": [
+        {"feature": "データ読み込み", "detail": "CSVやExcelからデータを取得", "priority": "必須"},
+        {"feature": "データ前処理", "detail": "欠損値処理、正規化", "priority": "必須"},
+        {"feature": "モデル訓練", "detail": "機械学習モデルの学習", "priority": "必須"},
+        {"feature": "予測と評価", "detail": "未来の値を予測し精度評価", "priority": "必須"}
+      ]
+    },
+    "technicalChoice": {
+      "title": "技術選定",
+      "choices": [{
+        "aspect": "機械学習アルゴリズム",
+        "options": [
+          {"name": "線形回帰", "pros": ["シンプル", "解釈しやすい", "高速"], "cons": ["非線形関係に弱い"], "selected": true},
+          {"name": "ランダムフォレスト", "pros": ["高精度", "過学習しにくい"], "cons": ["計算コスト高"], "selected": false}
+        ]
+      }]
+    },
+    "architecture": {
+      "title": "機械学習パイプライン",
+      "flow": ["1. データ収集", "2. 前処理(クリーニング)", "3. 訓練/テスト分割", "4. モデル訓練", "5. 評価", "6. 予測"],
+      "dataFlow": "生データ → 前処理 → モデル訓練 → 予測結果"
+    },
+    "developmentPlan": {
+      "title": "開発ステップ",
+      "steps": [
+        {"step": 1, "title": "データ前処理", "estimate": "30分"},
+        {"step": 2, "title": "モデル訓練", "estimate": "35分"},
+        {"step": 3, "title": "予測と評価", "estimate": "35分"}
+      ],
+      "totalEstimate": "約100分"
+    }
+  }],
+  "implementation": [
+    {
+      "id": "ml_impl_1",
+      "title": "Step 1: データの準備と前処理",
+      "objective": "pandasでデータを読み込み、機械学習用に前処理しよう",
+      "explanation": "機械学習の成功はデータの質で決まります。まずはデータを読み込んで、クリーニングと前処理を行います。",
+      "instructions": [
+        {"step": 1, "title": "データ読み込み", "description": "pandasでCSVデータを読み込み", "code": "import pandas as pd\nimport numpy as np\n\ndf = pd.read_csv('sales_data.csv')\nprint(df.head())"},
+        {"step": 2, "title": "前処理", "description": "欠損値の処理と特徴量の選択", "code": "# 欠損値を平均値で埋める\ndf.fillna(df.mean(), inplace=True)\n\n# 特徴量とターゲットを分離\nX = df[['advertising', 'season', 'competitors']]\ny = df['sales']"}
+      ],
+      "starterCode": "import pandas as pd\nimport numpy as np\n\n# 売上データ（モックデータ）\ndata = {\n    'month': [1, 2, 3, 4, 5, 6, 7, 8],\n    'advertising': [1000, 1500, 1200, 1800, 2000, 2200, 1900, 2100],\n    'season': [1, 1, 2, 2, 3, 3, 4, 4],\n    'sales': [15000, 18000, 16500, 22000, 24000, 26000, 23000, 25000]\n}\n\n# データを前処理してください\n# ここにコードを書いてください\n",
+      "solution": "import pandas as pd\nimport numpy as np\n\n# 売上データ（モックデータ）\ndata = {\n    'month': [1, 2, 3, 4, 5, 6, 7, 8],\n    'advertising': [1000, 1500, 1200, 1800, 2000, 2200, 1900, 2100],\n    'season': [1, 1, 2, 2, 3, 3, 4, 4],\n    'sales': [15000, 18000, 16500, 22000, 24000, 26000, 23000, 25000]\n}\n\n# DataFrameに変換\ndf = pd.DataFrame(data)\n\nprint(\"📊 Original Data:\")\nprint(df)\nprint(f\"\\nShape: {df.shape}\")\nprint(f\"Columns: {list(df.columns)}\")\n\n# データの統計情報\nprint(\"\\n📈 Statistical Summary:\")\nprint(df.describe())\n\n# 欠損値チェック\nprint(\"\\n🔍 Missing Values:\")\nprint(df.isnull().sum())\n\n# 特徴量とターゲットを分離\nX = df[['advertising', 'season']]\ny = df['sales']\n\nprint(\"\\n✅ Data Preprocessing Complete!\")\nprint(f\"Features (X): {X.shape}\")\nprint(f\"Target (y): {y.shape}\")\nprint(\"\\n📝 Note: 機械学習では特徴量(X)からターゲット(y)を予測します\")",
+      "hints": ["pd.DataFrame()で辞書からDataFrame作成", "describe()で統計情報を確認", "isnull().sum()で欠損値をチェック", "特徴量(X)とターゲット(y)を分離"],
+      "keyPoints": ["データ前処理が機械学習の8割", "欠損値の処理は必須", "特徴量エンジニアリングが精度を左右", "データの統計的理解が重要"]
+    },
+    {
+      "id": "ml_impl_2",
+      "title": "Step 2: モデルの訓練",
+      "objective": "scikit-learnで機械学習モデルを訓練しよう",
+      "explanation": "データが準備できたら、機械学習モデルを訓練します。線形回帰モデルを使って、広告費と売上の関係を学習させます。",
+      "instructions": [
+        {"step": 1, "title": "データ分割", "description": "訓練用とテスト用にデータを分割", "code": "from sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)"},
+        {"step": 2, "title": "モデル訓練", "description": "線形回帰モデルを訓練", "code": "from sklearn.linear_model import LinearRegression\n\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)"}
+      ],
+      "starterCode": "import pandas as pd\nimport numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\n\n# データ準備\nX = np.array([[1000], [1500], [1200], [1800], [2000], [2200], [1900], [2100]])\ny = np.array([15000, 18000, 16500, 22000, 24000, 26000, 23000, 25000])\n\n# モデルを訓練してください\n# ここにコードを書いてください\n",
+      "solution": "import pandas as pd\nimport numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import r2_score, mean_squared_error\n\n# データ準備\nX = np.array([[1000], [1500], [1200], [1800], [2000], [2200], [1900], [2100]])\ny = np.array([15000, 18000, 16500, 22000, 24000, 26000, 23000, 25000])\n\nprint(\"🎓 Training Machine Learning Model...\\n\")\n\n# データを訓練用とテスト用に分割 (80% 訓練, 20% テスト)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\nprint(f\"Training set: {len(X_train)} samples\")\nprint(f\"Test set: {len(X_test)} samples\\n\")\n\n# 線形回帰モデルを作成\nmodel = LinearRegression()\n\n# モデルを訓練\nmodel.fit(X_train, y_train)\n\nprint(\"✅ Model Training Complete!\\n\")\n\n# モデルのパラメータ\nprint(\"📊 Model Parameters:\")\nprint(f\"Coefficient (slope): {model.coef_[0]:.2f}\")\nprint(f\"Intercept: {model.intercept_:.2f}\")\nprint(f\"\\nEquation: Sales = {model.coef_[0]:.2f} × Advertising + {model.intercept_:.2f}\")\n\n# テストデータで予測\ny_pred = model.predict(X_test)\n\n# モデル評価\nr2 = r2_score(y_test, y_pred)\nrmse = np.sqrt(mean_squared_error(y_test, y_pred))\n\nprint(f\"\\n📈 Model Performance:\")\nprint(f\"R² Score: {r2:.4f} (1.0が完璧)\")\nprint(f\"RMSE: ${rmse:.2f}\")\nprint(\"\\n📝 Note: R²が0.8以上なら良好なモデルです\")",
+      "hints": ["train_test_split()でデータ分割", "LinearRegression()でモデル作成", "fit()で訓練", "predict()で予測"],
+      "keyPoints": ["訓練/テスト分割で過学習を防ぐ", "fit()がモデルの学習フェーズ", "係数と切片が学習結果", "R²スコアで精度を評価"]
+    },
+    {
+      "id": "ml_impl_3",
+      "title": "Step 3: 予測と評価",
+      "objective": "訓練したモデルで未来を予測し、精度を評価しよう",
+      "explanation": "訓練したモデルを使って、新しいデータに対する予測を行います。モデルの精度も評価します。",
+      "instructions": [
+        {"step": 1, "title": "予測", "description": "新しいデータで予測", "code": "new_data = [[2500]]  # 広告費2500\nprediction = model.predict(new_data)\nprint(f'Predicted sales: ${prediction[0]:.2f}')"},
+        {"step": 2, "title": "評価", "description": "R²スコアとRMSEで評価", "code": "from sklearn.metrics import r2_score, mean_squared_error\n\nr2 = r2_score(y_test, y_pred)\nrmse = np.sqrt(mean_squared_error(y_test, y_pred))"}
+      ],
+      "starterCode": "import numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import r2_score, mean_squared_error\n\n# 訓練済みモデル（すでに訓練されたとする）\nX_train = np.array([[1000], [1500], [1800], [2000], [2200], [1900]])\ny_train = np.array([15000, 18000, 22000, 24000, 26000, 23000])\n\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n# 新しいデータで予測してください\n# - 広告費: $2500, $3000, $3500\n# ここにコードを書いてください\n",
+      "solution": "import numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import r2_score, mean_squared_error\nimport matplotlib.pyplot as plt\n\n# 訓練済みモデル\nX_train = np.array([[1000], [1500], [1800], [2000], [2200], [1900]])\ny_train = np.array([15000, 18000, 22000, 24000, 26000, 23000])\n\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\nprint(\"🔮 Making Predictions...\\n\")\n\n# 新しいデータで予測\nnew_advertising_budgets = np.array([[2500], [3000], [3500]])\npredictions = model.predict(new_advertising_budgets)\n\nprint(\"📊 Prediction Results:\")\nfor budget, pred in zip(new_advertising_budgets, predictions):\n    print(f\"Advertising: ${budget[0]:,} → Predicted Sales: ${pred:,.2f}\")\n\n# モデルの信頼性評価\ny_train_pred = model.predict(X_train)\nr2 = r2_score(y_train, y_train_pred)\nrmse = np.sqrt(mean_squared_error(y_train, y_train_pred))\n\nprint(f\"\\n📈 Model Reliability:\")\nprint(f\"R² Score: {r2:.4f}\")\nprint(f\"RMSE: ${rmse:,.2f}\")\n\nif r2 > 0.8:\n    print(\"✅ High accuracy model!\")\nelif r2 > 0.6:\n    print(\"⚠️  Moderate accuracy - consider more features\")\nelse:\n    print(\"❌ Low accuracy - need more data or features\")\n\nprint(\"\\n💡 Business Insights:\")\nslope = model.coef_[0]\nprint(f\"For every $1 increase in advertising, sales increase by ${slope:.2f}\")\nprint(f\"ROI: {(slope-1)*100:.1f}% return on advertising spend\")\n\nprint(\"\\n📝 Note: 機械学習で未来を予測し、データドリブンな意思決定が可能に!\")",
+      "hints": ["predict()で新しいデータの予測", "r2_score()で精度評価", "mean_squared_error()で誤差計算", "ビジネスインサイトを抽出"],
+      "keyPoints": ["予測は学習済みモデルで即座に実行", "評価指標で信頼性を判断", "ビジネス的な解釈が重要", "継続的な改善でモデルを進化"]
+    }
+  ],
+  "reflection": [{
+    "id": "ml_reflection",
+    "title": "振り返りと次のステップ",
+    "summary": {
+      "title": "何を学んだか",
+      "description": "機械学習の基礎を学び、データから未来を予測するモデルを構築しました",
+      "achievements": ["データ前処理の重要性を理解", "機械学習モデルの訓練", "予測と評価の実践", "ビジネスへの応用方法"]
+    },
+    "beforeAfter": {
+      "before": {"time": "毎月5時間", "method": "手作業で分析", "issues": ["時間がかかる", "精度が低い", "スケールしない"]},
+      "after": {"time": "数秒", "method": "AIが自動予測", "benefits": ["即座に予測", "高精度", "年間60時間節約"]},
+      "improvement": "手作業5時間 → AI予測で数秒！"
+    },
+    "furtherImprovements": {
+      "title": "さらなる改善アイデア",
+      "ideas": [
+        {"idea": "複数の特徴量を使用", "description": "より多くの要因を考慮して精度向上", "difficulty": "低", "library": "scikit-learn"},
+        {"idea": "時系列予測", "description": "過去のトレンドから未来を予測", "difficulty": "中", "library": "statsmodels"},
+        {"idea": "深層学習の活用", "description": "ニューラルネットワークで複雑なパターン学習", "difficulty": "高", "library": "TensorFlow"},
+        {"idea": "自動機械学習", "description": "最適なモデルを自動選択", "difficulty": "高", "library": "AutoML"}
+      ]
+    },
+    "nextChallenge": {
+      "title": "次のチャレンジ",
+      "questions": ["分類問題（スパム判定など）に挑戦してみましょう", "クラスタリングでデータをグループ分けしてみましょう", "実際のビジネスデータで予測モデルを作ってみましょう"],
+      "encouragement": "機械学習は現代ビジネスの必須スキルです。データから価値を引き出しましょう！"
+    }
+  }]
+}

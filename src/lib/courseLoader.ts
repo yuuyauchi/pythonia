@@ -5,6 +5,13 @@ import taskManagerCourse from '../../assets/courses/course_task_manager.json';
 import excelAnalyzerCourse from '../../assets/courses/course_excel_analyzer.json';
 import webScrapingCourse from '../../assets/courses/course_web_scraping.json';
 import chatbotCourse from '../../assets/courses/course_chatbot.json';
+import pdfGeneratorCourse from '../../assets/courses/course_pdf_generator.json';
+import emailAutomationCourse from '../../assets/courses/course_email_automation.json';
+import imageProcessorCourse from '../../assets/courses/course_image_processor.json';
+import flaskWebappCourse from '../../assets/courses/course_flask_webapp.json';
+import mlIntroCourse from '../../assets/courses/course_ml_intro.json';
+import apiServerCourse from '../../assets/courses/course_api_server.json';
+import dbWebappCourse from '../../assets/courses/course_db_webapp.json';
 
 // Types
 export type CourseCategory = 'beginner' | 'intermediate' | 'advanced';
@@ -169,6 +176,13 @@ const courseContentMap: Record<string, any> = {
   course_excel_analyzer: excelAnalyzerCourse,
   course_web_scraping: webScrapingCourse,
   course_chatbot: chatbotCourse,
+  course_pdf_generator: pdfGeneratorCourse,
+  course_email_automation: emailAutomationCourse,
+  course_image_processor: imageProcessorCourse,
+  course_flask_webapp: flaskWebappCourse,
+  course_ml_intro: mlIntroCourse,
+  course_api_server: apiServerCourse,
+  course_db_webapp: dbWebappCourse,
 };
 
 // Get all courses

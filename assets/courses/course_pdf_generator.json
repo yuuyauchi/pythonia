@@ -1,0 +1,327 @@
+{
+  "problem_discovery": [
+    {
+      "id": "pdf_problem",
+      "title": "課題を発見しよう",
+      "scenario": {
+        "title": "毎月の報告書作成が大変...",
+        "description": "営業部の山田さんは、毎月の売上報告書を手作業でWordやExcelから作成し、PDF化しています。フォーマットは毎回同じなのに、データを入力してレイアウトを整えて...この作業に毎月2時間もかかっています。",
+        "timeSpent": "毎月2時間 × 12ヶ月 = 年間24時間",
+        "painPoints": [
+          "同じフォーマットを毎回作る手間",
+          "データを手動で入力する時間",
+          "レイアウトが崩れることがある",
+          "複数のファイルを作成するのが面倒"
+        ]
+      },
+      "problemAnalysis": {
+        "question1": "この状況で一番困っていることは何でしょうか?",
+        "options": [
+          "手作業でデータを入力する時間",
+          "フォーマットの統一が難しい",
+          "複数ファイルの一括生成ができない",
+          "すべて"
+        ],
+        "correctAnswer": 3,
+        "explanation": "これらすべてをPythonで自動化できます!データさえあれば、一瞬でPDFを生成できます。"
+      },
+      "idealSolution": {
+        "title": "理想の状態は?",
+        "description": "データを用意するだけで、自動的に綺麗なPDFレポートが生成されたら便利ですよね!",
+        "benefits": [
+          "手作業での入力が不要",
+          "フォーマットが常に統一される",
+          "複数ファイルも一括生成可能",
+          "年間24時間の時間節約"
+        ],
+        "beforeAfter": {
+          "before": "毎月2時間 × 手作業で作成",
+          "after": "数秒!データから自動生成"
+        }
+      },
+      "technicalFeasibility": {
+        "title": "技術で解決できる?",
+        "answer": "Yes! Pythonで簡単に実現できます",
+        "approach": [
+          "テンプレートを定義",
+          "データを読み込み",
+          "PDF を自動生成"
+        ],
+        "libraries": [
+          {
+            "name": "reportlab",
+            "purpose": "PDFファイルの生成",
+            "reason": "Python標準的なPDF生成ライブラリ"
+          },
+          {
+            "name": "PyPDF2",
+            "purpose": "既存PDFの操作",
+            "reason": "PDFの結合・分割が簡単にできる"
+          }
+        ]
+      }
+    }
+  ],
+  "planning": [
+    {
+      "id": "pdf_planning",
+      "title": "解決策を設計しよう",
+      "requirements": {
+        "title": "必要な機能を洗い出そう",
+        "features": [
+          {
+            "feature": "PDF生成",
+            "detail": "データからPDFファイルを作成する",
+            "priority": "必須"
+          },
+          {
+            "feature": "テキスト・表の追加",
+            "detail": "タイトル、本文、表をPDFに配置",
+            "priority": "必須"
+          },
+          {
+            "feature": "複数ページ対応",
+            "detail": "長いレポートでも自動でページ分割",
+            "priority": "必須"
+          },
+          {
+            "feature": "スタイル設定",
+            "detail": "フォント、色、サイズなどのカスタマイズ",
+            "priority": "あれば便利"
+          }
+        ]
+      },
+      "technicalChoice": {
+        "title": "技術選定",
+        "choices": [
+          {
+            "aspect": "PDF生成方法",
+            "options": [
+              {
+                "name": "reportlab",
+                "pros": ["豊富な機能", "細かいレイアウト制御", "日本語対応"],
+                "cons": ["学習コストが少し高い"],
+                "selected": true
+              },
+              {
+                "name": "FPDF",
+                "pros": ["シンプル", "初心者向け"],
+                "cons": ["機能が限定的"],
+                "selected": false
+              }
+            ]
+          }
+        ]
+      },
+      "architecture": {
+        "title": "システム構成",
+        "flow": [
+          "1. データの準備（辞書形式）",
+          "2. PDFキャンバスの作成",
+          "3. テキスト・表の配置",
+          "4. PDFファイルの保存"
+        ],
+        "dataFlow": "データ → PDF生成関数 → PDFファイル出力"
+      },
+      "developmentPlan": {
+        "title": "開発ステップ",
+        "steps": [
+          {
+            "step": 1,
+            "title": "基本的なPDF生成",
+            "estimate": "15分"
+          },
+          {
+            "step": 2,
+            "title": "テキストと表の追加",
+            "estimate": "20分"
+          },
+          {
+            "step": 3,
+            "title": "スタイル設定と完成",
+            "estimate": "15分"
+          }
+        ],
+        "totalEstimate": "約50分"
+      }
+    }
+  ],
+  "implementation": [
+    {
+      "id": "pdf_impl_1",
+      "title": "Step 1: 基本的なPDF生成",
+      "objective": "reportlabを使って、シンプルなPDFファイルを生成しよう",
+      "explanation": "まずは最もシンプルなPDFを作成します。テキストを1つ追加して、PDFとして保存する基本を学びましょう。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "Canvasの作成",
+          "description": "PDFを描画するためのキャンバスを作成します",
+          "code": "from reportlab.pdfgen import canvas\n\n# PDFキャンバスを作成\npdf = canvas.Canvas(\"report.pdf\")\n\n# テキストを追加\npdf.drawString(100, 750, \"こんにちは、PDF!\")\n\n# 保存\npdf.save()\nprint(\"PDFを生成しました!\")"
+        },
+        {
+          "step": 2,
+          "title": "座標の理解",
+          "description": "PDFは左下が原点(0,0)です。x座標は右に、y座標は上に増加します"
+        }
+      ],
+      "starterCode": "# reportlabでPDFを生成してください\n# Note: 学習環境ではファイルは実際に保存されませんが、コードは動作します\n\n# ここにコードを書いてください\n",
+      "solution": "from reportlab.pdfgen import canvas\n\n# PDFキャンバスを作成\npdf = canvas.Canvas(\"sales_report.pdf\")\n\n# タイトルを追加\npdf.setFont(\"Helvetica-Bold\", 24)\npdf.drawString(100, 750, \"Sales Report\")\n\n# 本文を追加\npdf.setFont(\"Helvetica\", 12)\npdf.drawString(100, 700, \"Monthly Sales Summary\")\npdf.drawString(100, 680, \"Total Revenue: $50,000\")\n\n# 保存\npdf.save()\nprint(\"PDF generated successfully!\")\nprint(\"\\n📝 Note: 実際の環境では sales_report.pdf が作成されます\")",
+      "hints": [
+        "canvas.Canvas()でPDFオブジェクトを作成",
+        "drawString(x, y, text)でテキストを配置",
+        "setFont()でフォントとサイズを変更可能",
+        "save()で実際にファイルを保存"
+      ],
+      "keyPoints": [
+        "reportlabの基本はCanvasオブジェクト",
+        "座標系は左下が原点(0,0)",
+        "save()を忘れるとファイルが生成されない",
+        "フォントの設定で見た目をカスタマイズ"
+      ]
+    },
+    {
+      "id": "pdf_impl_2",
+      "title": "Step 2: データから表を生成",
+      "objective": "辞書やリストのデータを使って、PDFに表を追加しよう",
+      "explanation": "実際の業務では、データベースやExcelからデータを読み込んでPDFを生成します。ここではPythonの辞書データから表を作成します。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "データの準備",
+          "description": "売上データを辞書形式で用意します",
+          "code": "sales_data = [\n    {\"product\": \"Product A\", \"sales\": 15000},\n    {\"product\": \"Product B\", \"sales\": 23000},\n    {\"product\": \"Product C\", \"sales\": 12000}\n]"
+        },
+        {
+          "step": 2,
+          "title": "表の描画",
+          "description": "ループを使ってデータを1行ずつ配置します",
+          "code": "y_position = 600\nfor item in sales_data:\n    pdf.drawString(100, y_position, item[\"product\"])\n    pdf.drawString(300, y_position, f\"${item['sales']}\")\n    y_position -= 20"
+        }
+      ],
+      "starterCode": "from reportlab.pdfgen import canvas\n\n# 売上データ\nsales_data = [\n    {\"product\": \"Product A\", \"sales\": 15000},\n    {\"product\": \"Product B\", \"sales\": 23000},\n    {\"product\": \"Product C\", \"sales\": 12000}\n]\n\n# PDFを作成して、データを表にしてください\n# ここにコードを書いてください\n",
+      "solution": "from reportlab.pdfgen import canvas\n\n# 売上データ\nsales_data = [\n    {\"product\": \"Product A\", \"sales\": 15000},\n    {\"product\": \"Product B\", \"sales\": 23000},\n    {\"product\": \"Product C\", \"sales\": 12000}\n]\n\n# PDFキャンバスを作成\npdf = canvas.Canvas(\"sales_table.pdf\")\n\n# タイトル\npdf.setFont(\"Helvetica-Bold\", 20)\npdf.drawString(100, 750, \"Sales Report\")\n\n# 表のヘッダー\npdf.setFont(\"Helvetica-Bold\", 12)\npdf.drawString(100, 700, \"Product\")\npdf.drawString(300, 700, \"Sales\")\n\n# データ行\npdf.setFont(\"Helvetica\", 12)\ny_position = 680\ntotal = 0\n\nfor item in sales_data:\n    pdf.drawString(100, y_position, item[\"product\"])\n    pdf.drawString(300, y_position, f\"${item['sales']:,}\")\n    total += item[\"sales\"]\n    y_position -= 20\n\n# 合計\npdf.setFont(\"Helvetica-Bold\", 12)\ny_position -= 10\npdf.drawString(100, y_position, \"Total\")\npdf.drawString(300, y_position, f\"${total:,}\")\n\npdf.save()\nprint(\"Sales table PDF generated!\")\nprint(f\"Total sales: ${total:,}\")",
+      "hints": [
+        "y_position変数で行の位置を管理",
+        "forループでデータを1行ずつ処理",
+        "f-stringでフォーマットを整える",
+        "合計値も計算して表示"
+      ],
+      "keyPoints": [
+        "データ駆動でPDFを生成",
+        "y座標を調整してループ処理",
+        "ヘッダーと本文でフォントを変更",
+        "集計値も同時に計算可能"
+      ]
+    },
+    {
+      "id": "pdf_impl_3",
+      "title": "Step 3: 完成版レポート生成",
+      "objective": "スタイルを整えて、実用的なPDFレポートを完成させよう",
+      "explanation": "最後に、線や色を追加して見栄えの良いレポートに仕上げます。実務で使えるレベルのPDFを生成しましょう。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "線の追加",
+          "description": "表の区切り線を引いて見やすくします",
+          "code": "pdf.line(90, 705, 400, 705)  # ヘッダー下の線\npdf.line(90, y_position + 30, 400, y_position + 30)  # 合計上の線"
+        },
+        {
+          "step": 2,
+          "title": "色の設定",
+          "description": "タイトルやヘッダーに色を付けます",
+          "code": "pdf.setFillColorRGB(0.2, 0.4, 0.8)  # 青色\npdf.drawString(100, 750, \"Sales Report\")"
+        }
+      ],
+      "starterCode": "from reportlab.pdfgen import canvas\n\n# 月次レポートデータ\nreport_data = {\n    \"title\": \"Monthly Sales Report - December 2024\",\n    \"items\": [\n        {\"product\": \"Laptop\", \"quantity\": 45, \"price\": 1200, \"total\": 54000},\n        {\"product\": \"Mouse\", \"quantity\": 120, \"price\": 25, \"total\": 3000},\n        {\"product\": \"Keyboard\", \"quantity\": 80, \"price\": 75, \"total\": 6000}\n    ],\n    \"summary\": \"Strong performance in Q4\"\n}\n\n# 綺麗なレポートPDFを作成してください\n# ここにコードを書いてください\n",
+      "solution": "from reportlab.pdfgen import canvas\n\n# 月次レポートデータ\nreport_data = {\n    \"title\": \"Monthly Sales Report - December 2024\",\n    \"items\": [\n        {\"product\": \"Laptop\", \"quantity\": 45, \"price\": 1200, \"total\": 54000},\n        {\"product\": \"Mouse\", \"quantity\": 120, \"price\": 25, \"total\": 3000},\n        {\"product\": \"Keyboard\", \"quantity\": 80, \"price\": 75, \"total\": 6000}\n    ],\n    \"summary\": \"Strong performance in Q4\"\n}\n\npdf = canvas.Canvas(\"monthly_report.pdf\")\n\n# タイトル（青色）\npdf.setFillColorRGB(0.2, 0.4, 0.8)\npdf.setFont(\"Helvetica-Bold\", 22)\npdf.drawString(100, 750, report_data[\"title\"])\n\n# 表のヘッダー\npdf.setFillColorRGB(0, 0, 0)\npdf.setFont(\"Helvetica-Bold\", 11)\npdf.drawString(100, 700, \"Product\")\npdf.drawString(250, 700, \"Qty\")\npdf.drawString(320, 700, \"Price\")\npdf.drawString(400, 700, \"Total\")\npdf.line(90, 695, 500, 695)\n\n# データ行\npdf.setFont(\"Helvetica\", 11)\ny_pos = 675\ngrand_total = 0\n\nfor item in report_data[\"items\"]:\n    pdf.drawString(100, y_pos, item[\"product\"])\n    pdf.drawString(250, y_pos, str(item[\"quantity\"]))\n    pdf.drawString(320, y_pos, f\"${item['price']:,}\")\n    pdf.drawString(400, y_pos, f\"${item['total']:,}\")\n    grand_total += item[\"total\"]\n    y_pos -= 22\n\n# 合計行\npdf.line(90, y_pos + 15, 500, y_pos + 15)\ny_pos -= 10\npdf.setFont(\"Helvetica-Bold\", 11)\npdf.setFillColorRGB(0.8, 0, 0)\npdf.drawString(320, y_pos, \"Grand Total:\")\npdf.drawString(400, y_pos, f\"${grand_total:,}\")\n\n# サマリー\npdf.setFillColorRGB(0, 0, 0)\npdf.setFont(\"Helvetica-Oblique\", 10)\npdf.drawString(100, y_pos - 30, f\"Summary: {report_data['summary']}\")\n\npdf.save()\nprint(\"✅ Professional PDF report generated!\")\nprint(f\"📊 Total revenue: ${grand_total:,}\")",
+      "hints": [
+        "setFillColorRGB()で色を設定（R,G,B: 0-1の範囲）",
+        "line()で線を引く（x1, y1, x2, y2）",
+        "フォントスタイル: Helvetica, Helvetica-Bold, Helvetica-Oblique",
+        "数値は:,でカンマ区切りに"
+      ],
+      "keyPoints": [
+        "色と線で見栄えが大きく向上",
+        "実務レベルのレポートが自動生成可能",
+        "データさえあれば何度でも再生成できる",
+        "フォーマットの統一性が保たれる"
+      ]
+    }
+  ],
+  "reflection": [
+    {
+      "id": "pdf_reflection",
+      "title": "振り返りと次のステップ",
+      "summary": {
+        "title": "何を学んだか",
+        "description": "PDF自動生成ツールを作成し、定型レポートの作成を自動化しました",
+        "achievements": [
+          "reportlabでPDFを生成できるようになった",
+          "データから表を自動生成できるようになった",
+          "スタイルを整えて実用的なレポートを作成できた",
+          "手作業の時間を大幅に削減する方法を学んだ"
+        ]
+      },
+      "beforeAfter": {
+        "before": {
+          "time": "毎月2時間",
+          "method": "WordやExcelで手作業",
+          "issues": [
+            "データ入力に時間がかかる",
+            "フォーマットが統一されない",
+            "ミスが発生しやすい"
+          ]
+        },
+        "after": {
+          "time": "数秒",
+          "method": "Pythonで自動生成",
+          "benefits": [
+            "データを用意するだけで完成",
+            "フォーマットが常に統一",
+            "年間24時間の節約"
+          ]
+        },
+        "improvement": "手作業2時間 → 自動化で数秒！約99%の時間削減"
+      },
+      "furtherImprovements": {
+        "title": "さらなる改善アイデア",
+        "ideas": [
+          {
+            "idea": "Excelファイルから自動読み込み",
+            "description": "openpyxlでExcelデータを読み込んで自動生成",
+            "difficulty": "中",
+            "library": "openpyxl"
+          },
+          {
+            "idea": "グラフの埋め込み",
+            "description": "matplotlibでグラフを生成してPDFに挿入",
+            "difficulty": "中",
+            "library": "matplotlib"
+          },
+          {
+            "idea": "メール自動送信",
+            "description": "生成したPDFを自動でメール送信",
+            "difficulty": "中",
+            "library": "smtplib"
+          },
+          {
+            "idea": "テンプレート機能",
+            "description": "複数のレポート形式に対応",
+            "difficulty": "高",
+            "library": "reportlab"
+          }
+        ]
+      },
+      "nextChallenge": {
+        "title": "次のチャレンジ",
+        "questions": [
+          "会社の定型レポートを自動化できないか考えてみましょう",
+          "データベースからデータを取得してPDFを生成してみましょう",
+          "複数のPDFを結合するツールを作ってみましょう"
+        ],
+        "encouragement": "PDF生成スキルは実務で非常に役立ちます。ぜひ実際の業務で活用してみてください！"
+      }
+    }
+  ]
+}

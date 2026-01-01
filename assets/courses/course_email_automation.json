@@ -1,0 +1,322 @@
+{
+  "problem_discovery": [
+    {
+      "id": "email_problem",
+      "title": "課題を発見しよう",
+      "scenario": {
+        "title": "同じメールを何度も送信...",
+        "description": "人事部の佐藤さんは、新入社員への案内メールを一人ずつ手作業で送信しています。本文はほぼ同じなのに、名前を変更して送信...30人分送るのに1時間かかります。",
+        "timeSpent": "1回1時間 × 年4回 = 年間4時間",
+        "painPoints": [
+          "同じ内容のメールを何度も作成",
+          "名前を間違えるリスク",
+          "送信漏れが発生する可能性",
+          "添付ファイルの付け忘れ"
+        ]
+      },
+      "problemAnalysis": {
+        "question1": "この状況で一番困っていることは何でしょうか?",
+        "options": [
+          "手作業での入力が面倒",
+          "ミスが発生しやすい",
+          "時間がかかりすぎる",
+          "すべて"
+        ],
+        "correctAnswer": 3,
+        "explanation": "Pythonで自動化すれば、これらすべての問題が解決します!"
+      },
+      "idealSolution": {
+        "title": "理想の状態は?",
+        "description": "リストを用意するだけで、自動的に全員にメールが送信されたら便利ですよね!",
+        "benefits": [
+          "一括送信で時間節約",
+          "ミスがなくなる",
+          "送信漏れがない",
+          "添付ファイルも自動で添付"
+        ],
+        "beforeAfter": {
+          "before": "1時間 × 手作業で一人ずつ送信",
+          "after": "数秒!リストから自動送信"
+        }
+      },
+      "technicalFeasibility": {
+        "title": "技術で解決できる?",
+        "answer": "Yes! Python標準ライブラリで実現可能",
+        "approach": [
+          "受信者リストの準備",
+          "メールテンプレートの作成",
+          "自動送信"
+        ],
+        "libraries": [
+          {
+            "name": "smtplib",
+            "purpose": "メール送信",
+            "reason": "Python標準ライブラリで簡単に使える"
+          },
+          {
+            "name": "email",
+            "purpose": "メールメッセージの作成",
+            "reason": "添付ファイルやHTML対応"
+          }
+        ]
+      }
+    }
+  ],
+  "planning": [
+    {
+      "id": "email_planning",
+      "title": "解決策を設計しよう",
+      "requirements": {
+        "title": "必要な機能を洗い出そう",
+        "features": [
+          {
+            "feature": "テンプレートメール作成",
+            "detail": "名前などを変数化したメールテンプレート",
+            "priority": "必須"
+          },
+          {
+            "feature": "一括送信機能",
+            "detail": "リストからループで自動送信",
+            "priority": "必須"
+          },
+          {
+            "feature": "添付ファイル対応",
+            "detail": "PDFなどのファイルを自動添付",
+            "priority": "あれば便利"
+          },
+          {
+            "feature": "送信ログ",
+            "detail": "誰に送信したかを記録",
+            "priority": "あれば便利"
+          }
+        ]
+      },
+      "technicalChoice": {
+        "title": "技術選定",
+        "choices": [
+          {
+            "aspect": "メール送信方法",
+            "options": [
+              {
+                "name": "smtplib (標準)",
+                "pros": ["追加インストール不要", "シンプル", "安定"],
+                "cons": ["設定が少し複雑"],
+                "selected": true
+              },
+              {
+                "name": "外部サービスAPI",
+                "pros": ["高機能", "送信成功率高い"],
+                "cons": ["コストがかかる", "API keyが必要"],
+                "selected": false
+              }
+            ]
+          }
+        ]
+      },
+      "architecture": {
+        "title": "システム構成",
+        "flow": [
+          "1. 受信者リストの読み込み",
+          "2. 各受信者用にメール作成",
+          "3. SMTPサーバーに接続",
+          "4. メール送信"
+        ],
+        "dataFlow": "受信者リスト → メール生成 → SMTP送信 → ログ記録"
+      },
+      "developmentPlan": {
+        "title": "開発ステップ",
+        "steps": [
+          {
+            "step": 1,
+            "title": "メールオブジェクトの作成",
+            "estimate": "15分"
+          },
+          {
+            "step": 2,
+            "title": "一括送信機能の実装",
+            "estimate": "20分"
+          },
+          {
+            "step": 3,
+            "title": "添付ファイル機能の追加",
+            "estimate": "15分"
+          }
+        ],
+        "totalEstimate": "約50分"
+      }
+    }
+  ],
+  "implementation": [
+    {
+      "id": "email_impl_1",
+      "title": "Step 1: メールメッセージの作成",
+      "objective": "emailライブラリを使って、基本的なメールメッセージを作成しよう",
+      "explanation": "まずは1通のメールメッセージを作成します。件名、本文、送信者、受信者を設定する基本を学びましょう。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "メールメッセージの構造",
+          "description": "emailライブラリでメールオブジェクトを作成します",
+          "code": "from email.message import EmailMessage\n\nmsg = EmailMessage()\nmsg['Subject'] = '件名'\nmsg['From'] = 'sender@example.com'\nmsg['To'] = 'recipient@example.com'\nmsg.set_content('メール本文')"
+        }
+      ],
+      "starterCode": "# メールメッセージを作成してください\n# Note: 学習環境では実際には送信されません\n\n# ここにコードを書いてください\n",
+      "solution": "from email.message import EmailMessage\n\n# メールメッセージを作成\nmsg = EmailMessage()\nmsg['Subject'] = 'Welcome to Our Company!'\nmsg['From'] = 'hr@company.com'\nmsg['To'] = 'newemployee@company.com'\n\n# 本文\nbody = \"\"\"\nDear New Employee,\n\nWelcome to our company!\nWe are excited to have you on board.\n\nBest regards,\nHR Department\n\"\"\"\n\nmsg.set_content(body)\n\nprint(\"Email message created:\")\nprint(f\"Subject: {msg['Subject']}\")\nprint(f\"From: {msg['From']}\")\nprint(f\"To: {msg['To']}\")\nprint(f\"\\nBody:\\n{msg.get_content()}\")\nprint(\"\\n📝 Note: 実際の環境ではSMTPサーバー経由で送信します\")",
+      "hints": [
+        "EmailMessageクラスでメールオブジェクトを作成",
+        "辞書のようにヘッダーを設定: msg['Subject'] = ...",
+        "set_content()で本文を設定",
+        "複数行の文字列には三重引用符を使用"
+      ],
+      "keyPoints": [
+        "EmailMessageは辞書のように扱える",
+        "Subject, From, Toは必須ヘッダー",
+        "本文はset_content()で設定",
+        "実際の送信にはSMTPサーバーが必要"
+      ]
+    },
+    {
+      "id": "email_impl_2",
+      "title": "Step 2: テンプレートと一括送信",
+      "objective": "リストから複数の受信者に、カスタマイズされたメールを送信しよう",
+      "explanation": "実際の業務では複数人に送信します。名前など一部だけ変更したメールを、リストから自動生成して送信します。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "受信者リストの準備",
+          "description": "送信先のリストを作成します",
+          "code": "recipients = [\n    {'name': '山田太郎', 'email': 'yamada@example.com'},\n    {'name': '佐藤花子', 'email': 'sato@example.com'}\n]"
+        },
+        {
+          "step": 2,
+          "title": "ループで送信",
+          "description": "各受信者用にメッセージをカスタマイズ",
+          "code": "for person in recipients:\n    msg = EmailMessage()\n    msg['To'] = person['email']\n    msg.set_content(f\"Dear {person['name']},\\n\\nWelcome!\")\n    # send_email(msg)  # 実際の送信"
+        }
+      ],
+      "starterCode": "from email.message import EmailMessage\n\n# 新入社員リスト\nrecipients = [\n    {'name': 'Taro Yamada', 'email': 'yamada@company.com', 'dept': 'Sales'},\n    {'name': 'Hanako Sato', 'email': 'sato@company.com', 'dept': 'Engineering'},\n    {'name': 'Ken Tanaka', 'email': 'tanaka@company.com', 'dept': 'Marketing'}\n]\n\n# 各受信者にカスタマイズされたメールを作成してください\n# ここにコードを書いてください\n",
+      "solution": "from email.message import EmailMessage\n\n# 新入社員リスト\nrecipients = [\n    {'name': 'Taro Yamada', 'email': 'yamada@company.com', 'dept': 'Sales'},\n    {'name': 'Hanako Sato', 'email': 'sato@company.com', 'dept': 'Engineering'},\n    {'name': 'Ken Tanaka', 'email': 'tanaka@company.com', 'dept': 'Marketing'}\n]\n\nprint(\"Sending personalized emails...\\n\")\n\n# 各受信者にカスタマイズされたメールを作成\nfor person in recipients:\n    msg = EmailMessage()\n    msg['Subject'] = 'Welcome to Our Company!'\n    msg['From'] = 'hr@company.com'\n    msg['To'] = person['email']\n    \n    # パーソナライズされた本文\n    body = f\"\"\"\nDear {person['name']},\n\nWelcome to the {person['dept']} department!\n\nWe are excited to have you join our team.\nYour orientation will begin next Monday at 9:00 AM.\n\nBest regards,\nHR Department\n\"\"\"\n    \n    msg.set_content(body)\n    \n    # 送信ログ表示\n    print(f\"✉️  Prepared email for {person['name']} ({person['email']})\")\n    print(f\"   Department: {person['dept']}\")\n\nprint(f\"\\n✅ {len(recipients)} emails prepared!\")\nprint(\"📝 Note: 実際の環境ではSMTPサーバー経由で自動送信されます\")",
+      "hints": [
+        "forループで各受信者を処理",
+        "f-stringで名前や部署を埋め込み",
+        "person['name'], person['email']でデータにアクセス",
+        "実務ではここでSMTP送信を実行"
+      ],
+      "keyPoints": [
+        "リスト駆動でメールを自動生成",
+        "f-stringでパーソナライゼーション",
+        "ループ処理で効率的に一括作成",
+        "実務では送信ログを記録すると良い"
+      ]
+    },
+    {
+      "id": "email_impl_3",
+      "title": "Step 3: 添付ファイルの追加",
+      "objective": "PDFなどのファイルをメールに添付する機能を追加しよう",
+      "explanation": "実務では、資料やレポートを添付して送ることが多いです。add_attachment()を使って、ファイルを添付する方法を学びましょう。",
+      "instructions": [
+        {
+          "step": 1,
+          "title": "ファイルの読み込み",
+          "description": "バイナリモードでファイルを読み込みます",
+          "code": "with open('document.pdf', 'rb') as f:\n    file_data = f.read()"
+        },
+        {
+          "step": 2,
+          "title": "添付ファイルの追加",
+          "description": "add_attachment()でファイルを添付",
+          "code": "msg.add_attachment(file_data,\n                   maintype='application',\n                   subtype='pdf',\n                   filename='document.pdf')"
+        }
+      ],
+      "starterCode": "from email.message import EmailMessage\nimport io\n\n# メール送信先\nrecipient = {'name': 'John Doe', 'email': 'john@company.com'}\n\n# 添付するファイル（実際はファイルから読み込み）\n# ここではモックデータを使用\nfile_content = b\"PDF file content here\"\n\n# 添付ファイル付きメールを作成してください\n# ここにコードを書いてください\n",
+      "solution": "from email.message import EmailMessage\nimport io\n\n# メール送信先\nrecipient = {'name': 'John Doe', 'email': 'john@company.com'}\n\n# 添付するファイル（実際はファイルから読み込み）\nfile_content = b\"PDF file content: Welcome Guide\"\n\n# メールメッセージを作成\nmsg = EmailMessage()\nmsg['Subject'] = 'Welcome Package - Please Review'\nmsg['From'] = 'hr@company.com'\nmsg['To'] = recipient['email']\n\n# 本文\nbody = f\"\"\"\nDear {recipient['name']},\n\nPlease find attached your welcome package.\n\nIf you have any questions, feel free to reach out.\n\nBest regards,\nHR Team\n\"\"\"\n\nmsg.set_content(body)\n\n# 添付ファイルを追加\nmsg.add_attachment(file_content,\n                   maintype='application',\n                   subtype='pdf',\n                   filename='welcome_guide.pdf')\n\nprint(\"Email with attachment created:\")\nprint(f\"To: {msg['To']}\")\nprint(f\"Subject: {msg['Subject']}\")\nprint(f\"\\nAttachments:\")\nfor part in msg.iter_attachments():\n    print(f\"  - {part.get_filename()}\")\n\nprint(\"\\n✅ Email with attachment ready to send!\")\nprint(\"📝 Note: 実際の環境では添付ファイル付きで送信されます\")",
+      "hints": [
+        "ファイルはバイナリモード('rb')で読み込み",
+        "add_attachment()で添付ファイルを追加",
+        "maintype/subtypeでファイルタイプを指定",
+        "複数ファイルも順次add_attachment()で追加可能"
+      ],
+      "keyPoints": [
+        "添付ファイルはバイナリデータとして扱う",
+        "MIMEタイプの指定が重要",
+        "複数ファイルの添付も可能",
+        "実務では送信前にファイルサイズをチェック"
+      ]
+    }
+  ],
+  "reflection": [
+    {
+      "id": "email_reflection",
+      "title": "振り返りと次のステップ",
+      "summary": {
+        "title": "何を学んだか",
+        "description": "メール送信自動化ツールを作成し、定型メールの一括送信を実現しました",
+        "achievements": [
+          "Pythonでメールメッセージを作成できるようになった",
+          "テンプレートを使ったパーソナライゼーション",
+          "添付ファイル付きメールの作成",
+          "一括送信で時間を大幅削減"
+        ]
+      },
+      "beforeAfter": {
+        "before": {
+          "time": "1時間",
+          "method": "手作業で一人ずつ送信",
+          "issues": [
+            "名前の入力ミス",
+            "送信漏れの可能性",
+            "添付ファイルの付け忘れ"
+          ]
+        },
+        "after": {
+          "time": "数秒",
+          "method": "Pythonで自動送信",
+          "benefits": [
+            "ミスがなくなる",
+            "全員に確実に送信",
+            "年間4時間の節約"
+          ]
+        },
+        "improvement": "手作業1時間 → 自動化で数秒！約99%の時間削減"
+      },
+      "furtherImprovements": {
+        "title": "さらなる改善アイデア",
+        "ideas": [
+          {
+            "idea": "Excelから受信者リスト読み込み",
+            "description": "openpyxlでExcelファイルから自動読み込み",
+            "difficulty": "低",
+            "library": "openpyxl"
+          },
+          {
+            "idea": "HTMLメール対応",
+            "description": "リッチなデザインのメールを送信",
+            "difficulty": "中",
+            "library": "email.mime"
+          },
+          {
+            "idea": "送信スケジュール機能",
+            "description": "指定時刻に自動送信",
+            "difficulty": "中",
+            "library": "schedule"
+          },
+          {
+            "idea": "開封確認機能",
+            "description": "メールが開封されたか追跡",
+            "difficulty": "高",
+            "library": "外部API"
+          }
+        ]
+      },
+      "nextChallenge": {
+        "title": "次のチャレンジ",
+        "questions": [
+          "定期的に送るメールを自動化できないか考えてみましょう",
+          "Excelの顧客リストからメールを送信してみましょう",
+          "レポートPDFを自動生成して添付するツールを作ってみましょう"
+        ],
+        "encouragement": "メール自動化は業務効率化の第一歩です。ぜひ実際の業務で活用してみてください！"
+      }
+    }
+  ]
+}

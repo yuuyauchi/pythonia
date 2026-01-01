@@ -1,0 +1,1 @@
+npm run ios実行時にipad pro 13-inchでアプリを起動したいです。

@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import { colors, typography, spacing } from '../../constants/theme';
 import { useSubscriptionStore, type SubscriptionPlan } from '../../store/subscriptionStore';
+import { useInAppPurchase } from '../../lib/useInAppPurchase';
+import { PRODUCT_IDS } from '../../lib/iapService.mock';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type Props = {
@@ -17,89 +19,64 @@ type Props = {
 };
 
 export default function SubscriptionScreen({ navigation }: Props) {
-  const { subscribe, isActive, plan } = useSubscriptionStore();
+  const { isActive, plan } = useSubscriptionStore();
+  const {
+    products,
+    isLoading,
+    isPurchasing,
+    isRestoring,
+    purchaseProduct,
+    restorePurchases,
+  } = useInAppPurchase();
 
-  const plans = [
-    {
-      id: 'basic' as SubscriptionPlan,
-      name: 'ベーシック',
-      price: 500,
-      features: ['初級コース3つまで', '基本的なライブラリ学習'],
-      recommended: false,
-    },
-    {
-      id: 'standard' as SubscriptionPlan,
-      name: 'スタンダード',
-      price: 1000,
-      features: ['全コースアクセス', '新コース毎月追加', 'コミュニティ参加'],
-      recommended: true,
-    },
-    {
-      id: 'premium' as SubscriptionPlan,
-      name: 'プレミアム',
-      price: 2000,
-      features: [
-        '全コース + プロジェクト添削',
-        '個別質問対応(月3回)',
-        '先行アクセス',
-      ],
-      recommended: false,
-    },
-  ];
+  const purchaseOption = {
+    id: 'premium' as SubscriptionPlan,
+    productId: PRODUCT_IDS.ALL_CONTENT,
+    name: '全コンテンツアクセス',
+    price: 1000,
+    features: [
+      '全13コース完全アクセス',
+      '初級から上級まで学び放題',
+      'Web開発・機械学習・DB操作',
+      '進捗管理・バッジ機能',
+      '買い切り - 追加課金なし',
+    ],
+  };
 
-  const handleSubscribe = (selectedPlan: SubscriptionPlan) => {
-    Alert.alert(
-      `${selectedPlan}プランに登録`,
-      'デモモードのため、実際の決済は行われません。登録しますか?',
-      [
-        { text: 'キャンセル', style: 'cancel' },
-        {
-          text: '登録する',
-          onPress: () => {
-            subscribe(selectedPlan);
-            Alert.alert(
-              '登録完了!',
-              `${selectedPlan}プランに登録されました。全てのコースをお楽しみください!`,
-              [
-                {
-                  text: 'OK',
-                  onPress: () => navigation.goBack(),
-                },
-              ]
-            );
-          },
-        },
-      ]
-    );
+  const handleSubscribe = async (productId: string) => {
+    if (isPurchasing) return;
+    
+    await purchaseProduct(productId as any);
+  };
+
+  const handleRestore = async () => {
+    if (isRestoring) return;
+    
+    await restorePurchases();
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.header}>
-          <Text style={styles.title}>プレミアムプラン</Text>
+          <Text style={styles.title}>全コンテンツアクセス</Text>
           <Text style={styles.subtitle}>
-            実践的な開発スキルを身につけよう
+            ¥1,000買い切りですべてのコースが学び放題
           </Text>
         </View>
 
         {isActive && (
           <View style={styles.currentPlanBanner}>
             <Text style={styles.currentPlanText}>
-              現在のプラン: {plan}
+              購入済み - すべてのコンテンツにアクセスできます
             </Text>
           </View>
         )}
 
         <View style={styles.benefitsSection}>
-          <Text style={styles.sectionTitle}>プレミアムの特典</Text>
+          <Text style={styles.sectionTitle}>含まれる内容</Text>
           <View style={styles.benefitsList}>
-            {[
-              '実務で使えるライブラリを習得',
-              '課題発見から実装までの実践',
-              '毎月新しいコースを追加',
-              '進捗管理とプロジェクト記録',
-            ].map((benefit, index) => (
+            {purchaseOption.features.map((benefit, index) => (
               <View key={index} style={styles.benefitItem}>
                 <Text style={styles.benefitIcon}>✓</Text>
                 <Text style={styles.benefitText}>{benefit}</Text>
@@ -109,55 +86,47 @@ export default function SubscriptionScreen({ navigation }: Props) {
         </View>
 
         <View style={styles.plansSection}>
-          <Text style={styles.sectionTitle}>プランを選択</Text>
-          {plans.map((planItem) => (
-            <View
-              key={planItem.id}
-              style={[
-                styles.planCard,
-                planItem.recommended && styles.recommendedPlan,
-              ]}
-            >
-              {planItem.recommended && (
-                <View style={styles.recommendedBadge}>
-                  <Text style={styles.recommendedText}>おすすめ</Text>
-                </View>
-              )}
-              <Text style={styles.planName}>{planItem.name}</Text>
-              <View style={styles.priceContainer}>
-                <Text style={styles.price}>¥{planItem.price}</Text>
-                <Text style={styles.priceUnit}>/月</Text>
-              </View>
-              <View style={styles.featuresList}>
-                {planItem.features.map((feature, index) => (
-                  <View key={index} style={styles.featureItem}>
-                    <Text style={styles.featureBullet}>•</Text>
-                    <Text style={styles.featureText}>{feature}</Text>
-                  </View>
-                ))}
-              </View>
-              <TouchableOpacity
-                style={[
-                  styles.subscribeButton,
-                  planItem.recommended && styles.subscribeButtonRecommended,
-                  isActive &&
-                    plan === planItem.id &&
-                    styles.subscribeButtonDisabled,
-                ]}
-                onPress={() => handleSubscribe(planItem.id)}
-                disabled={isActive && plan === planItem.id}
-              >
-                <Text
-                  style={[
-                    styles.subscribeButtonText,
-                    planItem.recommended && styles.subscribeButtonTextRecommended,
-                  ]}
-                >
-                  {isActive && plan === planItem.id ? '加入中' : '始める'}
-                </Text>
-              </TouchableOpacity>
+          <View style={styles.planCard}>
+            <Text style={styles.planName}>{purchaseOption.name}</Text>
+            <View style={styles.priceContainer}>
+              <Text style={styles.price}>¥{purchaseOption.price}</Text>
+              <Text style={styles.priceUnit}>買い切り</Text>
             </View>
-          ))}
+            <TouchableOpacity
+              style={[
+                styles.subscribeButton,
+                styles.subscribeButtonRecommended,
+                (isActive || isPurchasing) && styles.subscribeButtonDisabled,
+              ]}
+              onPress={() => handleSubscribe(purchaseOption.productId)}
+              disabled={isActive || isPurchasing}
+            >
+              <Text
+                style={[
+                  styles.subscribeButtonText,
+                  styles.subscribeButtonTextRecommended,
+                ]}
+              >
+                {isPurchasing ? '処理中...' : (isActive ? '購入済み' : '購入する')}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* 購入復元ボタン */}
+        <View style={styles.restoreSection}>
+          <TouchableOpacity
+            style={styles.restoreButton}
+            onPress={handleRestore}
+            disabled={isRestoring}
+          >
+            <Text style={styles.restoreButtonText}>
+              {isRestoring ? '復元中...' : '購入を復元'}
+            </Text>
+          </TouchableOpacity>
+          <Text style={styles.restoreHint}>
+            以前購入したコンテンツを復元できます
+          </Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -313,5 +282,24 @@ const styles = StyleSheet.create({
   },
   subscribeButtonTextRecommended: {
     color: '#FFFFFF',
+  },
+  restoreSection: {
+    padding: spacing.lg,
+    alignItems: 'center',
+    gap: spacing.sm,
+  },
+  restoreButton: {
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.lg,
+  },
+  restoreButtonText: {
+    ...typography.body,
+    color: colors.primary,
+    fontWeight: '600',
+  },
+  restoreHint: {
+    ...typography.caption,
+    color: colors.textSecondary,
+    textAlign: 'center',
   },
 });

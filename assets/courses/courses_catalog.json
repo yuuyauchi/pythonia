@@ -125,6 +125,81 @@
       ]
     },
     {
+      "id": "course_pdf_generator",
+      "title": "PDF自動生成ツール",
+      "category": "intermediate",
+      "difficulty": "中級",
+      "duration": "80分",
+      "price": 1000,
+      "thumbnail": "📄",
+      "description": "報告書を毎回手作業で作成...PDFを自動生成して、定型書類作成を効率化します。",
+      "learningGoals": [
+        "PDF操作の基礎を学ぶ",
+        "テンプレート活用を理解する",
+        "レポート自動化を実践する"
+      ],
+      "libraries": ["reportlab", "PyPDF2"],
+      "tags": ["PDF", "自動化", "ドキュメント"],
+      "modules": [
+        { "id": "mod1", "type": "problem_discovery", "contentId": "pdf_problem" },
+        { "id": "mod2", "type": "planning", "contentId": "pdf_planning" },
+        { "id": "mod3", "type": "implementation", "contentId": "pdf_impl_1" },
+        { "id": "mod4", "type": "implementation", "contentId": "pdf_impl_2" },
+        { "id": "mod5", "type": "implementation", "contentId": "pdf_impl_3" },
+        { "id": "mod6", "type": "reflection", "contentId": "pdf_reflection" }
+      ]
+    },
+    {
+      "id": "course_email_automation",
+      "title": "メール送信自動化ツール",
+      "category": "intermediate",
+      "difficulty": "中級",
+      "duration": "70分",
+      "price": 1000,
+      "thumbnail": "📧",
+      "description": "同じ内容のメールを何度も送信...自動化ツールで効率化し、時間を節約しましょう。",
+      "learningGoals": [
+        "メール送信の基本を学ぶ",
+        "添付ファイル処理をマスター",
+        "一括送信システムを構築"
+      ],
+      "libraries": ["smtplib", "email"],
+      "tags": ["メール", "自動化", "効率化"],
+      "modules": [
+        { "id": "mod1", "type": "problem_discovery", "contentId": "email_problem" },
+        { "id": "mod2", "type": "planning", "contentId": "email_planning" },
+        { "id": "mod3", "type": "implementation", "contentId": "email_impl_1" },
+        { "id": "mod4", "type": "implementation", "contentId": "email_impl_2" },
+        { "id": "mod5", "type": "implementation", "contentId": "email_impl_3" },
+        { "id": "mod6", "type": "reflection", "contentId": "email_reflection" }
+      ]
+    },
+    {
+      "id": "course_image_processor",
+      "title": "画像処理・加工ツール",
+      "category": "intermediate",
+      "difficulty": "中級",
+      "duration": "85分",
+      "price": 1000,
+      "thumbnail": "🖼️",
+      "description": "大量の画像をリサイズ・変換...画像処理を自動化して一括操作を実現します。",
+      "learningGoals": [
+        "画像処理の基礎を習得",
+        "フィルタ・エフェクトの適用",
+        "バッチ処理の実装"
+      ],
+      "libraries": ["Pillow", "opencv-python"],
+      "tags": ["画像処理", "バッチ処理", "自動化"],
+      "modules": [
+        { "id": "mod1", "type": "problem_discovery", "contentId": "image_problem" },
+        { "id": "mod2", "type": "planning", "contentId": "image_planning" },
+        { "id": "mod3", "type": "implementation", "contentId": "image_impl_1" },
+        { "id": "mod4", "type": "implementation", "contentId": "image_impl_2" },
+        { "id": "mod5", "type": "implementation", "contentId": "image_impl_3" },
+        { "id": "mod6", "type": "reflection", "contentId": "image_reflection" }
+      ]
+    },
+    {
       "id": "course_chatbot",
       "title": "チャットボット開発",
       "category": "advanced",
@@ -148,6 +223,106 @@
         { "id": "mod5", "type": "implementation", "contentId": "bot_impl_3" },
         { "id": "mod6", "type": "implementation", "contentId": "bot_impl_4" },
         { "id": "mod7", "type": "reflection", "contentId": "bot_reflection" }
+      ]
+    },
+    {
+      "id": "course_flask_webapp",
+      "title": "Webアプリケーション開発",
+      "category": "advanced",
+      "difficulty": "上級",
+      "duration": "150分",
+      "price": 1000,
+      "thumbnail": "🌐",
+      "description": "本格的なWebアプリを作りたい...FlaskでMVCアーキテクチャを学び、実践的なアプリを開発します。",
+      "learningGoals": [
+        "Webフレームワークを理解する",
+        "ルーティングとテンプレート",
+        "フォーム処理とバリデーション"
+      ],
+      "libraries": ["Flask", "Jinja2", "WTForms"],
+      "tags": ["Webアプリ", "Flask", "MVC"],
+      "modules": [
+        { "id": "mod1", "type": "problem_discovery", "contentId": "flask_problem" },
+        { "id": "mod2", "type": "planning", "contentId": "flask_planning" },
+        { "id": "mod3", "type": "implementation", "contentId": "flask_impl_1" },
+        { "id": "mod4", "type": "implementation", "contentId": "flask_impl_2" },
+        { "id": "mod5", "type": "implementation", "contentId": "flask_impl_3" },
+        { "id": "mod6", "type": "reflection", "contentId": "flask_reflection" }
+      ]
+    },
+    {
+      "id": "course_ml_intro",
+      "title": "機械学習入門プロジェクト",
+      "category": "advanced",
+      "difficulty": "上級",
+      "duration": "140分",
+      "price": 1000,
+      "thumbnail": "🧠",
+      "description": "データから予測モデルを作りたい...機械学習の基礎を学び、実際の予測システムを構築します。",
+      "learningGoals": [
+        "機械学習の基本概念を理解",
+        "データ前処理とモデル訓練",
+        "予測精度の評価方法"
+      ],
+      "libraries": ["scikit-learn", "pandas", "numpy"],
+      "tags": ["機械学習", "AI", "データサイエンス"],
+      "modules": [
+        { "id": "mod1", "type": "problem_discovery", "contentId": "ml_problem" },
+        { "id": "mod2", "type": "planning", "contentId": "ml_planning" },
+        { "id": "mod3", "type": "implementation", "contentId": "ml_impl_1" },
+        { "id": "mod4", "type": "implementation", "contentId": "ml_impl_2" },
+        { "id": "mod5", "type": "implementation", "contentId": "ml_impl_3" },
+        { "id": "mod6", "type": "reflection", "contentId": "ml_reflection" }
+      ]
+    },
+    {
+      "id": "course_api_server",
+      "title": "RESTful APIサーバー構築",
+      "category": "advanced",
+      "difficulty": "上級",
+      "duration": "130分",
+      "price": 1000,
+      "thumbnail": "🔌",
+      "description": "他のシステムと連携したい...REST APIを設計・実装し、バックエンド開発を学びます。",
+      "learningGoals": [
+        "REST API設計原則を理解",
+        "エンドポイント実装をマスター",
+        "認証・セキュリティの基礎"
+      ],
+      "libraries": ["FastAPI", "pydantic", "uvicorn"],
+      "tags": ["API", "バックエンド", "REST"],
+      "modules": [
+        { "id": "mod1", "type": "problem_discovery", "contentId": "api_problem" },
+        { "id": "mod2", "type": "planning", "contentId": "api_planning" },
+        { "id": "mod3", "type": "implementation", "contentId": "api_impl_1" },
+        { "id": "mod4", "type": "implementation", "contentId": "api_impl_2" },
+        { "id": "mod5", "type": "implementation", "contentId": "api_impl_3" },
+        { "id": "mod6", "type": "reflection", "contentId": "api_reflection" }
+      ]
+    },
+    {
+      "id": "course_db_webapp",
+      "title": "データベース連携Webアプリ",
+      "category": "advanced",
+      "difficulty": "上級",
+      "duration": "160分",
+      "price": 1000,
+      "thumbnail": "💾",
+      "description": "本格的なデータ管理システムを構築...PostgreSQLと連携し、フルスタック開発を実践します。",
+      "learningGoals": [
+        "ORM(SQLAlchemy)の使用方法",
+        "マイグレーション管理",
+        "セキュアなDB操作"
+      ],
+      "libraries": ["SQLAlchemy", "psycopg2", "alembic"],
+      "tags": ["データベース", "ORM", "フルスタック"],
+      "modules": [
+        { "id": "mod1", "type": "problem_discovery", "contentId": "db_problem" },
+        { "id": "mod2", "type": "planning", "contentId": "db_planning" },
+        { "id": "mod3", "type": "implementation", "contentId": "db_impl_1" },
+        { "id": "mod4", "type": "implementation", "contentId": "db_impl_2" },
+        { "id": "mod5", "type": "implementation", "contentId": "db_impl_3" },
+        { "id": "mod6", "type": "reflection", "contentId": "db_reflection" }
       ]
     }
   ]
