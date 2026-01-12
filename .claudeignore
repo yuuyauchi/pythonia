@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.expo/
+dist/
+web-build/
+.metro-health-check*
+
+# Native builds
+/ios
+/android
+.kotlin/
+
+# Generated files
+*.tsbuildinfo
+expo-env.d.ts
+
+# Debug logs
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# System files
+.DS_Store
+
+# Secrets and keys
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.pem
+.env*.local
+
+# Version control
+.git/

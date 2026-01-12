@@ -11,10 +11,12 @@ interface StudyHistory {
 
 interface ProfileState {
   userName: string;
+  avatarUri: string | null;
   studyHistory: StudyHistory[];
   totalStudyTime: number; // in minutes
 
   setUserName: (name: string) => void;
+  setAvatarUri: (uri: string | null) => void;
   recordStudySession: (stepsCompleted: number, timeSpent: number) => void;
   getCurrentStreak: () => number;
   getLongestStreak: () => number;
@@ -27,11 +29,16 @@ export const useProfileStore = create<ProfileState>()(
   persist(
     (set, get) => ({
       userName: '',
+      avatarUri: null,
       studyHistory: [],
       totalStudyTime: 0,
 
       setUserName: (name: string) => {
         set({ userName: name });
+      },
+
+      setAvatarUri: (uri: string | null) => {
+        set({ avatarUri: uri });
       },
 
       recordStudySession: (stepsCompleted: number, timeSpent: number) => {
@@ -142,6 +149,7 @@ export const useProfileStore = create<ProfileState>()(
       resetProfile: () => {
         set({
           userName: '',
+          avatarUri: null,
           studyHistory: [],
           totalStudyTime: 0,
         });

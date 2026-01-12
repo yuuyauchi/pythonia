@@ -1,0 +1,141 @@
+{
+  "problem_discovery": [{
+    "id": "image_problem",
+    "title": "課題を発見しよう",
+    "scenario": {
+      "title": "大量の画像を一つずつリサイズ...",
+      "description": "ECサイト運営の田中さんは、商品画像を手作業でリサイズしています。100枚の画像を一つずつ開いてサイズ変更...この作業に毎回3時間もかかっています。",
+      "timeSpent": "毎回3時間 × 月2回 = 年間72時間",
+      "painPoints": ["一つずつ開いてリサイズする手間", "画質が劣化することがある", "ファイル名の統一が大変", "フォーマット変換も必要"]
+    },
+    "problemAnalysis": {
+      "question1": "この状況で一番困っていることは何でしょうか?",
+      "options": ["手作業での処理時間", "画質管理の難しさ", "一括処理ができない", "すべて"],
+      "correctAnswer": 3,
+      "explanation": "Pythonの画像処理ライブラリで、これらすべてを一括自動化できます!"
+    },
+    "idealSolution": {
+      "title": "理想の状態は?",
+      "description": "フォルダに画像を入れるだけで、自動的にリサイズ・変換されたら便利ですよね!",
+      "benefits": ["一括処理で大幅な時間削減", "品質が統一される", "ミスがなくなる", "年間72時間の節約"],
+      "beforeAfter": {"before": "毎回3時間 × 手作業で処理", "after": "数秒!自動一括処理"}
+    },
+    "technicalFeasibility": {
+      "title": "技術で解決できる?",
+      "answer": "Yes! Pythonで簡単に実現できます",
+      "approach": ["画像ファイルの読み込み", "リサイズ・フィルタ適用", "一括保存"],
+      "libraries": [
+        {"name": "Pillow", "purpose": "画像処理の基本", "reason": "Python標準的な画像ライブラリ"},
+        {"name": "opencv-python", "purpose": "高度な画像処理", "reason": "プロレベルの処理が可能"}
+      ]
+    }
+  }],
+  "planning": [{
+    "id": "image_planning",
+    "title": "解決策を設計しよう",
+    "requirements": {
+      "title": "必要な機能を洗い出そう",
+      "features": [
+        {"feature": "画像の読み込み・保存", "detail": "様々な形式の画像を扱う", "priority": "必須"},
+        {"feature": "リサイズ機能", "detail": "指定サイズに自動変換", "priority": "必須"},
+        {"feature": "フォーマット変換", "detail": "PNG→JPEGなどの変換", "priority": "必須"},
+        {"feature": "フィルタ・エフェクト", "detail": "明るさ調整、ぼかしなど", "priority": "あれば便利"}
+      ]
+    },
+    "technicalChoice": {
+      "title": "技術選定",
+      "choices": [{
+        "aspect": "画像処理ライブラリ",
+        "options": [
+          {"name": "Pillow (PIL)", "pros": ["シンプル", "豊富な機能", "初心者向け"], "cons": ["高度な処理は苦手"], "selected": true},
+          {"name": "OpenCV", "pros": ["超高機能", "高速"], "cons": ["学習コスト高"], "selected": false}
+        ]
+      }]
+    },
+    "architecture": {
+      "title": "システム構成",
+      "flow": ["1. フォルダ内の画像を検索", "2. 各画像を読み込み", "3. リサイズ・加工", "4. 新しいフォルダに保存"],
+      "dataFlow": "元画像フォルダ → 処理 → 出力フォルダ"
+    },
+    "developmentPlan": {
+      "title": "開発ステップ",
+      "steps": [
+        {"step": 1, "title": "画像の読み込みとリサイズ", "estimate": "20分"},
+        {"step": 2, "title": "一括処理の実装", "estimate": "25分"},
+        {"step": 3, "title": "フィルタ機能の追加", "estimate": "20分"}
+      ],
+      "totalEstimate": "約65分"
+    }
+  }],
+  "implementation": [
+    {
+      "id": "image_impl_1",
+      "title": "Step 1: 画像の読み込みとリサイズ",
+      "objective": "Pillowを使って、画像を読み込んでリサイズしよう",
+      "explanation": "まずは1枚の画像を読み込んで、指定したサイズにリサイズする基本を学びます。",
+      "instructions": [
+        {"step": 1, "title": "画像の読み込み", "description": "Image.open()で画像を読み込みます", "code": "from PIL import Image\n\nimg = Image.open('photo.jpg')\nprint(f'Original size: {img.size}')"},
+        {"step": 2, "title": "リサイズ", "description": "resize()で新しいサイズに変更", "code": "new_img = img.resize((800, 600))\nnew_img.save('resized_photo.jpg')"}
+      ],
+      "starterCode": "# 画像のリサイズを実装してください\n# Note: 学習環境では実際のファイルは扱えませんが、コードは学べます\n\n# ここにコードを書いてください\n",
+      "solution": "from PIL import Image\nimport io\n\n# モック画像データ（実際はファイルから読み込み）\nprint(\"Processing image...\")\n\n# 実際のコード例\ncode_example = '''\nfrom PIL import Image\n\n# 画像を読み込み\nimg = Image.open('product_photo.jpg')\nprint(f\"Original size: {img.size}\")\n\n# リサイズ (800x600)\nnew_size = (800, 600)\nresized_img = img.resize(new_size, Image.Resampling.LANCZOS)\n\n# 保存\nresized_img.save('product_photo_resized.jpg', quality=95)\nprint(f\"Resized to: {new_size}\")\nprint(\"✅ Image resized and saved!\")\n'''\n\nprint(code_example)\nprint(\"\\n📝 Note: LANCZOS は高品質なリサイズアルゴリズムです\")\nprint(\"📝 quality=95 で高品質JPEG出力が可能です\")",
+      "hints": ["Image.open()で画像を読み込み", "resize((width, height))でサイズ指定", "Image.Resampling.LANCZOSで高品質リサイズ", "save()でファイルに保存"],
+      "keyPoints": ["Pillowの基本はImageオブジェクト", "元の画像は変更されない（イミュータブル）", "リサイズアルゴリズムで品質が変わる", "quality引数でJPEG品質を制御"]
+    },
+    {
+      "id": "image_impl_2",
+      "title": "Step 2: 複数画像の一括処理",
+      "objective": "フォルダ内の全画像を一括でリサイズしよう",
+      "explanation": "実務では複数の画像を一度に処理します。ループを使って、フォルダ内の全画像を自動処理します。",
+      "instructions": [
+        {"step": 1, "title": "ファイル一覧の取得", "description": "globで画像ファイルを検索", "code": "import glob\n\nimage_files = glob.glob('images/*.jpg')\nprint(f'Found {len(image_files)} images')"},
+        {"step": 2, "title": "ループ処理", "description": "各画像をリサイズ", "code": "for file_path in image_files:\n    img = Image.open(file_path)\n    resized = img.resize((800, 600))\n    resized.save(f'output/{file_path}')"}
+      ],
+      "starterCode": "from PIL import Image\n\n# 処理する画像のリスト（実際はglobで取得）\nimage_list = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg']\ntarget_size = (800, 600)\n\n# 全画像を一括リサイズしてください\n# ここにコードを書いてください\n",
+      "solution": "from PIL import Image\nimport os\n\n# 処理する画像のリスト（実際はglobで取得）\nimage_list = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg']\ntarget_size = (800, 600)\n\nprint(f\"Processing {len(image_list)} images...\\n\")\n\nprocessed_count = 0\ntotal_size_reduction = 0\n\nfor filename in image_list:\n    # 実際のコード例\n    print(f\"📸 Processing: {filename}\")\n    \n    # ファイル名の処理\n    basename = os.path.splitext(filename)[0]\n    output_filename = f\"{basename}_resized.jpg\"\n    \n    # リサイズ処理のシミュレーション\n    original_size = (1920, 1080)  # 元のサイズ\n    reduction = ((original_size[0] * original_size[1]) - (target_size[0] * target_size[1])) / (original_size[0] * original_size[1]) * 100\n    \n    print(f\"   Original: {original_size[0]}x{original_size[1]}\")\n    print(f\"   Resized:  {target_size[0]}x{target_size[1]}\")\n    print(f\"   Size reduction: {reduction:.1f}%\")\n    print(f\"   Saved as: {output_filename}\\n\")\n    \n    processed_count += 1\n    total_size_reduction += reduction\n\navg_reduction = total_size_reduction / len(image_list)\nprint(f\"✅ Processed {processed_count} images!\")\nprint(f\"📊 Average size reduction: {avg_reduction:.1f}%\")\nprint(\"\\n💡 Tip: 実際の処理では glob.glob('*.jpg') でファイルを取得します\")",
+      "hints": ["globやos.listdir()でファイル一覧を取得", "forループで各ファイルを処理", "os.path.splitext()でファイル名と拡張子を分離", "進捗状況を表示すると便利"],
+      "keyPoints": ["バッチ処理でまとめて効率化", "ファイル名の自動生成", "エラーハンドリングを追加すると堅牢", "処理統計を表示すると分かりやすい"]
+    },
+    {
+      "id": "image_impl_3",
+      "title": "Step 3: フィルタとエフェクト",
+      "objective": "画像にフィルタを適用して、品質を向上させよう",
+      "explanation": "リサイズだけでなく、明るさ調整やシャープ化などのフィルタを適用して、画像品質を最適化します。",
+      "instructions": [
+        {"step": 1, "title": "フィルタの適用", "description": "ImageFilterで様々なエフェクトを追加", "code": "from PIL import ImageFilter, ImageEnhance\n\n# シャープ化\nsharp_img = img.filter(ImageFilter.SHARPEN)\n\n# 明るさ調整\nenhancer = ImageEnhance.Brightness(img)\nbright_img = enhancer.enhance(1.2)  # 20%明るく"}
+      ],
+      "starterCode": "from PIL import Image, ImageFilter, ImageEnhance\n\n# 処理する画像\nimage_filename = 'product_photo.jpg'\n\n# リサイズと同時にフィルタを適用してください\n# - サイズ: 1000x1000\n# - シャープ化\n# - 明るさ10%アップ\n# ここにコードを書いてください\n",
+      "solution": "from PIL import Image, ImageFilter, ImageEnhance\n\n# 処理する画像\nimage_filename = 'product_photo.jpg'\ntarget_size = (1000, 1000)\n\nprint(f\"Processing: {image_filename}\\n\")\n\n# 実際のコード例\ncode_example = '''\nfrom PIL import Image, ImageFilter, ImageEnhance\n\n# 画像を読み込み\nimg = Image.open('product_photo.jpg')\n\n# Step 1: リサイズ\nresized_img = img.resize((1000, 1000), Image.Resampling.LANCZOS)\nprint(\"✓ Resized to 1000x1000\")\n\n# Step 2: シャープ化\nsharp_img = resized_img.filter(ImageFilter.SHARPEN)\nprint(\"✓ Applied sharpening filter\")\n\n# Step 3: 明るさ調整 (10%アップ)\nenhancer = ImageEnhance.Brightness(sharp_img)\nfinal_img = enhancer.enhance(1.1)\nprint(\"✓ Increased brightness by 10%\")\n\n# 保存\nfinal_img.save('product_photo_enhanced.jpg', quality=95)\nprint(\"\\n✅ Enhanced image saved!\")\n'''\n\nprint(code_example)\nprint(\"\\n📝 利用可能なフィルタ:\")\nprint(\"  - BLUR, SHARPEN, SMOOTH\")\nprint(\"  - EDGE_ENHANCE, CONTOUR\")\nprint(\"  - DETAIL, EMBOSS\")\nprint(\"\\n📝 調整可能な項目:\")\nprint(\"  - Brightness (明るさ)\")\nprint(\"  - Contrast (コントラスト)\")\nprint(\"  - Color (色の鮮やかさ)\")\nprint(\"  - Sharpness (シャープネス)\")",
+      "hints": ["ImageFilterで様々なフィルタを適用", "ImageEnhanceで明るさ等を調整", "enhance(1.0)が元の状態、1.2で20%増加", "複数のフィルタを順次適用可能"],
+      "keyPoints": ["フィルタで画像品質を向上", "チェーンで複数の処理を適用", "enhance値は1.0を基準に調整", "過度な加工は逆効果なので注意"]
+    }
+  ],
+  "reflection": [{
+    "id": "image_reflection",
+    "title": "振り返りと次のステップ",
+    "summary": {
+      "title": "何を学んだか",
+      "description": "画像処理・加工ツールを作成し、大量の画像を一括処理できるようになりました",
+      "achievements": ["Pillowで画像を読み込み・保存", "一括リサイズ処理の実装", "フィルタとエフェクトの適用", "年間72時間の時間削減"]
+    },
+    "beforeAfter": {
+      "before": {"time": "毎回3時間", "method": "手作業で一つずつ処理", "issues": ["処理に時間がかかる", "品質がバラバラ", "ミスが発生"]},
+      "after": {"time": "数秒", "method": "Python で一括自動処理", "benefits": ["一瞬で全画像処理", "品質が統一", "年間72時間の節約"]},
+      "improvement": "手作業3時間 → 自動化で数秒！約99%の時間削減"
+    },
+    "furtherImprovements": {
+      "title": "さらなる改善アイデア",
+      "ideas": [
+        {"idea": "透かし(ウォーターマーク)追加", "description": "ロゴや著作権表示を自動追加", "difficulty": "低", "library": "Pillow"},
+        {"idea": "顔認識と自動トリミング", "description": "顔を検出して最適な構図に", "difficulty": "高", "library": "opencv-python"},
+        {"idea": "画像圧縮最適化", "description": "品質を保ちながらファイルサイズを削減", "difficulty": "中", "library": "Pillow"},
+        {"idea": "AIによる画像補正", "description": "機械学習で自動的に画質向上", "difficulty": "高", "library": "tensorflow"}
+      ]
+    },
+    "nextChallenge": {
+      "title": "次のチャレンジ",
+      "questions": ["ECサイトの商品画像を一括処理してみましょう", "サムネイル自動生成ツールを作ってみましょう", "画像から顔を検出する機能を追加してみましょう"],
+      "encouragement": "画像処理スキルはWeb開発、データ分析など様々な分野で活用できます！"
+    }
+  }]
+}

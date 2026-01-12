@@ -1,0 +1,140 @@
+{
+  "problem_discovery": [{
+    "id": "flask_problem",
+    "title": "課題を発見しよう",
+    "scenario": {
+      "title": "データをWeb上で共有したい...",
+      "description": "開発チームのリーダー鈴木さんは、チーム内でデータを共有するために、毎回ファイルをメールで送っています。もっとスマートに、Webブラウザからアクセスできるシステムが欲しいです。",
+      "timeSpent": "データ共有に毎週2時間 = 年間100時間",
+      "painPoints": ["ファイルのやり取りが面倒", "最新版の管理が難しい", "複数人での同時アクセスができない", "モバイルからアクセスしにくい"]
+    },
+    "problemAnalysis": {
+      "question1": "この状況で一番困っていることは何でしょうか?",
+      "options": ["ファイル送信の手間", "バージョン管理", "アクセス性の悪さ", "すべて"],
+      "correctAnswer": 3,
+      "explanation": "Webアプリケーションを作れば、これらすべてが解決します!"
+    },
+    "idealSolution": {
+      "title": "理想の状態は?",
+      "description": "ブラウザからアクセスできるWebアプリがあれば、いつでもどこでもデータにアクセスできます!",
+      "benefits": ["ブラウザから簡単アクセス", "最新データが常に共有", "モバイルからも利用可能", "年間100時間の節約"],
+      "beforeAfter": {"before": "毎週2時間 × ファイル送信", "after": "いつでもWebでアクセス!"}
+    },
+    "technicalFeasibility": {
+      "title": "技術で解決できる?",
+      "answer": "Yes! Flaskで簡単に実現できます",
+      "approach": ["Flaskでサーバー構築", "HTML テンプレートで画面作成", "ルーティングでページ管理"],
+      "libraries": [
+        {"name": "Flask", "purpose": "Webフレームワーク", "reason": "軽量でシンプル、学習しやすい"},
+        {"name": "Jinja2", "purpose": "テンプレートエンジン", "reason": "HTML生成が簡単"},
+        {"name": "WTForms", "purpose": "フォーム処理", "reason": "バリデーションが簡単"}
+      ]
+    }
+  }],
+  "planning": [{
+    "id": "flask_planning",
+    "title": "解決策を設計しよう",
+    "requirements": {
+      "title": "必要な機能を洗い出そう",
+      "features": [
+        {"feature": "ホームページ表示", "detail": "トップページとナビゲーション", "priority": "必須"},
+        {"feature": "データ一覧表示", "detail": "データベースの情報を表示", "priority": "必須"},
+        {"feature": "フォーム送信", "detail": "ユーザーからの入力を受け付け", "priority": "必須"},
+        {"feature": "ログイン機能", "detail": "ユーザー認証", "priority": "あれば便利"}
+      ]
+    },
+    "technicalChoice": {
+      "title": "技術選定",
+      "choices": [{
+        "aspect": "Webフレームワーク",
+        "options": [
+          {"name": "Flask", "pros": ["軽量", "学習コスト低", "柔軟性高"], "cons": ["大規模には不向き"], "selected": true},
+          {"name": "Django", "pros": ["フル機能", "大規模向け"], "cons": ["学習コスト高"], "selected": false}
+        ]
+      }]
+    },
+    "architecture": {
+      "title": "MVCアーキテクチャ",
+      "flow": ["1. ルート定義 (URL → 処理)", "2. ビュー (HTMLテンプレート)", "3. モデル (データ処理)", "4. コントローラー (ビジネスロジック)"],
+      "dataFlow": "リクエスト → ルーティング → 処理 → テンプレート → レスポンス"
+    },
+    "developmentPlan": {
+      "title": "開発ステップ",
+      "steps": [
+        {"step": 1, "title": "基本的なFlaskアプリ", "estimate": "30分"},
+        {"step": 2, "title": "テンプレートとルーティング", "estimate": "40分"},
+        {"step": 3, "title": "フォーム処理", "estimate": "40分"}
+      ],
+      "totalEstimate": "約110分"
+    }
+  }],
+  "implementation": [
+    {
+      "id": "flask_impl_1",
+      "title": "Step 1: 基本的なFlaskアプリ",
+      "objective": "Flaskの基礎を学び、シンプルなWebサーバーを起動しよう",
+      "explanation": "まずは最もシンプルなFlaskアプリを作成します。ブラウザに「Hello World」を表示する基本を学びましょう。",
+      "instructions": [
+        {"step": 1, "title": "Flaskアプリの作成", "description": "Flaskオブジェクトを作成してルートを定義", "code": "from flask import Flask\n\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return 'Hello, Flask!'\n\nif __name__ == '__main__':\n    app.run(debug=True)"}
+      ],
+      "starterCode": "# Flaskアプリを作成してください\n# Note: 学習環境では実際のサーバーは起動しませんが、コードは学べます\n\n# ここにコードを書いてください\n",
+      "solution": "from flask import Flask\n\n# Flaskアプリケーションを作成\napp = Flask(__name__)\n\n# ルート定義: トップページ\n@app.route('/')\ndef home():\n    return '''\n    <html>\n        <head><title>My First Flask App</title></head>\n        <body>\n            <h1>Welcome to Flask!</h1>\n            <p>This is my first web application.</p>\n            <a href=\"/about\">About Page</a>\n        </body>\n    </html>\n    '''\n\n# ルート定義: Aboutページ\n@app.route('/about')\ndef about():\n    return '''\n    <html>\n        <head><title>About</title></head>\n        <body>\n            <h1>About This App</h1>\n            <p>Built with Python and Flask!</p>\n            <a href=\"/\">Back to Home</a>\n        </body>\n    </html>\n    '''\n\n# アプリケーション実行\nif __name__ == '__main__':\n    print(\"Flask app structure created!\")\n    print(\"Routes:\")\n    print(\"  / - Home page\")\n    print(\"  /about - About page\")\n    print(\"\\n📝 Note: 実際の環境では app.run(debug=True) でサーバーが起動します\")\n    print(\"📝 ブラウザで http://localhost:5000 にアクセスできます\")",
+      "hints": ["@app.route()でURLパスを定義", "関数の戻り値がブラウザに表示される", "debug=Trueで開発モードに", "__name__=='__main__'で直接実行時のみ起動"],
+      "keyPoints": ["Flaskの基本はルーティング", "デコレータでURLと関数を紐付け", "返り値がHTMLとしてレンダリング", "debug=Trueで自動リロード有効"]
+    },
+    {
+      "id": "flask_impl_2",
+      "title": "Step 2: テンプレートとデータ表示",
+      "objective": "Jinja2テンプレートを使って、動的なHTMLを生成しよう",
+      "explanation": "HTMLを文字列で返すのは不便です。テンプレートエンジンを使って、Pythonのデータを埋め込んだHTMLを生成します。",
+      "instructions": [
+        {"step": 1, "title": "テンプレートのレンダリング", "description": "render_template()でHTMLテンプレートを表示", "code": "from flask import render_template\n\n@app.route('/users')\ndef users():\n    user_list = ['Alice', 'Bob', 'Charlie']\n    return render_template('users.html', users=user_list)"}
+      ],
+      "starterCode": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n# 商品データ\nproducts = [\n    {'name': 'Laptop', 'price': 1200, 'stock': 5},\n    {'name': 'Mouse', 'price': 25, 'stock': 50},\n    {'name': 'Keyboard', 'price': 75, 'stock': 30}\n]\n\n# 商品一覧ページを作成してください\n# ここにコードを書いてください\n",
+      "solution": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n# 商品データ\nproducts = [\n    {'name': 'Laptop', 'price': 1200, 'stock': 5},\n    {'name': 'Mouse', 'price': 25, 'stock': 50},\n    {'name': 'Keyboard', 'price': 75, 'stock': 30}\n]\n\n@app.route('/')\ndef home():\n    return '''\n    <h1>Product Catalog</h1>\n    <a href=\"/products\">View Products</a>\n    '''\n\n@app.route('/products')\ndef show_products():\n    # テンプレートに商品データを渡す\n    # 実際はrender_template('products.html', products=products)\n    \n    # HTMLを動的生成（テンプレートのシミュレーション）\n    html = '<html><head><title>Products</title></head><body>'\n    html += '<h1>Product List</h1>'\n    html += '<table border=\"1\"><tr><th>Name</th><th>Price</th><th>Stock</th></tr>'\n    \n    for product in products:\n        html += f'<tr>'\n        html += f'<td>{product[\"name\"]}</td>'\n        html += f'<td>${product[\"price\"]}</td>'\n        html += f'<td>{product[\"stock\"]} units</td>'\n        html += f'</tr>'\n    \n    html += '</table>'\n    html += '<br><a href=\"/\">Back to Home</a>'\n    html += '</body></html>'\n    \n    return html\n\nif __name__ == '__main__':\n    print(\"Flask app with dynamic data created!\")\n    print(\"\\nProduct data:\")\n    for p in products:\n        print(f\"  - {p['name']}: ${p['price']} ({p['stock']} in stock)\")\n    print(\"\\n📝 Note: 実際はJinja2テンプレートを使います\")\n    print(\"📝 templates/products.html に {{ products }} でデータを渡せます\")",
+      "hints": ["render_template()でテンプレートを使用", "Pythonの変数をテンプレートに渡せる", "Jinja2で{{ variable }}で変数展開", "{% for %}でループ処理が可能"],
+      "keyPoints": ["テンプレートでHTML生成を分離", "データとビューの分離", "Jinja2の構文でPython的な処理", "保守性と可読性が向上"]
+    },
+    {
+      "id": "flask_impl_3",
+      "title": "Step 3: フォーム処理とPOSTリクエスト",
+      "objective": "ユーザーからの入力を受け取り、処理しよう",
+      "explanation": "Webアプリでは、ユーザーからの入力を受け取る機能が重要です。フォームデータを受け取って処理する方法を学びます。",
+      "instructions": [
+        {"step": 1, "title": "POSTデータの受け取り", "description": "request.formでフォームデータにアクセス", "code": "from flask import request\n\n@app.route('/submit', methods=['POST'])\ndef submit():\n    name = request.form['name']\n    return f'Hello, {name}!'"}
+      ],
+      "starterCode": "from flask import Flask, request\n\napp = Flask(__name__)\n\n# 問い合わせフォームを作成してください\n# - GET: フォーム表示\n# - POST: データ受信と確認ページ表示\n# ここにコードを書いてください\n",
+      "solution": "from flask import Flask, request\n\napp = Flask(__name__)\n\n# フォーム表示 (GET)\n@app.route('/contact', methods=['GET', 'POST'])\ndef contact():\n    if request.method == 'POST':\n        # フォームデータを受け取る\n        name = request.form.get('name', '')\n        email = request.form.get('email', '')\n        message = request.form.get('message', '')\n        \n        # 確認ページを表示\n        return f'''\n        <html>\n        <head><title>Submission Received</title></head>\n        <body>\n            <h1>Thank You!</h1>\n            <p>We received your message:</p>\n            <ul>\n                <li><strong>Name:</strong> {name}</li>\n                <li><strong>Email:</strong> {email}</li>\n                <li><strong>Message:</strong> {message}</li>\n            </ul>\n            <a href=\"/contact\">Send Another Message</a>\n        </body>\n        </html>\n        '''\n    \n    # GETリクエスト時: フォームを表示\n    return '''\n    <html>\n    <head><title>Contact Form</title></head>\n    <body>\n        <h1>Contact Us</h1>\n        <form method=\"POST\">\n            <label>Name:</label><br>\n            <input type=\"text\" name=\"name\" required><br><br>\n            \n            <label>Email:</label><br>\n            <input type=\"email\" name=\"email\" required><br><br>\n            \n            <label>Message:</label><br>\n            <textarea name=\"message\" rows=\"4\" cols=\"50\" required></textarea><br><br>\n            \n            <button type=\"submit\">Submit</button>\n        </form>\n    </body>\n    </html>\n    '''\n\nif __name__ == '__main__':\n    print(\"Flask app with form handling created!\")\n    print(\"\\nRoutes:\")\n    print(\"  GET  /contact - Display contact form\")\n    print(\"  POST /contact - Process form submission\")\n    print(\"\\n📝 Note: methods=['GET', 'POST']で両方のHTTPメソッドに対応\")\n    print(\"📝 request.methodで現在のメソッドを判定できます\")",
+      "hints": ["methods引数でHTTPメソッドを指定", "request.methodでGET/POSTを判定", "request.form['key']でフォームデータ取得", "バリデーションを追加すると堅牢に"],
+      "keyPoints": ["GETは表示、POSTは処理", "request.formでフォームデータアクセス", "同一URLでメソッドにより処理を分岐", "実務ではWTFormsでバリデーション"]
+    }
+  ],
+  "reflection": [{
+    "id": "flask_reflection",
+    "title": "振り返りと次のステップ",
+    "summary": {
+      "title": "何を学んだか",
+      "description": "FlaskでWebアプリケーションを構築し、動的なページとフォーム処理を実装しました",
+      "achievements": ["Flaskの基本構造を理解", "ルーティングとテンプレート", "フォーム処理の実装", "MVCアーキテクチャの理解"]
+    },
+    "beforeAfter": {
+      "before": {"time": "毎週2時間", "method": "ファイルをメール送信", "issues": ["共有が面倒", "最新版の管理困難", "アクセス性が悪い"]},
+      "after": {"time": "いつでも", "method": "Webアプリで共有", "benefits": ["ブラウザから即アクセス", "常に最新", "年間100時間節約"]},
+      "improvement": "ファイル送信 → Webアプリで即共有！"
+    },
+    "furtherImprovements": {
+      "title": "さらなる改善アイデア",
+      "ideas": [
+        {"idea": "データベース連携", "description": "SQLAlchemyでデータ永続化", "difficulty": "中", "library": "SQLAlchemy"},
+        {"idea": "ユーザー認証", "description": "ログイン機能の追加", "difficulty": "中", "library": "Flask-Login"},
+        {"idea": "RESTful API", "description": "JSON APIの提供", "difficulty": "中", "library": "Flask-RESTful"},
+        {"idea": "デプロイ", "description": "本番環境への公開", "difficulty": "高", "library": "Gunicorn/Heroku"}
+      ]
+    },
+    "nextChallenge": {
+      "title": "次のチャレンジ",
+      "questions": ["データベースと連携したアプリを作ってみましょう", "API サーバーを構築してみましょう", "認証機能を追加してみましょう"],
+      "encouragement": "Webアプリ開発スキルは現代の必須スキルです。ぜひ実務で活用してください！"
+    }
+  }]
+}
